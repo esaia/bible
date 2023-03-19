@@ -4,6 +4,7 @@ import Select from "react-select";
 import Preview from "./Preview";
 import useBibleContext from "../hooks/useBibleContext";
 import Skeleton from "./Skeleton";
+import { json } from "react-router-dom";
 
 const Header = () => {
   const { originalData, setoriginalData, filteredData, setfilteredData } =
@@ -31,6 +32,16 @@ const Header = () => {
   );
 
   const baseURL = `https://holybible.ge/service.php?w=${inputValues.book}&t=${inputValues.chapter}&m=&s=${phrase}&mv=${version?.value}&language=${language?.value}&page=1`;
+  useEffect(() => {
+    localStorage.setItem(
+      "language",
+      JSON.stringify({
+        value: "geo",
+        label: "geo",
+        id: "ena",
+      })
+    );
+  }, []);
 
   useEffect(() => {
     const fetch = async () => {

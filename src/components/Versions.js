@@ -242,11 +242,61 @@ const Versions = () => {
       const tavi = +filteredData.bibleData[0].tavi;
       const muxli = +filteredData.bibleData[0].muxli;
 
+      let englishMuxli;
+      if (JSON.parse(localStorage.getItem("language")).value === "geo") {
+        if (wigni + 3 === 49) {
+          englishMuxli = 63;
+        } else if (wigni + 3 === 50) {
+          englishMuxli = 64;
+        } else if (wigni + 3 === 51) {
+          englishMuxli = 65;
+        } else if (wigni + 3 === 52) {
+          englishMuxli = 66;
+        } else if (wigni + 3 === 53) {
+          englishMuxli = 67;
+        } else if (wigni + 3 === 54) {
+          englishMuxli = 68;
+        } else if (wigni + 3 === 55) {
+          englishMuxli = 48;
+        } else if (wigni + 3 === 56) {
+          englishMuxli = 49;
+        } else if (wigni + 3 === 57) {
+          englishMuxli = 50;
+        } else if (wigni + 3 === 58) {
+          englishMuxli = 51;
+        } else if (wigni + 3 === 59) {
+          englishMuxli = 52;
+        } else if (wigni + 3 === 60) {
+          englishMuxli = 53;
+        } else if (wigni + 3 === 61) {
+          englishMuxli = 54;
+        } else if (wigni + 3 === 62) {
+          englishMuxli = 55;
+        } else if (wigni + 3 === 63) {
+          englishMuxli = 56;
+        } else if (wigni + 3 === 64) {
+          englishMuxli = 57;
+        } else if (wigni + 3 === 65) {
+          englishMuxli = 58;
+        } else if (wigni + 3 === 66) {
+          englishMuxli = 59;
+        } else if (wigni + 3 === 67) {
+          englishMuxli = 60;
+        } else if (wigni + 3 === 68) {
+          englishMuxli = 61;
+        } else {
+          englishMuxli = null;
+        }
+      }
+
+      // console.log(wigni + 3);
+      // console.log(englishMuxli);
+
       const geoURL = `https://holybible.ge/service.php?w=${
         wigni + 3
       }&t=${tavi}&m=&s=&mv=${versions.geo}&language=geo&page=1`;
       const engURL = `https://holybible.ge/service.php?w=${
-        wigni + 3
+        englishMuxli ? englishMuxli : wigni + 3
       }&t=${tavi}&m=&s=&mv=${versions.eng}&language=eng&page=1`;
       const rusURL = `https://holybible.ge/service.php?w=${
         wigni + 3
@@ -266,7 +316,9 @@ const Versions = () => {
         },
         eng: {
           data: filteredEng,
-          tavimuxli: `${dataEng.data.bibleNames[wigni + 2]} ${tavi}:${muxli}`,
+          tavimuxli: `${
+            dataEng.data.bibleNames[englishMuxli ? englishMuxli - 1 : wigni + 2]
+          } ${tavi}:${muxli}`,
         },
         rus: {
           data: filteredRus,
@@ -280,11 +332,58 @@ const Versions = () => {
       const muxliMde =
         filteredData.bibleData[+filteredData.bibleData.length - 1].muxli;
 
+      let englishMuxli;
+      if (JSON.parse(localStorage.getItem("language")).value === "geo") {
+        if (wigni + 3 === 49) {
+          englishMuxli = 63;
+        } else if (wigni + 3 === 50) {
+          englishMuxli = 64;
+        } else if (wigni + 3 === 51) {
+          englishMuxli = 65;
+        } else if (wigni + 3 === 52) {
+          englishMuxli = 66;
+        } else if (wigni + 3 === 53) {
+          englishMuxli = 67;
+        } else if (wigni + 3 === 54) {
+          englishMuxli = 68;
+        } else if (wigni + 3 === 55) {
+          englishMuxli = 48;
+        } else if (wigni + 3 === 56) {
+          englishMuxli = 49;
+        } else if (wigni + 3 === 57) {
+          englishMuxli = 50;
+        } else if (wigni + 3 === 58) {
+          englishMuxli = 51;
+        } else if (wigni + 3 === 59) {
+          englishMuxli = 52;
+        } else if (wigni + 3 === 60) {
+          englishMuxli = 53;
+        } else if (wigni + 3 === 61) {
+          englishMuxli = 54;
+        } else if (wigni + 3 === 62) {
+          englishMuxli = 55;
+        } else if (wigni + 3 === 63) {
+          englishMuxli = 56;
+        } else if (wigni + 3 === 64) {
+          englishMuxli = 57;
+        } else if (wigni + 3 === 65) {
+          englishMuxli = 58;
+        } else if (wigni + 3 === 66) {
+          englishMuxli = 59;
+        } else if (wigni + 3 === 67) {
+          englishMuxli = 60;
+        } else if (wigni + 3 === 68) {
+          englishMuxli = 61;
+        } else {
+          englishMuxli = null;
+        }
+      }
+
       const geoURL = `https://holybible.ge/service.php?w=${
         wigni + 3
       }&t=${tavi}&m=&s=&mv=${versions.geo}&language=geo&page=1`;
       const engURL = `https://holybible.ge/service.php?w=${
-        wigni + 3
+        englishMuxli ? englishMuxli : wigni + 3
       }&t=${tavi}&m=&s=&mv=${versions.eng}&language=eng&page=1`;
       const rusURL = `https://holybible.ge/service.php?w=${
         wigni + 3
@@ -307,7 +406,7 @@ const Versions = () => {
         eng: {
           data: filteredEng,
           tavimuxli: `${
-            dataEng.data.bibleNames[wigni + 2]
+            dataEng.data.bibleNames[englishMuxli ? englishMuxli - 1 : wigni + 2]
           } ${tavi}:${muxli}-${muxliMde}`,
         },
         rus: {

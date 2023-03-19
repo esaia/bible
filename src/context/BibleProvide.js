@@ -181,7 +181,9 @@ const BibleProvide = ({ children }) => {
         setisDarkMode,
       }}
     >
-      <div className={`${isDarkMode && "dark"} font-banner`}>{children}</div>
+      <div className={`${isDarkMode && "dark"} font-banner`}>
+        <div className="dark:bg-black">{children}</div>
+      </div>
     </BibleContext.Provider>
   );
 };

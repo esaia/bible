@@ -3,14 +3,22 @@ import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { BsRocketTakeoff, BsSlashLg } from "react-icons/bs";
 import useBibleContext from "../hooks/useBibleContext";
-import { Button } from "@material-tailwind/react";
+import { Button, checkbox } from "@material-tailwind/react";
 import { Checkbox } from "@material-tailwind/react";
 
 const Versions = () => {
-  const { filteredData, result, setResult } = useBibleContext();
-  const [isGeorgia, setisGeorgia] = useState(true);
-  const [isEnglish, setisEnglish] = useState(false);
-  const [isRussian, setisRussian] = useState(false);
+  const { filteredData, result, setResult, isLanguage, setIsLanguage } =
+    useBibleContext();
+
+  const [isGeorgia, setisGeorgia] = useState(
+    JSON.parse(localStorage?.getItem("languages"))?.geo || true
+  );
+  const [isEnglish, setisEnglish] = useState(
+    JSON.parse(localStorage?.getItem("languages"))?.eng || false
+  );
+  const [isRussian, setisRussian] = useState(
+    JSON.parse(localStorage?.getItem("languages"))?.rus || false
+  );
   const [versions, setVersions] = useState(
     JSON.parse(localStorage.getItem("versions")) || {
       geo: "ახალი გადამუშავებული გამოცემა 2015",
@@ -18,6 +26,10 @@ const Versions = () => {
       rus: "Синодальный перевод",
     }
   );
+
+  useEffect(() => {
+    setIsLanguage({ geo: isGeorgia, eng: isEnglish, rus: isRussian });
+  }, [isEnglish, isGeorgia, isRussian]);
 
   useEffect(() => {
     localStorage.setItem("versions", JSON.stringify(versions));
@@ -269,8 +281,6 @@ const Versions = () => {
     }
   };
 
-  console.log(result);
-
   return (
     <div>
       <div className="mt-2 cursor-pointer flex items-start gap-4 flex-col">
@@ -279,9 +289,9 @@ const Versions = () => {
           <label className="w-28  dark:text-white">ქართულად</label>
 
           <Checkbox
-            defaultChecked
             onChange={() => setisGeorgia(!isGeorgia)}
             className="flex-1"
+            checked={isGeorgia}
           />
 
           <Select
@@ -303,6 +313,7 @@ const Versions = () => {
           <Checkbox
             onChange={() => setisEnglish(!isEnglish)}
             className="flex-1"
+            checked={isEnglish}
           />
 
           <Select
@@ -324,6 +335,7 @@ const Versions = () => {
           <Checkbox
             onChange={() => setisRussian(!isRussian)}
             className="flex-1"
+            checked={isRussian}
           />
 
           <Select

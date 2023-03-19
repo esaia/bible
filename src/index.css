@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+@import url("//cdn.web-fonts.ge/fonts/bpg-banner-caps/css/bpg-banner-caps.min.css");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,4 +8,20 @@
 .markedText {
   background-color: rgb(254, 238, 114);
   color: rgb(56, 54, 54);
+}
+
+@layer components {
+  .showbackground {
+    @apply bg-no-repeat bg-center bg-cover bg-[url('https://images.pexels.com/photos/66997/pexels-photo-66997.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')];
+  }
+  .showText {
+    @apply text-white text-3xl py-2;
+  }
+  .tavimuxli {
+    @apply text-white font-bold text-2xl mt-3;
+  }
+}
+
+.bgblind {
+  background-color: rgba(0, 0, 0, 0.441);
 }

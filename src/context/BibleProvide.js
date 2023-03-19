@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
 import { json, Outlet } from "react-router-dom";
-import { Switch } from "@material-tailwind/react";
 
 export const BibleContext = createContext();
 
@@ -152,6 +151,14 @@ const BibleProvide = ({ children }) => {
     JSON.parse(localStorage.getItem("result"))
   );
 
+  const [isLanguage, setIsLanguage] = useState(
+    JSON.parse(localStorage?.getItem("languages")) || null
+  );
+
+  useEffect(() => {
+    localStorage.setItem("languages", JSON.stringify(isLanguage));
+  }, [isLanguage]);
+
   useEffect(() => {
     localStorage.setItem("result", JSON.stringify(result));
     localStorage.setItem("darkmode", isDarkMode);
@@ -161,31 +168,20 @@ const BibleProvide = ({ children }) => {
     <BibleContext.Provider
       value={{
         isDarkMode,
+        setisDarkMode,
         originalData,
         setoriginalData,
         filteredData,
         setfilteredData,
         result,
         setResult,
+        isLanguage,
+        setIsLanguage,
+        isDarkMode,
+        setisDarkMode,
       }}
     >
-      <div className={`${isDarkMode && "dark"}`}>
-        {/* <Outlet /> */}
-        {children}
-        <div className=" p-3  right-0 bottom-0 text-white m-4 fixed">
-          {/* <button onClick={() => setisDarkMode(!isDarkMode)}>
-            enable {isDarkMode ? "light" : "dark"} Mode
-          </button> */}
-          {/* <Switch id="blue" color="blue" defaultChecked /> */}
-          <Switch
-            color="indigo"
-            label={isDarkMode ? "light" : "dark"}
-            onChange={() => setisDarkMode(!isDarkMode)}
-            value={isDarkMode}
-            ripple={true}
-          />
-        </div>
-      </div>
+      <div className={`${isDarkMode && "dark"} font-banner`}>{children}</div>
     </BibleContext.Provider>
   );
 };

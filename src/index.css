@@ -12,10 +12,10 @@
 
 @layer components {
   .showbackground {
-    @apply bg-no-repeat bg-center bg-cover bg-[url('https://images.pexels.com/photos/66997/pexels-photo-66997.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')];
+    @apply bg-no-repeat bg-center bg-cover bg-showbg;
   }
   .showText {
-    @apply text-white text-3xl py-2;
+    @apply text-white text-6xl py-2;
   }
   .tavimuxli {
     @apply text-white font-bold text-2xl mt-3;

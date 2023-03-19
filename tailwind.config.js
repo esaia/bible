@@ -6,7 +6,11 @@ module.exports = withMT({
   darkMode: "class",
 
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        showbg: "url('/public/images/1.jpg')",
+      },
+    },
     fontFamily: {
       valera: "Varela Round",
       banner: "BPG Banner Caps",

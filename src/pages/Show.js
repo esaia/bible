@@ -3,7 +3,14 @@ import useBibleContext from "../hooks/useBibleContext";
 
 import { SlSizeFullscreen } from "react-icons/sl";
 const Show = () => {
-  const { result, isLanguage, setResult, setIsLanguage } = useBibleContext();
+  const {
+    result,
+    isLanguage,
+    setResult,
+    setIsLanguage,
+    fontSize,
+    setFontSize,
+  } = useBibleContext();
 
   const [isFullScreen, setIsFullScreen] = useState(false);
 
@@ -24,6 +31,7 @@ const Show = () => {
 
       setResult(JSON.parse(localStorage.getItem("result")));
       setIsLanguage(JSON.parse(localStorage.getItem("languages")));
+      setFontSize(JSON.parse(localStorage.getItem("fontSize")));
     };
 
     window.addEventListener("storage", handleStorageChange);
@@ -34,7 +42,7 @@ const Show = () => {
   }, []);
 
   return (
-    <div className="max-h-[100vh] h-[100vh] flex justify-center items-start px-15 flex-col showbackground gap-20 bg-blend-overlay bgblind">
+    <div className="max-h-[100vh] h-[100vh] flex justify-center items-start px-15 flex-col showbackground gap-20 bg-blend-overlay bgblind  ">
       {!isFullScreen && (
         <div className="absolute right-0 bottom-0 bg-white p-4 cursor-pointer">
           <SlSizeFullscreen
@@ -51,7 +59,7 @@ const Show = () => {
           {result?.eng.data.map((item) => {
             return (
               <div key={item.id}>
-                <p className="showText  ">{item.bv}</p>
+                <p className={`showText text-${fontSize}xl  `}>{item.bv}</p>
               </div>
             );
           })}
@@ -65,7 +73,7 @@ const Show = () => {
           {result?.geo.data.map((item) => {
             return (
               <div key={item.id}>
-                <p className="showText   ">{item.bv}</p>
+                <p className={`showText text-${fontSize}xl  `}>{item.bv}</p>
               </div>
             );
           })}
@@ -79,7 +87,7 @@ const Show = () => {
           {result?.rus.data.map((item) => {
             return (
               <div key={item.id}>
-                <p className="showText   ">{item.bv}</p>
+                <p className={`showText text-${fontSize}xl  `}>{item.bv}</p>
               </div>
             );
           })}

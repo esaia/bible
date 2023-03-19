@@ -7,8 +7,15 @@ import { Button, checkbox } from "@material-tailwind/react";
 import { Checkbox } from "@material-tailwind/react";
 
 const Versions = () => {
-  const { filteredData, result, setResult, isLanguage, setIsLanguage } =
-    useBibleContext();
+  const {
+    filteredData,
+    result,
+    setResult,
+    isLanguage,
+    setIsLanguage,
+    fontSize,
+    setFontSize,
+  } = useBibleContext();
 
   const [isGeorgia, setisGeorgia] = useState(
     JSON.parse(localStorage?.getItem("languages"))?.geo || true
@@ -195,6 +202,38 @@ const Versions = () => {
     },
   ];
 
+  const fontSizes = [
+    {
+      value: "2",
+      label: "2",
+      id: "fontSize",
+    },
+    {
+      value: "3",
+      label: "3",
+      id: "fontSize",
+    },
+    {
+      value: "4",
+      label: "4",
+      id: "fontSize",
+    },
+    {
+      value: "5",
+      label: "5",
+      id: "fontSize",
+    },
+    {
+      value: "6",
+      label: "6",
+      id: "fontSize",
+    },
+    {
+      value: "7",
+      label: "7",
+      id: "fontSize",
+    },
+  ];
   const onSave = async () => {
     if (filteredData.bibleData.length === 0) {
       console.log("bibleData not exeists");
@@ -364,7 +403,14 @@ const Versions = () => {
             აჩვენე
           </Button>
 
-          <Button className="flex items-center gap-3 text-md px-4 py-2 bg-red-400">
+          <Button
+            className="flex items-center gap-3 text-md px-4 py-2 bg-red-400"
+            onClick={() => {
+              setisGeorgia(false);
+              setisEnglish(false);
+              setisRussian(false);
+            }}
+          >
             <BsRocketTakeoff
               width={200}
               height={400}
@@ -381,6 +427,26 @@ const Versions = () => {
             />
             შავი ფონი
           </Button>
+
+          <Select
+            options={fontSizes}
+            placeholder="font"
+            defaultValue={{
+              value: "5",
+              label: "5",
+              id: "fontSize",
+            }}
+            onChange={(e) => {
+              localStorage.setItem("fontSize", JSON.stringify(+e.value));
+              setFontSize(+e.value);
+            }}
+            className="react-select-container w-[100px]  flex-auto "
+            value={{
+              value: fontSize,
+              label: fontSize,
+              id: "version",
+            }}
+          />
         </div>
       </div>
     </div>

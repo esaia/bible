@@ -78,6 +78,7 @@ const Header = () => {
         });
       }
     } else {
+      setPhrase("");
       setInputValues({ ...inputValues, [e?.id]: e?.value });
     }
   };

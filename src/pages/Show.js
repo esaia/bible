@@ -34,7 +34,7 @@ const Show = () => {
   }, []);
 
   return (
-    <div className="max-h-[100vh] h-[100vh] flex justify-center items-start px-20 flex-col showbackground gap-20 bg-blend-overlay bgblind">
+    <div className="max-h-[100vh] h-[100vh] flex justify-center items-start px-15 flex-col showbackground gap-20 bg-blend-overlay bgblind">
       {!isFullScreen && (
         <div className="absolute right-0 bottom-0 bg-white p-4 cursor-pointer">
           <SlSizeFullscreen

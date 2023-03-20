@@ -235,60 +235,60 @@ const Versions = () => {
     },
   ];
   const onSave = async () => {
+    const wigni = +filteredData.bibleData[0].wigni;
+    const tavi = +filteredData.bibleData[0].tavi;
+    const muxli = +filteredData.bibleData[0].muxli;
+
+    let englishMuxli;
+    if (JSON.parse(localStorage.getItem("language")).value === "geo") {
+      if (wigni + 3 === 49) {
+        englishMuxli = 63;
+      } else if (wigni + 3 === 50) {
+        englishMuxli = 64;
+      } else if (wigni + 3 === 51) {
+        englishMuxli = 65;
+      } else if (wigni + 3 === 52) {
+        englishMuxli = 66;
+      } else if (wigni + 3 === 53) {
+        englishMuxli = 67;
+      } else if (wigni + 3 === 54) {
+        englishMuxli = 68;
+      } else if (wigni + 3 === 55) {
+        englishMuxli = 48;
+      } else if (wigni + 3 === 56) {
+        englishMuxli = 49;
+      } else if (wigni + 3 === 57) {
+        englishMuxli = 50;
+      } else if (wigni + 3 === 58) {
+        englishMuxli = 51;
+      } else if (wigni + 3 === 59) {
+        englishMuxli = 52;
+      } else if (wigni + 3 === 60) {
+        englishMuxli = 53;
+      } else if (wigni + 3 === 61) {
+        englishMuxli = 54;
+      } else if (wigni + 3 === 62) {
+        englishMuxli = 55;
+      } else if (wigni + 3 === 63) {
+        englishMuxli = 56;
+      } else if (wigni + 3 === 64) {
+        englishMuxli = 57;
+      } else if (wigni + 3 === 65) {
+        englishMuxli = 58;
+      } else if (wigni + 3 === 66) {
+        englishMuxli = 59;
+      } else if (wigni + 3 === 67) {
+        englishMuxli = 60;
+      } else if (wigni + 3 === 68) {
+        englishMuxli = 61;
+      } else {
+        englishMuxli = null;
+      }
+    }
+
     if (filteredData.bibleData.length === 0) {
       console.log("bibleData not exeists");
     } else if (filteredData.bibleData.length === 1) {
-      const wigni = +filteredData.bibleData[0].wigni;
-      const tavi = +filteredData.bibleData[0].tavi;
-      const muxli = +filteredData.bibleData[0].muxli;
-
-      let englishMuxli;
-      if (JSON.parse(localStorage.getItem("language")).value === "geo") {
-        if (wigni + 3 === 49) {
-          englishMuxli = 63;
-        } else if (wigni + 3 === 50) {
-          englishMuxli = 64;
-        } else if (wigni + 3 === 51) {
-          englishMuxli = 65;
-        } else if (wigni + 3 === 52) {
-          englishMuxli = 66;
-        } else if (wigni + 3 === 53) {
-          englishMuxli = 67;
-        } else if (wigni + 3 === 54) {
-          englishMuxli = 68;
-        } else if (wigni + 3 === 55) {
-          englishMuxli = 48;
-        } else if (wigni + 3 === 56) {
-          englishMuxli = 49;
-        } else if (wigni + 3 === 57) {
-          englishMuxli = 50;
-        } else if (wigni + 3 === 58) {
-          englishMuxli = 51;
-        } else if (wigni + 3 === 59) {
-          englishMuxli = 52;
-        } else if (wigni + 3 === 60) {
-          englishMuxli = 53;
-        } else if (wigni + 3 === 61) {
-          englishMuxli = 54;
-        } else if (wigni + 3 === 62) {
-          englishMuxli = 55;
-        } else if (wigni + 3 === 63) {
-          englishMuxli = 56;
-        } else if (wigni + 3 === 64) {
-          englishMuxli = 57;
-        } else if (wigni + 3 === 65) {
-          englishMuxli = 58;
-        } else if (wigni + 3 === 66) {
-          englishMuxli = 59;
-        } else if (wigni + 3 === 67) {
-          englishMuxli = 60;
-        } else if (wigni + 3 === 68) {
-          englishMuxli = 61;
-        } else {
-          englishMuxli = null;
-        }
-      }
-
       // console.log(wigni + 3);
       // console.log(englishMuxli);
 
@@ -326,58 +326,8 @@ const Versions = () => {
         },
       });
     } else if (filteredData.bibleData.length > 1) {
-      const wigni = +filteredData.bibleData[0].wigni;
-      const tavi = +filteredData.bibleData[0].tavi;
-      const muxli = +filteredData.bibleData[0].muxli;
       const muxliMde =
         filteredData.bibleData[+filteredData.bibleData.length - 1].muxli;
-
-      let englishMuxli;
-      if (JSON.parse(localStorage.getItem("language")).value === "geo") {
-        if (wigni + 3 === 49) {
-          englishMuxli = 63;
-        } else if (wigni + 3 === 50) {
-          englishMuxli = 64;
-        } else if (wigni + 3 === 51) {
-          englishMuxli = 65;
-        } else if (wigni + 3 === 52) {
-          englishMuxli = 66;
-        } else if (wigni + 3 === 53) {
-          englishMuxli = 67;
-        } else if (wigni + 3 === 54) {
-          englishMuxli = 68;
-        } else if (wigni + 3 === 55) {
-          englishMuxli = 48;
-        } else if (wigni + 3 === 56) {
-          englishMuxli = 49;
-        } else if (wigni + 3 === 57) {
-          englishMuxli = 50;
-        } else if (wigni + 3 === 58) {
-          englishMuxli = 51;
-        } else if (wigni + 3 === 59) {
-          englishMuxli = 52;
-        } else if (wigni + 3 === 60) {
-          englishMuxli = 53;
-        } else if (wigni + 3 === 61) {
-          englishMuxli = 54;
-        } else if (wigni + 3 === 62) {
-          englishMuxli = 55;
-        } else if (wigni + 3 === 63) {
-          englishMuxli = 56;
-        } else if (wigni + 3 === 64) {
-          englishMuxli = 57;
-        } else if (wigni + 3 === 65) {
-          englishMuxli = 58;
-        } else if (wigni + 3 === 66) {
-          englishMuxli = 59;
-        } else if (wigni + 3 === 67) {
-          englishMuxli = 60;
-        } else if (wigni + 3 === 68) {
-          englishMuxli = 61;
-        } else {
-          englishMuxli = null;
-        }
-      }
 
       const geoURL = `https://holybible.ge/service.php?w=${
         wigni + 3
@@ -436,7 +386,8 @@ const Versions = () => {
             options={versionGeo}
             isSearchable={true}
             onChange={(e) => setVersions({ ...versions, geo: e.value })}
-            className="react-select-container w-[300px]  flex-auto "
+            className="my-react-select-container w-[300px]  flex-auto  "
+            classNamePrefix="my-react-select"
             value={{
               value: versions.geo,
               label: versions.geo,
@@ -458,7 +409,8 @@ const Versions = () => {
             options={versionEN}
             isSearchable={true}
             onChange={(e) => setVersions({ ...versions, eng: e.value })}
-            className="react-select-container w-[300px]  flex-auto "
+            className="my-react-select-container w-[300px]  flex-auto  "
+            classNamePrefix="my-react-select"
             value={{
               value: versions.eng,
               label: versions.eng,
@@ -480,7 +432,8 @@ const Versions = () => {
             options={versionRU}
             isSearchable={true}
             onChange={(e) => setVersions({ ...versions, rus: e.value })}
-            className="react-select-container w-[300px]  flex-auto "
+            className="my-react-select-container w-[300px]  flex-auto  "
+            classNamePrefix="my-react-select"
             value={{
               value: versions.rus,
               label: versions.rus,
@@ -539,7 +492,8 @@ const Versions = () => {
               localStorage.setItem("fontSize", JSON.stringify(+e.value));
               setFontSize(+e.value);
             }}
-            className="react-select-container w-[100px]  flex-auto "
+            className="my-react-select-container w-[100px] flex-auto"
+            classNamePrefix="my-react-select"
             value={{
               value: fontSize,
               label: fontSize,

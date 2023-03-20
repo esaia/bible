@@ -165,7 +165,6 @@ const BibleProvide = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("result", JSON.stringify(result));
-    localStorage.setItem("darkmode", isDarkMode);
   }, [result, isDarkMode]);
 
   return (
@@ -188,7 +187,7 @@ const BibleProvide = ({ children }) => {
       }}
     >
       <div className={`${isDarkMode && "dark"} font-banner`}>
-        <div className="dark:bg-black">{children}</div>
+        <div className="dark:bg-[#111827]">{children}</div>
       </div>
     </BibleContext.Provider>
   );

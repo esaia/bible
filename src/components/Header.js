@@ -89,7 +89,6 @@ const Header = () => {
         });
       }
     } else {
-      setPhrase("");
       setInputValues({ ...inputValues, [e?.id]: e?.value });
     }
   };
@@ -111,7 +110,7 @@ const Header = () => {
     },
     {
       value: "russian",
-      label: "russian",
+      label: "rus",
       id: "ena",
     },
   ];
@@ -188,7 +187,9 @@ const Header = () => {
               setLanguage(e);
               localStorage.setItem("language", JSON.stringify(e));
             }}
-            className="react-select-container w-[100px]  flex-auto  z-50"
+            // className="react-select-container  w-[100px]  flex-auto z-50"
+            className="my-react-select-container  w-[100px]  flex-auto z-50"
+            classNamePrefix="my-react-select"
           />
 
           {/* version */}
@@ -201,7 +202,8 @@ const Header = () => {
               setVersion(e);
               localStorage.setItem("version", JSON.stringify(e));
             }}
-            className="react-select-container w-[300px]  flex-auto  z-50"
+            className="my-react-select-container w-[300px]  flex-auto  z-50"
+            classNamePrefix="my-react-select"
           />
           {/* wigni */}
           <Select
@@ -210,7 +212,8 @@ const Header = () => {
             isClearable={true}
             isSearchable={true}
             onChange={(e, triggleAction) => inputChanges(e, triggleAction)}
-            className="react-select-container w-[300px]  flex-auto  "
+            className="my-react-select-container w-[300px]  flex-auto  "
+            classNamePrefix="my-react-select"
           />
 
           {/* Tavi */}
@@ -223,8 +226,8 @@ const Header = () => {
             isSearchable={true}
             isClearable={true}
             onChange={(e, triggleAction) => inputChanges(e, triggleAction)}
-            className="react-select-container w-[150px] flex-auto "
-            classNamePrefix="1"
+            className="my-react-select-container w-[150px] flex-auto "
+            classNamePrefix="my-react-select"
           />
 
           {/* muxli */}
@@ -238,7 +241,8 @@ const Header = () => {
             isSearchable={true}
             isClearable={true}
             onChange={(e, triggleAction) => inputChanges(e, triggleAction)}
-            className="react-select-container w-[150px] flex-auto"
+            className="my-react-select-container w-[150px] flex-auto"
+            classNamePrefix="my-react-select"
           />
           <Select
             value={versemde.filter(
@@ -250,7 +254,8 @@ const Header = () => {
             isClearable={true}
             isDisabled={inputValues.verse ? false : true}
             onChange={(e, triggleAction) => inputChanges(e, triggleAction)}
-            className="react-select-container w-[150px] flex-auto"
+            className="my-react-select-container w-[150px] flex-auto"
+            classNamePrefix="my-react-select"
           />
 
           <input
@@ -267,7 +272,7 @@ const Header = () => {
             }}
             value={phrase}
             type="text"
-            className="outline-none  p-3  w-[300px] h-[37px] rounded-[3px] border-[1.2px] border-gray-300   flex-auto "
+            className="outline-none  p-3  w-[300px] h-[37px] rounded-[3px] border-[1.2px] border-gray-300   flex-auto dark:bg-[#374151] dark:text-white "
           />
         </form>
       </div>

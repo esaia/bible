@@ -25,3 +25,33 @@
 .bgblind {
   background-color: rgba(0, 0, 0, 0.441);
 }
+
+@layer components {
+  /* .my-react-select-container {
+  } */
+  .my-react-select-container .my-react-select__control {
+    @apply dark:bg-[#374151] dark:text-white dark:hover:text-black;
+  }
+
+  .my-react-select-container .my-react-select__control--is-focused {
+    @apply dark:bg-[#374151] dark:text-white;
+  }
+
+  .my-react-select-container .my-react-select__menu {
+    @apply dark:bg-[#374151] dark:text-white;
+  }
+
+  .my-react-select-container .my-react-select__option {
+    @apply dark:text-white  dark:hover:text-black  dark:hover:bg-[#96a8cf] cursor-pointer;
+  }
+
+  .my-react-select-container .my-react-select__indicator-separator {
+    @apply dark:bg-[#2256ab];
+  }
+
+  .my-react-select-container .my-react-select__input-container,
+  .my-react-select-container .my-react-select__placeholder,
+  .my-react-select-container .my-react-select__single-value {
+    @apply dark:text-white;
+  }
+}

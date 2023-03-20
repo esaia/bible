@@ -3,14 +3,13 @@ import useBibleContext from "../hooks/useBibleContext";
 
 const Preview = ({ filteredData }) => {
   const { originalData } = useBibleContext();
-
   return (
     <div className="w-full max-w-[1200px]">
       {originalData?.bibleData &&
         filteredData?.bibleData.map((item, i) => {
           return (
             <div
-              className="w-full bg-[#030215]    p-5  text-white text-xl mt-6 rounded-md  dark:bg-white dark:text-black"
+              className="w-full bg-[#030215]  p-5  text-white text-xl mt-6 rounded-md  dark:bg-[#374151] dark:text-white "
               key={i}
             >
               <div

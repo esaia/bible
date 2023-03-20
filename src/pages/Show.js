@@ -41,59 +41,62 @@ const Show = () => {
     };
   }, []);
 
+  console.log(fontSize);
   return (
-    <div className="max-h-[100vh] h-[100vh] flex justify-center items-start px-15 flex-col showbackground gap-20 bg-blend-overlay bgblind  ">
-      {!isFullScreen && (
-        <div className="absolute right-0 bottom-0 bg-white p-4 cursor-pointer">
-          <SlSizeFullscreen
-            onClick={handleFullscreenClick}
-            className="text-4xl"
-          />
-        </div>
-      )}
+    <div className="flex justify-center items-center w-full h-[100vh]">
+      <div className=" w-full h-[100vh] px-10 flex justify-center items-start  flex-col  gap-16 bg-blend-overlay bgblind showbackground ">
+        {!isFullScreen && (
+          <div className="absolute right-0 bottom-0 bg-white p-4 cursor-pointer">
+            <SlSizeFullscreen
+              onClick={handleFullscreenClick}
+              className="text-4xl"
+            />
+          </div>
+        )}
 
-      {/* ENG */}
+        {/* ENG */}
 
-      {result && isLanguage.eng && (
-        <div className="px-20">
-          {result?.eng.data.map((item) => {
-            return (
-              <div key={item.id}>
-                <p className={`showText text-${fontSize}xl  `}>{item.bv}</p>
-              </div>
-            );
-          })}
-          <h3 className="tavimuxli">{result?.eng?.tavimuxli}</h3>
-        </div>
-      )}
+        {result && isLanguage.eng && (
+          <div className="w-full">
+            {result?.eng.data.map((item) => {
+              return (
+                <div key={item.id}>
+                  <p className={`showText  text-${fontSize}xl `}>{item.bv}</p>
+                </div>
+              );
+            })}
+            <h3 className="tavimuxli">{result?.eng?.tavimuxli}</h3>
+          </div>
+        )}
 
-      {/* GEO */}
-      {result && isLanguage.geo && (
-        <div className="px-20">
-          {result?.geo.data.map((item) => {
-            return (
-              <div key={item.id}>
-                <p className={`showText text-${fontSize}xl  `}>{item.bv}</p>
-              </div>
-            );
-          })}
-          <h3 className="tavimuxli">{result?.geo?.tavimuxli}</h3>
-        </div>
-      )}
+        {/* GEO */}
+        {result && isLanguage.geo && (
+          <div className="">
+            {result?.geo.data.map((item) => {
+              return (
+                <div key={item.id}>
+                  <p className={`showText text-${+fontSize}xl `}>{item.bv}</p>
+                </div>
+              );
+            })}
+            <h3 className="tavimuxli">{result?.geo?.tavimuxli}</h3>
+          </div>
+        )}
 
-      {/* rus */}
-      {result && isLanguage.rus && (
-        <div className="px-20">
-          {result?.rus.data.map((item) => {
-            return (
-              <div key={item.id}>
-                <p className={`showText text-${fontSize}xl  `}>{item.bv}</p>
-              </div>
-            );
-          })}
-          <h3 className="tavimuxli">{result?.rus?.tavimuxli}</h3>
-        </div>
-      )}
+        {/* rus */}
+        {result && isLanguage.rus && (
+          <div className="">
+            {result?.rus.data.map((item) => {
+              return (
+                <div key={item.id}>
+                  <p className={`showText text-${fontSize}xl  `}>{item.bv}</p>
+                </div>
+              );
+            })}
+            <h3 className="tavimuxli">{result?.rus?.tavimuxli}</h3>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

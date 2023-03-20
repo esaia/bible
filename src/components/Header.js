@@ -89,6 +89,7 @@ const Header = () => {
         });
       }
     } else {
+      setPhrase("");
       setInputValues({ ...inputValues, [e?.id]: e?.value });
     }
   };
@@ -187,7 +188,6 @@ const Header = () => {
               setLanguage(e);
               localStorage.setItem("language", JSON.stringify(e));
             }}
-            // className="react-select-container  w-[100px]  flex-auto z-50"
             className="my-react-select-container  w-[100px]  flex-auto z-50"
             classNamePrefix="my-react-select"
           />

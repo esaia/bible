@@ -5,6 +5,7 @@ import { BsRocketTakeoff, BsSlashLg } from "react-icons/bs";
 import useBibleContext from "../hooks/useBibleContext";
 import { Button, checkbox } from "@material-tailwind/react";
 import { Checkbox } from "@material-tailwind/react";
+import SelectTheme from "./SelectTheme";
 
 const Versions = () => {
   const {
@@ -371,14 +372,13 @@ const Versions = () => {
 
   return (
     <div>
-      <div className="mt-2 cursor-pointer flex items-start gap-4 flex-col">
+      <div className="mt-2 cursor-pointer flex justify-center    gap-4 flex-col  max-w-[600px] pt-16">
         {/* geo */}
-        <div className="flex gap-4 items-center ">
-          <label className="w-28  dark:text-white">ქართულად</label>
+        <div className=" flex items-center ">
+          <label className=" dark:text-white w-[130px]">ქართულად</label>
 
           <Checkbox
             onChange={() => setisGeorgia(!isGeorgia)}
-            className="flex-1"
             checked={isGeorgia}
           />
 
@@ -386,7 +386,7 @@ const Versions = () => {
             options={versionGeo}
             isSearchable={true}
             onChange={(e) => setVersions({ ...versions, geo: e.value })}
-            className="my-react-select-container w-[300px]  flex-auto  "
+            className="my-react-select-container  pl-5 w-[300px]"
             classNamePrefix="my-react-select"
             value={{
               value: versions.geo,
@@ -395,13 +395,13 @@ const Versions = () => {
             }}
           />
         </div>
+
         {/* eng */}
-        <div className="flex gap-4 items-center ">
-          <label className="w-28 dark:text-white">ინგლისურად</label>
+        <div className=" flex items-center ">
+          <label className="dark:text-white w-[130px] ">ინგლისურად</label>
 
           <Checkbox
             onChange={() => setisEnglish(!isEnglish)}
-            className="flex-1"
             checked={isEnglish}
           />
 
@@ -409,7 +409,7 @@ const Versions = () => {
             options={versionEN}
             isSearchable={true}
             onChange={(e) => setVersions({ ...versions, eng: e.value })}
-            className="my-react-select-container w-[300px]  flex-auto  "
+            className="my-react-select-container  pl-5 w-[300px] "
             classNamePrefix="my-react-select"
             value={{
               value: versions.eng,
@@ -419,12 +419,11 @@ const Versions = () => {
           />
         </div>
         {/* rus */}
-        <div className="flex gap-4 items-center ">
-          <label className="w-28 dark:text-white">რუსულად</label>
+        <div className=" flex items-center  ">
+          <label className="dark:text-white w-[130px]">რუსულად</label>
 
           <Checkbox
             onChange={() => setisRussian(!isRussian)}
-            className="flex-1"
             checked={isRussian}
           />
 
@@ -432,7 +431,7 @@ const Versions = () => {
             options={versionRU}
             isSearchable={true}
             onChange={(e) => setVersions({ ...versions, rus: e.value })}
-            className="my-react-select-container w-[300px]  flex-auto  "
+            className="my-react-select-container pl-5 w-[300px] "
             classNamePrefix="my-react-select"
             value={{
               value: versions.rus,
@@ -442,7 +441,7 @@ const Versions = () => {
           />
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 py-10">
           <Button
             className="flex items-center gap-3 text-md px-4 py-2 bg-green-400"
             onClick={onSave}
@@ -501,6 +500,7 @@ const Versions = () => {
             }}
           />
         </div>
+        <SelectTheme />
       </div>
     </div>
   );

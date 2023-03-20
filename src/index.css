@@ -12,7 +12,7 @@
 
 @layer components {
   .showbackground {
-    @apply bg-no-repeat bg-center bg-cover bg-showbg;
+    @apply bg-no-repeat bg-center bg-cover;
   }
   .showText {
     @apply text-white  py-2;

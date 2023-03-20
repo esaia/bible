@@ -20,7 +20,14 @@ module.exports = withMT({
     },
     extend: {
       backgroundImage: {
-        showbg: "url('/public/images/1.jpg')",
+        "1img": "url('/public/images/1.jpeg')",
+        "2img": "url('/public/images/2.jpeg')",
+        "3img": "url('/public/images/3.jpeg')",
+        "4img": "url('/public/images/4.jpeg')",
+        "5img": "url('/public/images/5.jpeg')",
+        "6img": "url('/public/images/6.jpeg')",
+        "7img": "url('/public/images/7.jpeg')",
+        "8img": "url('/public/images/8.jpeg')",
       },
     },
     fontFamily: {

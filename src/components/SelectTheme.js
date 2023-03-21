@@ -156,6 +156,134 @@ const SelectTheme = () => {
             className="w-20 h-full object-cover"
           />
         </div>
+
+        {/* ///// */}
+
+        <div className="flex">
+          <Radio
+            id="blue"
+            value="9"
+            name="color"
+            color="red"
+            onChange={(e) => {
+              setThemeNumber(e.target.value);
+            }}
+            checked={themeNumber === "9"}
+          />
+          <img
+            src="./images/9.jpeg"
+            alt="image"
+            className="w-20 h-full object-cover"
+          />
+        </div>
+
+        <div className="flex">
+          <Radio
+            id="blue"
+            value="10"
+            name="color"
+            color="red"
+            onChange={(e) => {
+              setThemeNumber(e.target.value);
+            }}
+            checked={themeNumber === "10"}
+          />
+          <img
+            src="./images/10.jpeg"
+            alt="image"
+            className="w-20 h-full object-cover"
+          />
+        </div>
+
+        <div className="flex">
+          <Radio
+            id="blue"
+            value="11"
+            name="color"
+            color="red"
+            onChange={(e) => {
+              setThemeNumber(e.target.value);
+            }}
+            checked={themeNumber === "11"}
+          />
+          <img
+            src="./images/11.jpeg"
+            alt="image"
+            className="w-20 h-full object-cover"
+          />
+        </div>
+
+        <div className="flex">
+          <Radio
+            id="blue"
+            value="12"
+            name="color"
+            color="red"
+            onChange={(e) => {
+              setThemeNumber(e.target.value);
+            }}
+            checked={themeNumber === "12"}
+          />
+          <img
+            src="./images/12.jpeg"
+            alt="image"
+            className="w-20 h-full object-cover"
+          />
+        </div>
+
+        <div className="flex">
+          <Radio
+            id="blue"
+            value="13"
+            name="color"
+            color="red"
+            onChange={(e) => {
+              setThemeNumber(e.target.value);
+            }}
+            checked={themeNumber === "13"}
+          />
+          <img
+            src="./images/13.jpeg"
+            alt="image"
+            className="w-20 h-full object-cover"
+          />
+        </div>
+
+        <div className="flex">
+          <Radio
+            id="blue"
+            value="14"
+            name="color"
+            color="red"
+            onChange={(e) => {
+              setThemeNumber(e.target.value);
+            }}
+            checked={themeNumber === "14"}
+          />
+          <img
+            src="./images/14.jpeg"
+            alt="image"
+            className="w-20 h-full object-cover"
+          />
+        </div>
+
+        <div className="flex">
+          <Radio
+            id="blue"
+            value="15"
+            name="color"
+            color="red"
+            onChange={(e) => {
+              setThemeNumber(e.target.value);
+            }}
+            checked={themeNumber === "15"}
+          />
+          <img
+            src="./images/15.jpeg"
+            alt="image"
+            className="w-20 h-full object-cover"
+          />
+        </div>
       </div>
     </div>
   );

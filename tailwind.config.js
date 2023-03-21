@@ -28,6 +28,13 @@ module.exports = withMT({
         "6img": "url('/public/images/6.jpeg')",
         "7img": "url('/public/images/7.jpeg')",
         "8img": "url('/public/images/8.jpeg')",
+        "9img": "url('/public/images/9.jpeg')",
+        "10img": "url('/public/images/10.jpeg')",
+        "11img": "url('/public/images/11.jpeg')",
+        "12img": "url('/public/images/12.jpeg')",
+        "13img": "url('/public/images/13.jpeg')",
+        "14img": "url('/public/images/14.jpeg')",
+        "15img": "url('/public/images/15.jpeg')",
       },
     },
     fontFamily: {

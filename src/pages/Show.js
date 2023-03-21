@@ -44,8 +44,6 @@ const Show = () => {
     };
   }, []);
 
-  console.log(fontSize);
-
   return (
     <div className="flex justify-center items-center w-full h-[100vh]">
       <div
@@ -68,6 +66,20 @@ const Show = () => {
             return "bg-7img";
           case "8":
             return "bg-8img";
+          case "9":
+            return "bg-9img";
+          case "10":
+            return "bg-10img";
+          case "11":
+            return "bg-11img";
+          case "12":
+            return "bg-12img";
+          case "13":
+            return "bg-13img";
+          case "14":
+            return "bg-14img";
+          case "15":
+            return "bg-15img";
 
           default:
             return "bg-1img";

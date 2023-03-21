@@ -290,9 +290,6 @@ const Versions = () => {
     if (filteredData.bibleData.length === 0) {
       console.log("bibleData not exeists");
     } else if (filteredData.bibleData.length === 1) {
-      // console.log(wigni + 3);
-      // console.log(englishMuxli);
-
       const geoURL = `https://holybible.ge/service.php?w=${
         wigni + 3
       }&t=${tavi}&m=&s=&mv=${versions.geo}&language=geo&page=1`;
@@ -375,7 +372,7 @@ const Versions = () => {
       <div className="mt-2 cursor-pointer flex justify-center    gap-4 flex-col  max-w-[600px] pt-16">
         {/* geo */}
         <div className=" flex items-center ">
-          <label className=" dark:text-white w-[130px]">ქართულად</label>
+          <label className=" dark:text-white w-[130px]">Georgia</label>
 
           <Checkbox
             onChange={() => setisGeorgia(!isGeorgia)}
@@ -398,7 +395,7 @@ const Versions = () => {
 
         {/* eng */}
         <div className=" flex items-center ">
-          <label className="dark:text-white w-[130px] ">ინგლისურად</label>
+          <label className="dark:text-white w-[130px] ">English</label>
 
           <Checkbox
             onChange={() => setisEnglish(!isEnglish)}
@@ -420,7 +417,7 @@ const Versions = () => {
         </div>
         {/* rus */}
         <div className=" flex items-center  ">
-          <label className="dark:text-white w-[130px]">რუსულად</label>
+          <label className="dark:text-white w-[130px]">Russian</label>
 
           <Checkbox
             onChange={() => setisRussian(!isRussian)}
@@ -451,7 +448,7 @@ const Versions = () => {
               height={400}
               className="text-5x cursor-pointer "
             />
-            აჩვენე
+            Show
           </Button>
 
           <Button
@@ -467,16 +464,16 @@ const Versions = () => {
               height={400}
               className="text-5x cursor-pointer "
             />
-            გაასუფთავე
+            Clear
           </Button>
 
-          <Button className="flex items-center gap-3 text-md px-4 py-2 bg-black">
+          <Button className="flex items-center gap-3 text-md px-4 py-2 bg-[#374151]">
             <BsRocketTakeoff
               width={200}
               height={400}
               className="text-5x cursor-pointer "
             />
-            შავი ფონი
+            black
           </Button>
 
           <Select
@@ -501,6 +498,18 @@ const Versions = () => {
           />
         </div>
         <SelectTheme />
+        <div>
+          <p className="dark:text-white text-center py-7">
+            Made By{" "}
+            <a
+              href="https://www.facebook.com/esaia.gafrindashvili/"
+              className="underline"
+              target="_blank"
+            >
+              Eso
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   );

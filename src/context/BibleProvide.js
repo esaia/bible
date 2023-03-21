@@ -165,7 +165,7 @@ const BibleProvide = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("result", JSON.stringify(result));
-  }, [result, isDarkMode]);
+  }, [result, isDarkMode, setisDarkMode]);
 
   return (
     <BibleContext.Provider

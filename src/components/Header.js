@@ -62,8 +62,6 @@ const Header = () => {
     fetch();
   }, [inputValues, phrase, language, version]);
 
-  //   console.log(filteredData.bibleData);
-
   ////////////////////////////////////////////////////////////////////
   const inputChanges = (e, triggleAction) => {
     if (triggleAction.action === "clear" && triggleAction?.removedValues) {

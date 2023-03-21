@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
 @import url("//cdn.web-fonts.ge/fonts/bpg-banner-caps/css/bpg-banner-caps.min.css");
+/* photos --->>> https://shop.churchmotiongraphics.com/library/still-background */
 
 @tailwind base;
 @tailwind components;
@@ -8,6 +9,10 @@
 .markedText {
   background-color: rgb(254, 238, 114);
   color: rgb(56, 54, 54);
+}
+
+.bgblind {
+  background-color: rgba(0, 0, 0, 0.359);
 }
 
 @layer components {
@@ -20,10 +25,6 @@
   .tavimuxli {
     @apply text-white font-bold text-4xl mt-3;
   }
-}
-
-.bgblind {
-  background-color: rgba(0, 0, 0, 0.441);
 }
 
 @layer components {

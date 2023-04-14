@@ -237,7 +237,7 @@ const Header = ({ onSave }) => {
             value={versemde.filter(
               (option) => option.label === inputValues.versemde || null
             )}
-            placeholder={"მუხლი (მდე)"}
+            placeholder={"(მდე)"}
             options={versemde}
             isSearchable={true}
             isClearable={true}

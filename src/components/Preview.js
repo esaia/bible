@@ -10,7 +10,7 @@ const Preview = ({ filteredData }) => {
         filteredData?.bibleData.map((item, i) => {
           return (
             <div
-              className="w-full bg-[#030215]  p-5  text-white text-xl mt-6 rounded-md  dark:bg-[#374151] dark:text-white "
+              className="w-full bg-[#030215] max-w-6xl mx-auto  p-5  text-white text-xl mt-6 rounded-md  dark:bg-[#374151] dark:text-white "
               key={i}
             >
               <div

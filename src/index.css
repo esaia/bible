@@ -20,10 +20,10 @@
     @apply bg-no-repeat bg-center bg-cover;
   }
   .showText {
-    @apply text-white  py-2;
+    @apply text-white  py-2 px-16;
   }
   .tavimuxli {
-    @apply text-white font-bold text-4xl mt-3;
+    @apply text-white font-bold px-16 text-4xl mt-3;
   }
 }
 

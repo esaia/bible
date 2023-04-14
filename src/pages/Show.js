@@ -80,6 +80,8 @@ const Show = () => {
             return "bg-14img";
           case "15":
             return "bg-15img";
+          case "16":
+            return "bg-16img";
 
           default:
             return "bg-1img";
@@ -126,6 +128,8 @@ const Show = () => {
                         return "text-7xl";
                       case 8:
                         return "text-8xl";
+                      case 8:
+                        return "text-9xl";
                       default:
                         return "text-5xl";
                     }
@@ -167,6 +171,8 @@ const Show = () => {
                           return "text-7xl";
                         case 8:
                           return "text-8xl";
+                        case 9:
+                          return "text-9xl";
 
                         default:
                           return "text-4xl";
@@ -208,6 +214,9 @@ const Show = () => {
                              return "text-7xl";
                            case 8:
                              return "text-8xl";
+                           case 9:
+                             return "text-9xl";
+
                            default:
                              return "text-5xl";
                          }

@@ -15,7 +15,6 @@ const Filteres = () => {
   return (
     <div className=" w-full min-h-[100vh] flex justify-start items-center flex-col p-4   dark:bg-[#101828]">
       <div className="flex flex-col items-center w-full ">
-        <Header />
         <Versions />
         <FixedDetails />
       </div>

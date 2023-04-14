@@ -3,8 +3,9 @@ import useBibleContext from "../hooks/useBibleContext";
 
 const Preview = ({ filteredData }) => {
   const { originalData } = useBibleContext();
+
   return (
-    <div className="w-full max-w-[1200px]">
+    <div className="w-full ">
       {originalData?.bibleData &&
         filteredData?.bibleData.map((item, i) => {
           return (

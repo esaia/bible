@@ -4,9 +4,9 @@ import Select from "react-select";
 import Preview from "./Preview";
 import useBibleContext from "../hooks/useBibleContext";
 import Skeleton from "./Skeleton";
-import { json } from "react-router-dom";
+import VerseArrows from "./VerseArrows";
 
-const Header = () => {
+const Header = ({ onSave }) => {
   const { originalData, setoriginalData, filteredData, setfilteredData } =
     useBibleContext();
 
@@ -32,16 +32,6 @@ const Header = () => {
   );
 
   const baseURL = `https://holybible.ge/service.php?w=${inputValues.book}&t=${inputValues.chapter}&m=&s=${phrase}&mv=${version?.value}&language=${language?.value}&page=1`;
-  useEffect(() => {
-    localStorage.setItem(
-      "language",
-      JSON.stringify({
-        value: "geo",
-        label: "geo",
-        id: "ena",
-      })
-    );
-  }, []);
 
   useEffect(() => {
     const fetch = async () => {
@@ -242,6 +232,7 @@ const Header = () => {
             className="my-react-select-container w-[150px] flex-auto"
             classNamePrefix="my-react-select"
           />
+
           <Select
             value={versemde.filter(
               (option) => option.label === inputValues.versemde || null
@@ -277,7 +268,17 @@ const Header = () => {
       {filteredData.bibleData.length === 0 ? (
         <Skeleton />
       ) : (
-        <Preview filteredData={filteredData} />
+        <>
+          <VerseArrows
+            filteredData={filteredData}
+            inputValues={inputValues}
+            setInputValues={setInputValues}
+            originalData={originalData}
+            onSave={onSave}
+          />
+
+          <Preview filteredData={filteredData} />
+        </>
       )}
     </>
   );

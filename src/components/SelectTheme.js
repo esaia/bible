@@ -284,6 +284,24 @@ const SelectTheme = () => {
             className="w-20 h-full object-cover"
           />
         </div>
+
+        <div className="flex">
+          <Radio
+            id="blue"
+            value="16"
+            name="color"
+            color="red"
+            onChange={(e) => {
+              setThemeNumber(e.target.value);
+            }}
+            checked={themeNumber === "16"}
+          />
+          <img
+            src="./images/16.jpeg"
+            alt="image"
+            className="w-20 h-full object-cover"
+          />
+        </div>
       </div>
     </div>
   );

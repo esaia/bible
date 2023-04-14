@@ -6,20 +6,14 @@ import useBibleContext from "../hooks/useBibleContext";
 import { Button, checkbox } from "@material-tailwind/react";
 import { Checkbox } from "@material-tailwind/react";
 import SelectTheme from "./SelectTheme";
+import Header from "./Header";
 
 const Versions = () => {
-  const {
-    filteredData,
-    result,
-    setResult,
-    isLanguage,
-    setIsLanguage,
-    fontSize,
-    setFontSize,
-  } = useBibleContext();
+  const { filteredData, setResult, setIsLanguage, fontSize, setFontSize } =
+    useBibleContext();
 
   const [isGeorgia, setisGeorgia] = useState(
-    JSON.parse(localStorage?.getItem("languages"))?.geo || true
+    JSON.parse(localStorage?.getItem("languages"))?.geo || false
   );
   const [isEnglish, setisEnglish] = useState(
     JSON.parse(localStorage?.getItem("languages"))?.eng || false
@@ -234,6 +228,16 @@ const Versions = () => {
       label: "7",
       id: "fontSize",
     },
+    {
+      value: "8",
+      label: "8",
+      id: "fontSize",
+    },
+    {
+      value: "9",
+      label: "9",
+      id: "fontSize",
+    },
   ];
   const onSave = async () => {
     const wigni = +filteredData.bibleData[0].wigni;
@@ -288,25 +292,31 @@ const Versions = () => {
     }
 
     if (filteredData.bibleData.length === 0) {
-      console.log("bibleData not exeists");
-    } else if (filteredData.bibleData.length === 1) {
-      const geoURL = `https://holybible.ge/service.php?w=${
-        wigni + 3
-      }&t=${tavi}&m=&s=&mv=${versions.geo}&language=geo&page=1`;
-      const engURL = `https://holybible.ge/service.php?w=${
-        englishMuxli ? englishMuxli : wigni + 3
-      }&t=${tavi}&m=&s=&mv=${versions.eng}&language=eng&page=1`;
-      const rusURL = `https://holybible.ge/service.php?w=${
-        wigni + 3
-      }&t=${tavi}&m=&s=&mv=${versions.rus}&language=russian&page=1`;
+      return console.log("bibleData not exeists");
+    }
 
-      const dataGeo = await axios.get(geoURL);
-      const dataEng = await axios.get(engURL);
-      const dataRus = await axios.get(rusURL);
+    const geoURL = `https://holybible.ge/service.php?w=${
+      wigni + 3
+    }&t=${tavi}&m=&s=&mv=${versions.geo}&language=geo&page=1`;
+    const engURL = `https://holybible.ge/service.php?w=${
+      englishMuxli ? englishMuxli : wigni + 3
+    }&t=${tavi}&m=&s=&mv=${versions.eng}&language=eng&page=1`;
+    const rusURL = `https://holybible.ge/service.php?w=${
+      wigni + 3
+    }&t=${tavi}&m=&s=&mv=${versions.rus}&language=russian&page=1`;
 
+    const dataGeo = await axios.get(geoURL);
+    const dataEng = await axios.get(engURL);
+    const dataRus = await axios.get(rusURL);
+
+    const muxliMde =
+      filteredData.bibleData[+filteredData.bibleData.length - 1].muxli;
+
+    if (filteredData.bibleData.length === 1) {
       const filteredGeo = dataGeo.data.bibleData.slice(muxli - 1, muxli);
       const filteredEng = dataEng.data.bibleData.slice(muxli - 1, muxli);
       const filteredRus = dataRus.data.bibleData.slice(muxli - 1, muxli);
+
       setResult({
         geo: {
           data: filteredGeo,
@@ -324,26 +334,10 @@ const Versions = () => {
         },
       });
     } else if (filteredData.bibleData.length > 1) {
-      const muxliMde =
-        filteredData.bibleData[+filteredData.bibleData.length - 1].muxli;
-
-      const geoURL = `https://holybible.ge/service.php?w=${
-        wigni + 3
-      }&t=${tavi}&m=&s=&mv=${versions.geo}&language=geo&page=1`;
-      const engURL = `https://holybible.ge/service.php?w=${
-        englishMuxli ? englishMuxli : wigni + 3
-      }&t=${tavi}&m=&s=&mv=${versions.eng}&language=eng&page=1`;
-      const rusURL = `https://holybible.ge/service.php?w=${
-        wigni + 3
-      }&t=${tavi}&m=&s=&mv=${versions.rus}&language=russian&page=1`;
-
-      const dataGeo = await axios.get(geoURL);
-      const dataEng = await axios.get(engURL);
-      const dataRus = await axios.get(rusURL);
-
       const filteredGeo = dataGeo.data.bibleData.slice(muxli - 1, muxliMde);
       const filteredEng = dataEng.data.bibleData.slice(muxli - 1, muxliMde);
       const filteredRus = dataRus.data.bibleData.slice(muxli - 1, muxliMde);
+
       setResult({
         geo: {
           data: filteredGeo,
@@ -369,7 +363,9 @@ const Versions = () => {
 
   return (
     <div>
-      <div className="mt-2 cursor-pointer flex justify-center    gap-4 flex-col  max-w-[600px] pt-16">
+      <Header onSave={onSave} />
+
+      <div className="mt-2 cursor-pointer flex justify-center items-center      gap-4 flex-col   pt-16">
         {/* geo */}
         <div className=" flex items-center ">
           <label className=" dark:text-white w-[130px]">Georgia</label>

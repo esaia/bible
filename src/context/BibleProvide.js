@@ -160,6 +160,17 @@ const BibleProvide = ({ children }) => {
   );
 
   useEffect(() => {
+    localStorage.setItem(
+      "language",
+      JSON.stringify({
+        value: "geo",
+        label: "geo",
+        id: "ena",
+      })
+    );
+  }, []);
+
+  useEffect(() => {
     localStorage.setItem("languages", JSON.stringify(isLanguage));
   }, [isLanguage, fontSize]);
 

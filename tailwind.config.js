@@ -17,6 +17,7 @@ module.exports = withMT({
       "6xl": "4.052rem",
       "7xl": "5.052rem",
       "8xl": "6.052rem",
+      "9xl": "7.052rem",
     },
     extend: {
       backgroundImage: {
@@ -35,6 +36,7 @@ module.exports = withMT({
         "13img": "url('/public/images/13.jpeg')",
         "14img": "url('/public/images/14.jpeg')",
         "15img": "url('/public/images/15.jpeg')",
+        "16img": "url('/public/images/16.jpeg')",
       },
     },
     fontFamily: {

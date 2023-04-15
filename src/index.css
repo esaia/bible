@@ -12,7 +12,7 @@
 }
 
 .bgblind {
-  background-color: rgba(0, 0, 0, 0.359);
+  background-color: rgba(0, 0, 0, 0.529);
 }
 
 @layer components {
@@ -24,6 +24,9 @@
   }
   .tavimuxli {
     @apply text-white font-bold px-16 text-4xl mt-3;
+  }
+  .themeimg {
+    @apply w-20 h-12 object-cover;
   }
 }
 

@@ -41,7 +41,7 @@ const VerseArrows = ({
             onClick={right}
           />
           <button
-            class="bg-black text-white px-3 rounded-md dark:text-white  dark:bg-[#374151] hover:bg-gray-700 dark:hover:bg-gray-500"
+            className="bg-black text-white px-3 rounded-md dark:text-white  dark:bg-[#374151] hover:bg-gray-700 dark:hover:bg-gray-500"
             onClick={() => onSave()}
           >
             Show

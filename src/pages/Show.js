@@ -82,6 +82,14 @@ const Show = () => {
             return "bg-15img";
           case "16":
             return "bg-16img";
+          case "17":
+            return "bg-17img";
+          case "18":
+            return "bg-18img";
+          case "19":
+            return "bg-19img";
+          case "20":
+            return "bg-20img";
 
           default:
             return "bg-1img";

@@ -37,6 +37,10 @@ module.exports = withMT({
         "14img": "url('/public/images/14.jpeg')",
         "15img": "url('/public/images/15.jpeg')",
         "16img": "url('/public/images/16.jpeg')",
+        "17img": "url('/public/images/17.jpeg')",
+        "18img": "url('/public/images/18.jpeg')",
+        "19img": "url('/public/images/19.jpeg')",
+        "20img": "url('/public/images/20.jpeg')",
       },
     },
     fontFamily: {

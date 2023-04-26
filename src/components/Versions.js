@@ -7,6 +7,7 @@ import { Button, checkbox } from "@material-tailwind/react";
 import { Checkbox } from "@material-tailwind/react";
 import SelectTheme from "./SelectTheme";
 import Header from "./Header";
+import useData from "../hooks/useData";
 
 const Versions = () => {
   const { filteredData, setResult, setIsLanguage, fontSize, setFontSize } =
@@ -239,57 +240,35 @@ const Versions = () => {
       id: "fontSize",
     },
   ];
+
   const onSave = async () => {
     const wigni = +filteredData.bibleData[0].wigni;
     const tavi = +filteredData.bibleData[0].tavi;
     const muxli = +filteredData.bibleData[0].muxli;
 
-    let englishMuxli;
-    if (JSON.parse(localStorage.getItem("language")).value === "geo") {
-      if (wigni + 3 === 49) {
-        englishMuxli = 63;
-      } else if (wigni + 3 === 50) {
-        englishMuxli = 64;
-      } else if (wigni + 3 === 51) {
-        englishMuxli = 65;
-      } else if (wigni + 3 === 52) {
-        englishMuxli = 66;
-      } else if (wigni + 3 === 53) {
-        englishMuxli = 67;
-      } else if (wigni + 3 === 54) {
-        englishMuxli = 68;
-      } else if (wigni + 3 === 55) {
-        englishMuxli = 48;
-      } else if (wigni + 3 === 56) {
-        englishMuxli = 49;
-      } else if (wigni + 3 === 57) {
-        englishMuxli = 50;
-      } else if (wigni + 3 === 58) {
-        englishMuxli = 51;
-      } else if (wigni + 3 === 59) {
-        englishMuxli = 52;
-      } else if (wigni + 3 === 60) {
-        englishMuxli = 53;
-      } else if (wigni + 3 === 61) {
-        englishMuxli = 54;
-      } else if (wigni + 3 === 62) {
-        englishMuxli = 55;
-      } else if (wigni + 3 === 63) {
-        englishMuxli = 56;
-      } else if (wigni + 3 === 64) {
-        englishMuxli = 57;
-      } else if (wigni + 3 === 65) {
-        englishMuxli = 58;
-      } else if (wigni + 3 === 66) {
-        englishMuxli = 59;
-      } else if (wigni + 3 === 67) {
-        englishMuxli = 60;
-      } else if (wigni + 3 === 68) {
-        englishMuxli = 61;
-      } else {
-        englishMuxli = null;
-      }
-    }
+    const mappings = {
+      49: 63,
+      50: 64,
+      51: 65,
+      52: 66,
+      53: 67,
+      54: 68,
+      55: 48,
+      56: 49,
+      57: 50,
+      58: 51,
+      59: 52,
+      60: 53,
+      61: 54,
+      62: 55,
+      63: 56,
+      64: 57,
+      65: 58,
+      66: 59,
+      67: 60,
+      68: 61,
+    };
+    let englishWigni = mappings[wigni + 3] || null;
 
     if (filteredData.bibleData.length === 0) {
       return console.log("bibleData not exeists");
@@ -299,7 +278,7 @@ const Versions = () => {
       wigni + 3
     }&t=${tavi}&m=&s=&mv=${versions.geo}&language=geo&page=1`;
     const engURL = `https://holybible.ge/service.php?w=${
-      englishMuxli ? englishMuxli : wigni + 3
+      englishWigni ? englishWigni : wigni + 3
     }&t=${tavi}&m=&s=&mv=${versions.eng}&language=eng&page=1`;
     const rusURL = `https://holybible.ge/service.php?w=${
       wigni + 3
@@ -325,7 +304,7 @@ const Versions = () => {
         eng: {
           data: filteredEng,
           tavimuxli: `${
-            dataEng.data.bibleNames[englishMuxli ? englishMuxli - 1 : wigni + 2]
+            dataEng.data.bibleNames[englishWigni ? englishWigni - 1 : wigni + 2]
           } ${tavi}:${muxli}`,
         },
         rus: {
@@ -348,7 +327,7 @@ const Versions = () => {
         eng: {
           data: filteredEng,
           tavimuxli: `${
-            dataEng.data.bibleNames[englishMuxli ? englishMuxli - 1 : wigni + 2]
+            dataEng.data.bibleNames[englishWigni ? englishWigni - 1 : wigni + 2]
           } ${tavi}:${muxli}-${muxliMde}`,
         },
         rus: {

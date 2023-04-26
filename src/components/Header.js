@@ -5,12 +5,14 @@ import Preview from "./Preview";
 import useBibleContext from "../hooks/useBibleContext";
 import Skeleton from "./Skeleton";
 import VerseArrows from "./VerseArrows";
+import useData from "../hooks/useData";
 
 const Header = ({ onSave }) => {
   const { originalData, setoriginalData, filteredData, setfilteredData } =
     useBibleContext();
 
-  // inputvalues gadatana global contextshi da buttonze onsumbitze save to other value in 3 language
+  const { languages, versions, book, chapter, verse, versemde } = useData();
+
   const [phrase, setPhrase] = useState("");
   const [inputValues, setInputValues] = useState({
     version: "",
@@ -82,91 +84,10 @@ const Header = ({ onSave }) => {
     }
   };
 
-  ////////////////////////////////////////////////////////////////
-
-  //   DATA <<<------->>>
-
-  const languages = [
-    {
-      value: "geo",
-      label: "geo",
-      id: "ena",
-    },
-    {
-      value: "eng",
-      label: "eng",
-      id: "ena",
-    },
-    {
-      value: "russian",
-      label: "rus",
-      id: "ena",
-    },
-  ];
-
-  const versions = filteredData?.versions.map((item, i) => {
-    return { value: item, label: item, id: "version" };
-  });
-
-  const bible = originalData?.bibleNames
-    ?.map((item, i) => {
-      return { value: i + 1, label: item, id: "book" };
-    })
-    .slice(0, 3);
-
-  const oldTest = originalData?.bibleNames
-    ?.map((item, i) => {
-      return { value: i + 1, label: item, id: "book" };
-    })
-    .slice(3, 42);
-
-  const newTest = originalData?.bibleNames
-    ?.map((item, i) => {
-      return { value: i + 1, label: item, id: "book" };
-    })
-    .slice(42, 69);
-
-  const book = [
-    {
-      label: "ბიბლია",
-      options: bible,
-    },
-    {
-      label: "ძველი აღთქმა",
-      options: oldTest,
-    },
-    {
-      label: "ახალი აღთქმა",
-      options: newTest,
-    },
-  ];
-
-  const chapter =
-    filteredData?.tavi &&
-    new Array(+filteredData?.tavi[0].cc)?.fill()?.map((_, i) => {
-      return { value: i + 1, label: i + 1, id: "chapter" };
-    });
-
-  const verse =
-    filteredData?.muxli &&
-    new Array(+filteredData?.muxli[0].cc)?.fill()?.map((_, i) => {
-      return { value: i + 1, label: i + 1, id: "verse" };
-    });
-
-  const versemde =
-    filteredData?.muxli &&
-    new Array(+filteredData?.muxli[0].cc)
-      ?.fill()
-      ?.map((_, i) => {
-        return { value: i + 1, label: i + 1, id: "versemde" };
-      })
-      .slice(inputValues.verse);
-
   return (
     <>
       <div className="w-full">
         <form className="flex justify-start items-center flex-grow-4 gap-3 my-4 flex-wrap">
-          {/* ena */}
           <Select
             placeholder={"ენა"}
             defaultValue={language}
@@ -179,7 +100,6 @@ const Header = ({ onSave }) => {
             className="my-react-select-container  w-[100px]  flex-auto z-50"
             classNamePrefix="my-react-select"
           />
-
           {/* version */}
           <Select
             placeholder={"ვერსია"}
@@ -203,7 +123,6 @@ const Header = ({ onSave }) => {
             className="my-react-select-container w-[300px]  flex-auto  "
             classNamePrefix="my-react-select"
           />
-
           {/* Tavi */}
           <Select
             value={chapter?.filter(
@@ -217,7 +136,6 @@ const Header = ({ onSave }) => {
             className="my-react-select-container w-[150px] flex-auto "
             classNamePrefix="my-react-select"
           />
-
           {/* muxli */}
           <Select
             value={verse.filter(
@@ -232,7 +150,6 @@ const Header = ({ onSave }) => {
             className="my-react-select-container w-[150px] flex-auto"
             classNamePrefix="my-react-select"
           />
-
           <Select
             value={versemde.filter(
               (option) => option.label === inputValues.versemde || null
@@ -246,7 +163,6 @@ const Header = ({ onSave }) => {
             className="my-react-select-container w-[150px] flex-auto"
             classNamePrefix="my-react-select"
           />
-
           <input
             onChange={(e) => {
               setInputValues({
@@ -265,6 +181,7 @@ const Header = ({ onSave }) => {
           />
         </form>
       </div>
+
       {filteredData.bibleData.length === 0 ? (
         <Skeleton />
       ) : (

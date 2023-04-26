@@ -11,7 +11,7 @@ const Header = ({ onSave }) => {
   const { originalData, setoriginalData, filteredData, setfilteredData } =
     useBibleContext();
 
-  const { languages, versions, book, chapter, verse, versemde } = useData();
+  const { languages, versions, book, chapter, verse } = useData();
 
   const [phrase, setPhrase] = useState("");
   const [inputValues, setInputValues] = useState({
@@ -83,6 +83,15 @@ const Header = ({ onSave }) => {
       setInputValues({ ...inputValues, [e?.id]: e?.value });
     }
   };
+
+  const versemde =
+    filteredData?.muxli &&
+    new Array(+filteredData?.muxli[0].cc)
+      ?.fill()
+      ?.map((_, i) => {
+        return { value: i + 1, label: i + 1, id: "versemde" };
+      })
+      .slice(inputValues.verse);
 
   return (
     <>

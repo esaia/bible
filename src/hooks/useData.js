@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { BibleContext } from "../context/BibleProvide";
 
 const useData = () => {
-  const { filteredData, originalData, inputValues } = useContext(BibleContext);
+  const { filteredData, originalData } = useContext(BibleContext);
 
   //   For preview
   const languages = [
@@ -69,15 +69,6 @@ const useData = () => {
     new Array(+filteredData?.muxli[0].cc)?.fill()?.map((_, i) => {
       return { value: i + 1, label: i + 1, id: "verse" };
     });
-
-  const versemde =
-    filteredData?.muxli &&
-    new Array(+filteredData?.muxli[0].cc)
-      ?.fill()
-      ?.map((_, i) => {
-        return { value: i + 1, label: i + 1, id: "versemde" };
-      })
-      .slice(inputValues?.verse);
 
   //   For result
 
@@ -289,7 +280,6 @@ const useData = () => {
     book,
     chapter,
     verse,
-    versemde,
     versionGeo,
     versionEN,
     versionRU,

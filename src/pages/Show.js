@@ -3,17 +3,11 @@ import useBibleContext from "../hooks/useBibleContext";
 
 import { SlSizeFullscreen } from "react-icons/sl";
 const Show = () => {
-  const {
-    result,
-    isLanguage,
-    setResult,
-    setIsLanguage,
-    fontSize,
-    setFontSize,
-  } = useBibleContext();
+  const { result, isLanguage, setResult, setIsLanguage } = useBibleContext();
 
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [theme, setTheme] = useState(1);
+  const [fontSize, setFontSize] = useState(5);
 
   const handleFullscreenClick = () => {
     if (!isFullScreen) {

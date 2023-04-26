@@ -155,10 +155,6 @@ const BibleProvide = ({ children }) => {
     JSON.parse(localStorage?.getItem("languages")) || null
   );
 
-  const [fontSize, setFontSize] = useState(
-    +JSON.parse(localStorage.getItem("fontSize")) || 5
-  );
-
   useEffect(() => {
     localStorage.setItem(
       "language",
@@ -169,10 +165,6 @@ const BibleProvide = ({ children }) => {
       })
     );
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem("languages", JSON.stringify(isLanguage));
-  }, [isLanguage, fontSize]);
 
   useEffect(() => {
     localStorage.setItem("result", JSON.stringify(result));
@@ -193,8 +185,6 @@ const BibleProvide = ({ children }) => {
         setIsLanguage,
         isDarkMode,
         setisDarkMode,
-        fontSize,
-        setFontSize,
       }}
     >
       <div className={`${isDarkMode && "dark"} font-banner`}>

@@ -13,8 +13,6 @@ const useBibleContext = () => {
     setResult,
     isLanguage,
     setIsLanguage,
-    fontSize,
-    setFontSize,
   } = useContext(BibleContext);
 
   return {
@@ -28,8 +26,6 @@ const useBibleContext = () => {
     setResult,
     isLanguage,
     setIsLanguage,
-    fontSize,
-    setFontSize,
   };
 };
 

@@ -8,10 +8,14 @@ import { Checkbox } from "@material-tailwind/react";
 import SelectTheme from "./SelectTheme";
 import Header from "./Header";
 import useData from "../hooks/useData";
+import VersionSelect from "./result-versions/VersionSelect";
+import FontSize from "./result-versions/FontSize";
+import MadeBy from "./result-versions/MadeBy";
 
 const Versions = () => {
   const { filteredData, setResult, setIsLanguage, fontSize, setFontSize } =
     useBibleContext();
+  const { versionGeo, versionEN, versionRU, fontSizes } = useData();
 
   const [isGeorgia, setisGeorgia] = useState(
     JSON.parse(localStorage?.getItem("languages"))?.geo || false
@@ -30,6 +34,12 @@ const Versions = () => {
     }
   );
 
+  const clearAll = () => {
+    setisGeorgia(false);
+    setisEnglish(false);
+    setisRussian(false);
+  };
+
   useEffect(() => {
     setIsLanguage({ geo: isGeorgia, eng: isEnglish, rus: isRussian });
   }, [isEnglish, isGeorgia, isRussian]);
@@ -37,209 +47,6 @@ const Versions = () => {
   useEffect(() => {
     localStorage.setItem("versions", JSON.stringify(versions));
   }, [versions]);
-
-  // DATA
-  const versionGeo = [
-    {
-      value: "ახალი გადამუშავებული გამოცემა 2015",
-      label: "ახალი გადამუშავებული გამოცემა 2015",
-      id: "version",
-    },
-    {
-      value: "სბს–2013",
-      label: "სბს–2013",
-      id: "version",
-    },
-    {
-      value: "სბს–სტოკჰოლმი 2001",
-      label: "სბს–სტოკჰოლმი 2001",
-      id: "version",
-    },
-    {
-      value: "საპატრიარქო – orthodoxy.ge",
-      label: "საპატრიარქო – orthodoxy.ge",
-      id: "version",
-    },
-    {
-      value: "მცხეთური ხელნაწერი–გ. მთაწმინდელი",
-      label: "მცხეთური ხელნაწერი–გ. მთაწმინდელი",
-      id: "version",
-    },
-    {
-      value: "ადიშის ოთხთავი 897 წ. – ძველი მონუსკრიპტები",
-      label: "ადიშის ოთხთავი 897 წ. – ძველი მონუსკრიპტები",
-      id: "version",
-    },
-    {
-      value: "ახალი ქვეყნიერების თარგმანი*",
-      label: "ახალი ქვეყნიერების თარგმანი*",
-      id: "version",
-    },
-    {
-      value: "ახალი აღთქმა, სტოკჰოლმი 1985",
-      label: "ახალი აღთქმა, სტოკჰოლმი 1985",
-      id: "version",
-    },
-  ];
-
-  const versionEN = [
-    {
-      value: "NASB New American Standard Bible",
-      label: "NASB New American Standard Bible",
-      id: "version",
-    },
-    {
-      value: "NIV New International Version",
-      label: "NIV New International Version",
-      id: "version",
-    },
-    {
-      value: "KJV King James Version",
-      label: "KJV King James Version",
-      id: "version",
-    },
-    {
-      value: "Geneva Bible 1599",
-      label: "Geneva Bible 1599",
-      id: "version",
-    },
-    {
-      value: "NRSV New Revised Standard Bible",
-      label: "NRSV New Revised Standard Bible",
-      id: "version",
-    },
-    {
-      value: "Darby's New Translation",
-      label: "Darby's New Translation",
-      id: "version",
-    },
-    {
-      value: "ESV English Standard Version 2001",
-      label: "ESV English Standard Version 2001",
-      id: "version",
-    },
-    {
-      value: "Douay Rheims Bible",
-      label: "Douay Rheims Bible",
-      id: "version",
-    },
-    {
-      value: "WEB-World English Bible",
-      label: "WEB-World English Bible",
-      id: "version",
-    },
-    {
-      value: "Modern KJV",
-      label: "Modern KJV",
-      id: "version",
-    },
-    {
-      value: "ASV American Standard Version 1901",
-      label: "ASV American Standard Version 1901",
-      id: "version",
-    },
-    {
-      value: "Basic English Bible",
-      label: "Basic English Bible",
-      id: "version",
-    },
-    {
-      value: "Catholic Public Domain Version 2009",
-      label: "Catholic Public Domain Version 2009",
-      id: "version",
-    },
-  ];
-
-  const versionRU = [
-    {
-      value: "Синодальный перевод",
-      label: "Синодальный перевод",
-      id: "version",
-    },
-    {
-      value: "Hовый Pусский Перевод (IBS)",
-      label: "Hовый Pусский Перевод (IBS)",
-      id: "version",
-    },
-    {
-      value: "Библия Германа Менге",
-      label: "Библия Германа Менге",
-      id: "version",
-    },
-
-    {
-      value: "Священное Писание - Смысловой Перевод",
-      label: "Священное Писание - Смысловой Перевод",
-      id: "version",
-    },
-
-    {
-      value: "Церковно-славянская Библия Кирилла и Мефодия",
-      label: "Церковно-славянская Библия Кирилла и Мефодия",
-      id: "version",
-    },
-
-    {
-      value: "Новый Завет - Восстановительный перевод 1998",
-      label: "Новый Завет - Восстановительный перевод 1998",
-      id: "version",
-    },
-
-    {
-      value: "Слово Жизни - Новый Завет 1991",
-      label: "Слово Жизни - Новый Завет 1991",
-      id: "version",
-    },
-
-    {
-      value: "Новый Завет - перевод еписк. Кассиана (Безобразова)",
-      label: "Новый Завет - перевод еписк. Кассиана (Безобразова)",
-      id: "version",
-    },
-  ];
-
-  const fontSizes = [
-    {
-      value: "2",
-      label: "2",
-      id: "fontSize",
-    },
-    {
-      value: "3",
-      label: "3",
-      id: "fontSize",
-    },
-    {
-      value: "4",
-      label: "4",
-      id: "fontSize",
-    },
-    {
-      value: "5",
-      label: "5",
-      id: "fontSize",
-    },
-    {
-      value: "6",
-      label: "6",
-      id: "fontSize",
-    },
-    {
-      value: "7",
-      label: "7",
-      id: "fontSize",
-    },
-    {
-      value: "8",
-      label: "8",
-      id: "fontSize",
-    },
-    {
-      value: "9",
-      label: "9",
-      id: "fontSize",
-    },
-  ];
 
   const onSave = async () => {
     const wigni = +filteredData.bibleData[0].wigni;
@@ -345,75 +152,39 @@ const Versions = () => {
       <Header onSave={onSave} />
 
       <div className="mt-2 cursor-pointer flex justify-center items-center      gap-4 flex-col   pt-16">
-        {/* geo */}
-        <div className=" flex items-center ">
-          <label className=" dark:text-white w-[130px]">Georgia</label>
+        <VersionSelect
+          title={"Georgia"}
+          version={versionGeo}
+          activeversion={versions.geo}
+          versions={versions}
+          setVersions={setVersions}
+          language={isGeorgia}
+          setLanguage={setisGeorgia}
+          activeLang={Object.keys(versions)[0]}
+        />
 
-          <Checkbox
-            onChange={() => setisGeorgia(!isGeorgia)}
-            checked={isGeorgia}
-          />
+        <VersionSelect
+          title={"English"}
+          version={versionEN}
+          activeversion={versions.eng}
+          versions={versions}
+          setVersions={setVersions}
+          language={isEnglish}
+          setLanguage={setisEnglish}
+          activeLang={Object.keys(versions)[1]}
+        />
+        <VersionSelect
+          title={"Russian"}
+          version={versionRU}
+          activeversion={versions.rus}
+          versions={versions}
+          setVersions={setVersions}
+          language={isRussian}
+          setLanguage={setisRussian}
+          activeLang={Object.keys(versions)[2]}
+        />
 
-          <Select
-            options={versionGeo}
-            isSearchable={true}
-            onChange={(e) => setVersions({ ...versions, geo: e.value })}
-            className="my-react-select-container  pl-5 w-[300px]"
-            classNamePrefix="my-react-select"
-            value={{
-              value: versions.geo,
-              label: versions.geo,
-              id: "version",
-            }}
-          />
-        </div>
-
-        {/* eng */}
-        <div className=" flex items-center ">
-          <label className="dark:text-white w-[130px] ">English</label>
-
-          <Checkbox
-            onChange={() => setisEnglish(!isEnglish)}
-            checked={isEnglish}
-          />
-
-          <Select
-            options={versionEN}
-            isSearchable={true}
-            onChange={(e) => setVersions({ ...versions, eng: e.value })}
-            className="my-react-select-container  pl-5 w-[300px] "
-            classNamePrefix="my-react-select"
-            value={{
-              value: versions.eng,
-              label: versions.eng,
-              id: "version",
-            }}
-          />
-        </div>
-        {/* rus */}
-        <div className=" flex items-center  ">
-          <label className="dark:text-white w-[130px]">Russian</label>
-
-          <Checkbox
-            onChange={() => setisRussian(!isRussian)}
-            checked={isRussian}
-          />
-
-          <Select
-            options={versionRU}
-            isSearchable={true}
-            onChange={(e) => setVersions({ ...versions, rus: e.value })}
-            className="my-react-select-container pl-5 w-[300px] "
-            classNamePrefix="my-react-select"
-            value={{
-              value: versions.rus,
-              label: versions.rus,
-              id: "version",
-            }}
-          />
-        </div>
-
-        <div className="flex gap-2 py-10">
+        <div className="flex gap-5 py-10">
           <Button
             className="flex items-center gap-3 text-md px-4 py-2 bg-green-400"
             onClick={onSave}
@@ -428,63 +199,16 @@ const Versions = () => {
 
           <Button
             className="flex items-center gap-3 text-md px-4 py-2 bg-red-400"
-            onClick={() => {
-              setisGeorgia(false);
-              setisEnglish(false);
-              setisRussian(false);
-            }}
+            onClick={clearAll}
           >
-            <BsRocketTakeoff
-              width={200}
-              height={400}
-              className="text-5x cursor-pointer "
-            />
             Clear
           </Button>
-
-          <Button className="flex items-center gap-3 text-md px-4 py-2 bg-[#374151]">
-            <BsRocketTakeoff
-              width={200}
-              height={400}
-              className="text-5x cursor-pointer "
-            />
-            black
-          </Button>
-
-          <Select
-            options={fontSizes}
-            placeholder="font"
-            defaultValue={{
-              value: "5",
-              label: "5",
-              id: "fontSize",
-            }}
-            onChange={(e) => {
-              localStorage.setItem("fontSize", JSON.stringify(+e.value));
-              setFontSize(+e.value);
-            }}
-            className="my-react-select-container w-[100px] flex-auto"
-            classNamePrefix="my-react-select"
-            value={{
-              value: fontSize,
-              label: fontSize,
-              id: "version",
-            }}
-          />
+          <FontSize />
         </div>
+
         <SelectTheme />
-        <div>
-          <p className="dark:text-white text-center py-7">
-            Made By{" "}
-            <a
-              href="https://www.facebook.com/esaia.gafrindashvili/"
-              className="underline"
-              target="_blank"
-            >
-              Eso
-            </a>
-          </p>
-        </div>
+
+        <MadeBy />
       </div>
     </div>
   );

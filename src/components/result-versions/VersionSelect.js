@@ -4,7 +4,7 @@ import Select from "react-select";
 
 const VersionSelect = ({
   title,
-  version,
+  data,
   activeversion,
   versions,
   setVersions,
@@ -17,7 +17,7 @@ const VersionSelect = ({
       <label className=" dark:text-white w-[130px]">{title}</label>
       <Checkbox onChange={() => setLanguage(!language)} checked={language} />
       <Select
-        options={version}
+        options={data}
         isSearchable={true}
         onChange={(e) => setVersions({ ...versions, [activeLang]: e.value })}
         className="my-react-select-container  pl-5 w-[300px]"

@@ -154,7 +154,7 @@ const Versions = () => {
       <div className="mt-2 cursor-pointer flex justify-center items-center      gap-4 flex-col   pt-16">
         <VersionSelect
           title={"Georgia"}
-          version={versionGeo}
+          data={versionGeo}
           activeversion={versions.geo}
           versions={versions}
           setVersions={setVersions}
@@ -165,7 +165,7 @@ const Versions = () => {
 
         <VersionSelect
           title={"English"}
-          version={versionEN}
+          data={versionEN}
           activeversion={versions.eng}
           versions={versions}
           setVersions={setVersions}
@@ -175,7 +175,7 @@ const Versions = () => {
         />
         <VersionSelect
           title={"Russian"}
-          version={versionRU}
+          data={versionRU}
           activeversion={versions.rus}
           versions={versions}
           setVersions={setVersions}

@@ -9,17 +9,17 @@ const useData = () => {
     {
       value: "geo",
       label: "geo",
-      id: "ena",
+      id: "language",
     },
     {
       value: "eng",
       label: "eng",
-      id: "ena",
+      id: "language",
     },
     {
       value: "russian",
       label: "rus",
-      id: "ena",
+      id: "language",
     },
   ];
   const versions = filteredData?.versions?.map((item, i) => {

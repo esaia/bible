@@ -1,5 +1,6 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useReducer, useState } from "react";
 import { json, Outlet } from "react-router-dom";
+import useData from "../hooks/useData";
 
 export const BibleContext = createContext();
 
@@ -140,6 +141,95 @@ const BibleProvide = ({ children }) => {
     },
     bibleData2: "",
   };
+  const inputValueInitial = {
+    version:
+      localStorage.getItem("previewVersion") ||
+      "ახალი გადამუშავებული გამოცემა 2015",
+    book: 4,
+    chapter: 1,
+    verse: 1,
+    versemde: null,
+    phrase: "",
+    language: localStorage.getItem("previewLanguage") || "geo",
+  };
+
+  const bibleDataReducer = (state, { type, payload }) => {
+    const e = payload?.event;
+    const triggleAction = payload?.triggleAction;
+
+    switch (type) {
+      case "CHANGE_INPUT_VALUE":
+        if (triggleAction.action === "clear" && triggleAction?.removedValues) {
+          if (triggleAction.removedValues[0].id === "verse") {
+            return {
+              ...state,
+              [triggleAction.removedValues[0].id]: null,
+              versemde: null,
+            };
+          } else if (triggleAction.removedValues[0].id === "chapter") {
+            return {
+              ...state,
+              [triggleAction.removedValues[0].id]: null,
+              versemde: null,
+              verse: null,
+            };
+          } else if (triggleAction.removedValues[0].id === "versemde") {
+            return {
+              ...state,
+              [triggleAction.removedValues[0].id]: null,
+            };
+          } else {
+            return {
+              ...state,
+              [triggleAction.removedValues[0].id]: null,
+            };
+          }
+        } else {
+          return { ...state, [e?.id]: e?.value, phrase: "" };
+        }
+      case "CHANGE_LANGUAGE_AND_VERSION":
+        // add to localstorage
+        if (e.id === "version") {
+          localStorage.setItem("previewVersion", e.value);
+        } else if (e.id === "language") {
+          localStorage.setItem("previewLanguage", e.value);
+        }
+        return { ...state, [e?.id]: e?.value, phrase: "" };
+
+      case "DECREASE_VERSE":
+        if (state.verse === 1) {
+          return { ...state };
+        }
+        return {
+          ...state,
+          verse: +state.verse - 1,
+        };
+      case "INCREASE_VERSE":
+        return {
+          ...state,
+          verse: +state.verse + 1,
+        };
+
+      case "PHRASE_INPUT":
+        return {
+          ...state,
+          version: "",
+          book: 1,
+          chapter: null,
+          verse: null,
+          versemde: null,
+          phrase: payload.event.target.value,
+        };
+
+      default:
+        break;
+    }
+  };
+
+  const [inputValues, inputDispatch] = useReducer(
+    bibleDataReducer,
+    inputValueInitial
+  );
 
   const [isDarkMode, setisDarkMode] = useState(
     JSON.parse(localStorage.getItem("darkmode")) || false
@@ -180,6 +270,8 @@ const BibleProvide = ({ children }) => {
         setResult,
         isLanguage,
         setIsLanguage,
+        inputDispatch,
+        inputValues,
       }}
     >
       <div className={`${isDarkMode && "dark"} font-banner`}>

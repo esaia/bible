@@ -8,31 +8,12 @@ import VerseArrows from "./VerseArrows";
 import useData from "../hooks/useData";
 
 const Header = ({ onSave }) => {
-  const { filteredData, setfilteredData } = useBibleContext();
+  const { filteredData, setfilteredData, inputValues, inputDispatch } =
+    useBibleContext();
 
   const { languages, versions, book, chapter, verse } = useData();
 
-  const [phrase, setPhrase] = useState("");
-  const [inputValues, setInputValues] = useState({
-    version: "",
-    book: null,
-    chapter: 1,
-    verse: 1,
-    versemde: null,
-  });
-  const [language, setLanguage] = useState(
-    JSON.parse(localStorage.getItem("language")) || {
-      value: "geo",
-      label: "geo",
-      id: "ena",
-    }
-  );
-
-  const [version, setVersion] = useState(
-    JSON.parse(localStorage.getItem("version"))
-  );
-
-  const baseURL = `https://holybible.ge/service.php?w=${inputValues.book}&t=${inputValues.chapter}&m=&s=${phrase}&mv=${version?.value}&language=${language?.value}&page=1`;
+  const baseURL = `https://holybible.ge/service.php?w=${inputValues.book}&t=${inputValues.chapter}&m=&s=${inputValues.phrase}&mv=${inputValues?.version}&language=${inputValues.language}&page=1`;
 
   useEffect(() => {
     const fetch = async () => {
@@ -50,36 +31,20 @@ const Header = ({ onSave }) => {
     };
 
     fetch();
-  }, [inputValues, phrase, language, version]);
+  }, [inputValues]);
 
-  ////////////////////////////////////////////////////////////////////
-  const inputChanges = (e, triggleAction) => {
-    if (triggleAction.action === "clear" && triggleAction?.removedValues) {
-      setInputValues({
-        ...inputValues,
-        [triggleAction.removedValues[0].id]: null,
-      });
+  const changeInputValue = (e, triggleAction) => {
+    inputDispatch({
+      type: "CHANGE_INPUT_VALUE",
+      payload: { event: e, triggleAction },
+    });
+  };
 
-      if (triggleAction.removedValues[0].id === "verse") {
-        setInputValues({
-          ...inputValues,
-          [triggleAction.removedValues[0].id]: null,
-          versemde: null,
-        });
-      }
-
-      if (triggleAction.removedValues[0].id === "chapter") {
-        setInputValues({
-          ...inputValues,
-          [triggleAction.removedValues[0].id]: null,
-          versemde: null,
-          verse: null,
-        });
-      }
-    } else {
-      setPhrase("");
-      setInputValues({ ...inputValues, [e?.id]: e?.value });
-    }
+  const changeLanguageAndVersion = (e, triggleAction) => {
+    inputDispatch({
+      type: "CHANGE_LANGUAGE_AND_VERSION",
+      payload: { event: e, triggleAction },
+    });
   };
 
   const versemde =
@@ -97,26 +62,32 @@ const Header = ({ onSave }) => {
         <form className="flex justify-start items-center flex-grow-4 gap-3 my-4 flex-wrap">
           <Select
             placeholder={"ენა"}
-            defaultValue={language}
+            defaultValue={{
+              value: inputValues.language,
+              label: inputValues.language,
+              id: "language",
+            }}
             options={languages}
             isSearchable={true}
-            onChange={(e) => {
-              setLanguage(e);
-              localStorage.setItem("language", JSON.stringify(e));
-            }}
+            onChange={(e, triggleAction) =>
+              changeLanguageAndVersion(e, triggleAction)
+            }
             className="my-react-select-container  w-[100px]  flex-auto z-50"
             classNamePrefix="my-react-select"
           />
           {/* version */}
           <Select
             placeholder={"ვერსია"}
-            defaultValue={version}
+            defaultValue={{
+              value: inputValues.version,
+              label: inputValues.version,
+              id: "version",
+            }}
             options={versions}
             isSearchable={true}
-            onChange={(e) => {
-              setVersion(e);
-              localStorage.setItem("version", JSON.stringify(e));
-            }}
+            onChange={(e, triggleAction) =>
+              changeLanguageAndVersion(e, triggleAction)
+            }
             className="my-react-select-container w-[300px]  flex-auto  z-50"
             classNamePrefix="my-react-select"
           />
@@ -126,7 +97,7 @@ const Header = ({ onSave }) => {
             options={book}
             isClearable={true}
             isSearchable={true}
-            onChange={(e, triggleAction) => inputChanges(e, triggleAction)}
+            onChange={(e, triggleAction) => changeInputValue(e, triggleAction)}
             className="my-react-select-container w-[300px]  flex-auto  "
             classNamePrefix="my-react-select"
           />
@@ -139,7 +110,7 @@ const Header = ({ onSave }) => {
             options={chapter}
             isSearchable={true}
             isClearable={true}
-            onChange={(e, triggleAction) => inputChanges(e, triggleAction)}
+            onChange={(e, triggleAction) => changeInputValue(e, triggleAction)}
             className="my-react-select-container w-[150px] flex-auto "
             classNamePrefix="my-react-select"
           />
@@ -153,7 +124,7 @@ const Header = ({ onSave }) => {
             options={verse}
             isSearchable={true}
             isClearable={true}
-            onChange={(e, triggleAction) => inputChanges(e, triggleAction)}
+            onChange={(e, triggleAction) => changeInputValue(e, triggleAction)}
             className="my-react-select-container w-[150px] flex-auto"
             classNamePrefix="my-react-select"
           />
@@ -166,23 +137,16 @@ const Header = ({ onSave }) => {
             isSearchable={true}
             isClearable={true}
             isDisabled={inputValues.verse ? false : true}
-            onChange={(e, triggleAction) => inputChanges(e, triggleAction)}
+            onChange={(e, triggleAction) => changeInputValue(e, triggleAction)}
             className="my-react-select-container w-[150px] flex-auto"
             classNamePrefix="my-react-select"
           />
           <input
             onChange={(e) => {
-              setInputValues({
-                version: "",
-                book: 1,
-                chapter: null,
-                verse: null,
-                versemde: null,
-              });
-
-              setPhrase(e.target.value);
+              inputDispatch({ type: "PHRASE_INPUT", payload: { event: e } });
+              // setPhrase(e.target.value);
             }}
-            value={phrase}
+            value={inputValues.phrase}
             type="text"
             className="outline-none  p-3  w-[300px] h-[37px] rounded-[3px] border-[1.2px] border-gray-300   flex-auto dark:bg-[#374151] dark:text-white "
           />
@@ -193,11 +157,7 @@ const Header = ({ onSave }) => {
         <Skeleton />
       ) : (
         <>
-          <VerseArrows
-            inputValues={inputValues}
-            setInputValues={setInputValues}
-            onSave={onSave}
-          />
+          <VerseArrows inputValues={inputValues} onSave={onSave} />
 
           <Preview />
         </>

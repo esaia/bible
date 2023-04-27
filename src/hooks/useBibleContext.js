@@ -11,6 +11,8 @@ const useBibleContext = () => {
     setResult,
     isLanguage,
     setIsLanguage,
+    inputValues,
+    inputDispatch,
   } = useContext(BibleContext);
 
   return {
@@ -22,6 +24,8 @@ const useBibleContext = () => {
     setResult,
     isLanguage,
     setIsLanguage,
+    inputValues,
+    inputDispatch,
   };
 };
 

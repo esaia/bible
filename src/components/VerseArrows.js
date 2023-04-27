@@ -4,26 +4,17 @@ import useData from "../hooks/useData";
 import useBibleContext from "../hooks/useBibleContext";
 
 const VerseArrows = ({ inputValues, setInputValues, onSave }) => {
-  const { filteredData } = useBibleContext();
+  const { filteredData, inputDispatch } = useBibleContext();
   const { verse } = useData();
   const left = () => {
-    if (inputValues.verse === 1) {
-      return;
-    }
-    setInputValues({
-      ...inputValues,
-      verse: +inputValues.verse - 1,
-    });
+    inputDispatch({ type: "DECREASE_VERSE" });
   };
 
   const right = () => {
     if (inputValues.verse == verse[verse.length - 1].value) {
       return;
     }
-    setInputValues({
-      ...inputValues,
-      verse: +inputValues.verse + 1,
-    });
+    inputDispatch({ type: "INCREASE_VERSE" });
   };
 
   return (

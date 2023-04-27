@@ -5,8 +5,6 @@ const useBibleContext = () => {
   const {
     isDarkMode,
     setisDarkMode,
-    originalData,
-    setoriginalData,
     filteredData,
     setfilteredData,
     result,
@@ -18,8 +16,6 @@ const useBibleContext = () => {
   return {
     isDarkMode,
     setisDarkMode,
-    originalData,
-    setoriginalData,
     filteredData,
     setfilteredData,
     result,

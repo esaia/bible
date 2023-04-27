@@ -145,7 +145,6 @@ const BibleProvide = ({ children }) => {
     JSON.parse(localStorage.getItem("darkmode")) || false
   );
 
-  const [originalData, setoriginalData] = useState({});
   const [filteredData, setfilteredData] = useState(initialState);
   const [result, setResult] = useState(
     JSON.parse(localStorage.getItem("result"))
@@ -175,16 +174,12 @@ const BibleProvide = ({ children }) => {
       value={{
         isDarkMode,
         setisDarkMode,
-        originalData,
-        setoriginalData,
         filteredData,
         setfilteredData,
         result,
         setResult,
         isLanguage,
         setIsLanguage,
-        isDarkMode,
-        setisDarkMode,
       }}
     >
       <div className={`${isDarkMode && "dark"} font-banner`}>

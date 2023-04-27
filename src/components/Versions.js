@@ -1,10 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Select from "react-select";
-import { BsRocketTakeoff, BsSlashLg } from "react-icons/bs";
+import { BsRocketTakeoff } from "react-icons/bs";
 import useBibleContext from "../hooks/useBibleContext";
-import { Button, checkbox } from "@material-tailwind/react";
-import { Checkbox } from "@material-tailwind/react";
+import { Button } from "@material-tailwind/react";
 import SelectTheme from "./SelectTheme";
 import Header from "./Header";
 import useData from "../hooks/useData";
@@ -13,9 +11,8 @@ import FontSize from "./result-versions/FontSize";
 import MadeBy from "./result-versions/MadeBy";
 
 const Versions = () => {
-  const { filteredData, setResult, setIsLanguage, fontSize, setFontSize } =
-    useBibleContext();
-  const { versionGeo, versionEN, versionRU, fontSizes } = useData();
+  const { filteredData, setResult, setIsLanguage } = useBibleContext();
+  const { versionGeo, versionEN, versionRU } = useData();
 
   const [isGeorgia, setisGeorgia] = useState(
     JSON.parse(localStorage?.getItem("languages"))?.geo || false
@@ -91,9 +88,15 @@ const Versions = () => {
       wigni + 3
     }&t=${tavi}&m=&s=&mv=${versions.rus}&language=russian&page=1`;
 
-    const dataGeo = await axios.get(geoURL);
-    const dataEng = await axios.get(engURL);
-    const dataRus = await axios.get(rusURL);
+    // const dataGeo = await axios.get(geoURL);
+    // const dataEng = await axios.get(engURL);
+    // const dataRus = await axios.get(rusURL);
+
+    const [dataGeo, dataEng, dataRus] = await Promise.all([
+      axios.get(geoURL),
+      axios.get(engURL),
+      axios.get(rusURL),
+    ]);
 
     const muxliMde =
       filteredData.bibleData[+filteredData.bibleData.length - 1].muxli;

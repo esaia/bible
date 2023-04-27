@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { BibleContext } from "../context/BibleProvide";
 
 const useData = () => {
-  const { filteredData, originalData } = useContext(BibleContext);
+  const { filteredData } = useContext(BibleContext);
 
   //   For preview
   const languages = [
@@ -26,19 +26,19 @@ const useData = () => {
     return { value: item, label: item, id: "version" };
   });
 
-  const bible = originalData?.bibleNames
+  const bible = filteredData?.bibleNames
     ?.map((item, i) => {
       return { value: i + 1, label: item, id: "book" };
     })
     .slice(0, 3);
 
-  const oldTest = originalData?.bibleNames
+  const oldTest = filteredData?.bibleNames
     ?.map((item, i) => {
       return { value: i + 1, label: item, id: "book" };
     })
     .slice(3, 42);
 
-  const newTest = originalData?.bibleNames
+  const newTest = filteredData?.bibleNames
     ?.map((item, i) => {
       return { value: i + 1, label: item, id: "book" };
     })

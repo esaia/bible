@@ -1,12 +1,12 @@
 import React from "react";
 import useBibleContext from "../hooks/useBibleContext";
 
-const Preview = ({ filteredData }) => {
-  const { originalData } = useBibleContext();
+const Preview = () => {
+  const { filteredData } = useBibleContext();
 
   return (
     <div className="w-full ">
-      {originalData?.bibleData &&
+      {filteredData?.bibleData &&
         filteredData?.bibleData.map((item, i) => {
           return (
             <div
@@ -20,7 +20,7 @@ const Preview = ({ filteredData }) => {
               ></div>
               {/* <h1>{item.bv}</h1> */}
               <p>
-                {originalData.bibleNames[+item.wigni + 2]} {item.tavi}:
+                {filteredData.bibleNames[+item.wigni + 2]} {item.tavi}:
                 {item.muxli}
               </p>
             </div>

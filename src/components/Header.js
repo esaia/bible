@@ -8,8 +8,7 @@ import VerseArrows from "./VerseArrows";
 import useData from "../hooks/useData";
 
 const Header = ({ onSave }) => {
-  const { originalData, setoriginalData, filteredData, setfilteredData } =
-    useBibleContext();
+  const { filteredData, setfilteredData } = useBibleContext();
 
   const { languages, versions, book, chapter, verse } = useData();
 
@@ -38,7 +37,6 @@ const Header = ({ onSave }) => {
   useEffect(() => {
     const fetch = async () => {
       const { data } = await axios.get(baseURL);
-      setoriginalData(data);
 
       if (inputValues.verse || inputValues.versemde) {
         const myData = data.bibleData.slice(
@@ -196,14 +194,12 @@ const Header = ({ onSave }) => {
       ) : (
         <>
           <VerseArrows
-            filteredData={filteredData}
             inputValues={inputValues}
             setInputValues={setInputValues}
-            originalData={originalData}
             onSave={onSave}
           />
 
-          <Preview filteredData={filteredData} />
+          <Preview />
         </>
       )}
     </>

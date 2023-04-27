@@ -1,13 +1,11 @@
 import React from "react";
 import { BsArrowLeftSquareFill, BsArrowRightSquareFill } from "react-icons/bs";
+import useData from "../hooks/useData";
+import useBibleContext from "../hooks/useBibleContext";
 
-const VerseArrows = ({
-  inputValues,
-  filteredData,
-  setInputValues,
-  originalData,
-  onSave,
-}) => {
+const VerseArrows = ({ inputValues, setInputValues, onSave }) => {
+  const { filteredData } = useBibleContext();
+  const { verse } = useData();
   const left = () => {
     if (inputValues.verse === 1) {
       return;
@@ -18,8 +16,8 @@ const VerseArrows = ({
     });
   };
 
-  const right = (save) => {
-    if (inputValues.verse === originalData.bibleData.length) {
+  const right = () => {
+    if (inputValues.verse == verse[verse.length - 1].value) {
       return;
     }
     setInputValues({

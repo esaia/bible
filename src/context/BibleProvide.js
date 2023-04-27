@@ -1,6 +1,4 @@
 import React, { createContext, useEffect, useReducer, useState } from "react";
-import { json, Outlet } from "react-router-dom";
-import useData from "../hooks/useData";
 
 export const BibleContext = createContext();
 
@@ -231,7 +229,16 @@ const BibleProvide = ({ children }) => {
           versemde: null,
           phrase: payload.event.target.value,
         };
+      case "FROM_PREVIEW":
+        const { wigni, tavi, muxli } = payload;
 
+        return {
+          ...state,
+          book: +wigni + 3,
+          chapter: +tavi,
+          verse: +muxli,
+          phrase: "",
+        };
       default:
         break;
     }

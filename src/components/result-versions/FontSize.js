@@ -4,7 +4,7 @@ import useBibleContext from "../../hooks/useBibleContext";
 import Select from "react-select";
 
 const FontSize = () => {
-  const { isLanguage } = useBibleContext();
+  const { isLanguage, inputValues, inputDispatch } = useBibleContext();
   const { fontSizes } = useData();
   const [fontSize, setFontSize] = useState(
     +JSON.parse(localStorage.getItem("fontSize")) || 5
@@ -20,19 +20,18 @@ const FontSize = () => {
         options={fontSizes}
         placeholder="font"
         defaultValue={{
-          value: "5",
-          label: "5",
+          value: inputValues.fontSize,
+          label: inputValues.fontSize,
           id: "fontSize",
         }}
-        onChange={(e) => {
-          localStorage.setItem("fontSize", JSON.stringify(+e.value));
-          setFontSize(+e.value);
-        }}
+        onChange={(e) =>
+          inputDispatch({ type: "CHANGE_FONT_SIZE", payload: +e.value })
+        }
         className="my-react-select-container w-[100px] flex-auto"
         classNamePrefix="my-react-select"
         value={{
-          value: fontSize,
-          label: fontSize,
+          value: inputValues.fontSize,
+          label: inputValues.fontSize,
           id: "version",
         }}
       />

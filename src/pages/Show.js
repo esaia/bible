@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import useBibleContext from "../hooks/useBibleContext";
-
 import { SlSizeFullscreen } from "react-icons/sl";
+import TextShow from "../components/result-versions/TextShow";
+
 const Show = () => {
-  const { result, isLanguage, setResult, setIsLanguage } = useBibleContext();
+  const { result, isLanguage, setResult, setIsLanguage, inputValues } =
+    useBibleContext();
 
   const [isFullScreen, setIsFullScreen] = useState(false);
-  const [theme, setTheme] = useState(1);
-  const [fontSize, setFontSize] = useState(5);
+  const [theme, setTheme] = useState(localStorage.getItem("themeNumber") || 1);
+  const [fontSize, setFontSize] = useState(inputValues.fontSize);
 
   const handleFullscreenClick = () => {
     if (!isFullScreen) {
@@ -22,12 +24,9 @@ const Show = () => {
 
   useEffect(() => {
     const handleStorageChange = () => {
-      // window.location.reload(false);
-
       setResult(JSON.parse(localStorage.getItem("result")));
       setIsLanguage(JSON.parse(localStorage.getItem("languages")));
       setFontSize(JSON.parse(localStorage.getItem("fontSize")));
-
       setTheme(localStorage.getItem("themeNumber"));
     };
 
@@ -102,137 +101,26 @@ const Show = () => {
           </div>
         )}
 
-        {/* ENG */}
+        <TextShow
+          lang="eng"
+          showLanguage={isLanguage.eng}
+          result={result}
+          fontSize={fontSize}
+        />
 
-        {result && isLanguage.eng && (
-          <div className="w-full">
-            {result?.eng.data.map((item) => {
-              return (
-                <div key={item.id}>
-                  <p
-                    className={`showText
+        <TextShow
+          lang="geo"
+          showLanguage={isLanguage.geo}
+          result={result}
+          fontSize={fontSize}
+        />
 
-                  ${(() => {
-                    switch (fontSize) {
-                      case 1:
-                        return "text-1xl";
-                      case 2:
-                        return "text-2xl";
-                      case 3:
-                        return "text-3xl";
-                      case 4:
-                        return "text-4xl";
-                      case 5:
-                        return "text-5xl";
-                      case 6:
-                        return "text-6xl";
-                      case 7:
-                        return "text-7xl";
-                      case 8:
-                        return "text-8xl";
-                      case 8:
-                        return "text-9xl";
-                      default:
-                        return "text-5xl";
-                    }
-                  })()}
-                  
-              `}
-                  >
-                    {item.bv}
-                  </p>
-                </div>
-              );
-            })}
-            <h3 className="tavimuxli">{result?.eng?.tavimuxli}</h3>
-          </div>
-        )}
-
-        {/* GEO */}
-        {result && isLanguage.geo && (
-          <div className="">
-            {result?.geo.data.map((item) => {
-              return (
-                <div key={item.id}>
-                  <p
-                    className={`showText  ${(() => {
-                      switch (fontSize) {
-                        case 1:
-                          return "text-1xl";
-                        case 2:
-                          return "text-2xl";
-                        case 3:
-                          return "text-3xl";
-                        case 4:
-                          return "text-4xl";
-                        case 5:
-                          return "text-5xl";
-                        case 6:
-                          return "text-6xl";
-                        case 7:
-                          return "text-7xl";
-                        case 8:
-                          return "text-8xl";
-                        case 9:
-                          return "text-9xl";
-
-                        default:
-                          return "text-4xl";
-                      }
-                    })()} `}
-                  >
-                    {item.bv}
-                  </p>
-                </div>
-              );
-            })}
-            <h3 className="tavimuxli">{result?.geo?.tavimuxli}</h3>
-          </div>
-        )}
-
-        {/* rus */}
-        {result && isLanguage.rus && (
-          <div className="">
-            {result?.rus.data.map((item) => {
-              return (
-                <div key={item.id}>
-                  <p
-                    className={`showText  
-                       ${(() => {
-                         switch (fontSize) {
-                           case 1:
-                             return "text-1xl";
-                           case 2:
-                             return "text-2xl";
-                           case 3:
-                             return "text-3xl";
-                           case 4:
-                             return "text-4xl";
-                           case 5:
-                             return "text-5xl";
-                           case 6:
-                             return "text-6xl";
-                           case 7:
-                             return "text-7xl";
-                           case 8:
-                             return "text-8xl";
-                           case 9:
-                             return "text-9xl";
-
-                           default:
-                             return "text-5xl";
-                         }
-                       })()}
-                        `}
-                  >
-                    {item.bv}
-                  </p>
-                </div>
-              );
-            })}
-            <h3 className="tavimuxli">{result?.rus?.tavimuxli}</h3>
-          </div>
-        )}
+        <TextShow
+          lang="rus"
+          showLanguage={isLanguage.rus}
+          result={result}
+          fontSize={fontSize}
+        />
       </div>
     </div>
   );

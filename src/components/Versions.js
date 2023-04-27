@@ -88,10 +88,6 @@ const Versions = () => {
       wigni + 3
     }&t=${tavi}&m=&s=&mv=${versions.rus}&language=russian&page=1`;
 
-    // const dataGeo = await axios.get(geoURL);
-    // const dataEng = await axios.get(engURL);
-    // const dataRus = await axios.get(rusURL);
-
     const [dataGeo, dataEng, dataRus] = await Promise.all([
       axios.get(geoURL),
       axios.get(engURL),

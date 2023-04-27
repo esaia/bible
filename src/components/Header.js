@@ -144,7 +144,6 @@ const Header = ({ onSave }) => {
           <input
             onChange={(e) => {
               inputDispatch({ type: "PHRASE_INPUT", payload: { event: e } });
-              // setPhrase(e.target.value);
             }}
             value={inputValues.phrase}
             type="text"

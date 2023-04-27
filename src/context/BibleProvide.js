@@ -145,12 +145,14 @@ const BibleProvide = ({ children }) => {
     version:
       localStorage.getItem("previewVersion") ||
       "ახალი გადამუშავებული გამოცემა 2015",
-    book: 4,
+    book: 1,
     chapter: 1,
     verse: 1,
     versemde: null,
     phrase: "",
     language: localStorage.getItem("previewLanguage") || "geo",
+    darkmode: localStorage.getItem("darkmode") === "true" ? true : false,
+    fontSize: localStorage.getItem("fontSize") || 5,
   };
 
   const bibleDataReducer = (state, { type, payload }) => {
@@ -196,6 +198,15 @@ const BibleProvide = ({ children }) => {
         }
         return { ...state, [e?.id]: e?.value, phrase: "" };
 
+      case "CHANGE_DARK_MODE":
+        localStorage.setItem("darkmode", !state.darkmode);
+        return { ...state, darkmode: !state.darkmode };
+
+      case "CHANGE_FONT_SIZE":
+        localStorage.setItem("fontSize", JSON.stringify(+payload));
+
+        return { ...state, fontSize: payload };
+
       case "DECREASE_VERSE":
         if (state.verse === 1) {
           return { ...state };
@@ -231,11 +242,8 @@ const BibleProvide = ({ children }) => {
     inputValueInitial
   );
 
-  const [isDarkMode, setisDarkMode] = useState(
-    JSON.parse(localStorage.getItem("darkmode")) || false
-  );
-
   const [filteredData, setfilteredData] = useState(initialState);
+
   const [result, setResult] = useState(
     JSON.parse(localStorage.getItem("result"))
   );
@@ -245,25 +253,12 @@ const BibleProvide = ({ children }) => {
   );
 
   useEffect(() => {
-    localStorage.setItem(
-      "language",
-      JSON.stringify({
-        value: "geo",
-        label: "geo",
-        id: "ena",
-      })
-    );
-  }, []);
-
-  useEffect(() => {
     localStorage.setItem("result", JSON.stringify(result));
-  }, [result, isDarkMode, setisDarkMode]);
+  }, [result]);
 
   return (
     <BibleContext.Provider
       value={{
-        isDarkMode,
-        setisDarkMode,
         filteredData,
         setfilteredData,
         result,
@@ -274,7 +269,7 @@ const BibleProvide = ({ children }) => {
         inputValues,
       }}
     >
-      <div className={`${isDarkMode && "dark"} font-banner`}>
+      <div className={`${inputValues.darkmode && "dark"} font-banner`}>
         <div className="dark:bg-[#111827]">{children}</div>
       </div>
     </BibleContext.Provider>

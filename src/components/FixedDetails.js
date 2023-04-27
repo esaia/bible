@@ -3,7 +3,7 @@ import { Switch } from "@material-tailwind/react";
 import useBibleContext from "../hooks/useBibleContext";
 
 const FixedDetails = () => {
-  const { isDarkMode, setisDarkMode } = useBibleContext();
+  const { inputValues, inputDispatch } = useBibleContext();
 
   return (
     <div>
@@ -17,9 +17,9 @@ const FixedDetails = () => {
           </a>
           <Switch
             color="indigo"
-            label={isDarkMode ? "light" : "dark"}
-            onChange={() => setisDarkMode(!isDarkMode)}
-            checked={isDarkMode}
+            label={inputValues.darkmode ? "light" : "dark"}
+            onChange={() => inputDispatch({ type: "CHANGE_DARK_MODE" })}
+            checked={inputValues.darkmode}
             ripple={true}
           />
         </div>

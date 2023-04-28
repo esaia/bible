@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "react-awesome-button/dist/styles.css";
 import FixedDetails from "../components/FixedDetails";
 import Versions from "../components/Versions";

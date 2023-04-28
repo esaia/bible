@@ -1,5 +1,4 @@
 import React from "react";
-import { BsArrowLeftSquareFill, BsArrowRightSquareFill } from "react-icons/bs";
 import { TiArrowRightThick, TiArrowLeftThick } from "react-icons/ti";
 import useData from "../hooks/useData";
 import useBibleContext from "../hooks/useBibleContext";
@@ -12,7 +11,7 @@ const VerseArrows = ({ inputValues, onSave }) => {
   };
 
   const right = () => {
-    if (inputValues.verse == verse[verse.length - 1].value) {
+    if (inputValues.verse === verse[verse.length - 1].value) {
       return;
     }
     inputDispatch({ type: "INCREASE_VERSE" });

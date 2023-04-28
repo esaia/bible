@@ -145,7 +145,7 @@ const BibleProvide = ({ children }) => {
       "ახალი გადამუშავებული გამოცემა 2015",
     book: 1,
     chapter: 1,
-    verse: 1,
+    verse: null,
     versemde: null,
     phrase: "",
     language: localStorage.getItem("previewLanguage") || "geo",
@@ -185,6 +185,28 @@ const BibleProvide = ({ children }) => {
             };
           }
         } else {
+          if (
+            e?.id === "chapter" ||
+            e?.id === "version" ||
+            e?.id === "language"
+          ) {
+            return {
+              ...state,
+              [e?.id]: e?.value,
+              phrase: "",
+              verse: null,
+              versemde: null,
+            };
+          } else if (e?.id === "book") {
+            return {
+              ...state,
+              [e?.id]: e?.value,
+              phrase: "",
+              chapter: 1,
+              verse: null,
+              versemde: null,
+            };
+          }
           return { ...state, [e?.id]: e?.value, phrase: "" };
         }
       case "CHANGE_LANGUAGE_AND_VERSION":

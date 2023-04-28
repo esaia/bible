@@ -1,8 +1,10 @@
 import React from "react";
 import useBibleContext from "../hooks/useBibleContext";
+import axios from "axios";
 
 const Preview = () => {
-  const { filteredData, inputDispatch, inputValues } = useBibleContext();
+  const { filteredData, inputDispatch, inputValues, setfilteredData } =
+    useBibleContext();
 
   return (
     <div className="w-full ">

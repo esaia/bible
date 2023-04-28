@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import Select from "react-select";
 import Preview from "./Preview";
@@ -10,29 +10,28 @@ import useData from "../hooks/useData";
 const Header = ({ onSave }) => {
   const { filteredData, setfilteredData, inputValues, inputDispatch } =
     useBibleContext();
+
   const { languages, versions, book, chapter, verse } = useData();
-  const [originalData, setOriginalData] = useState({});
 
   const baseURL = `https://holybible.ge/service.php?w=${inputValues.book}&t=${inputValues.chapter}&m=&s=${inputValues.phrase}&mv=${inputValues?.version}&language=${inputValues.language}&page=1`;
 
   useEffect(() => {
     const fetch = async () => {
+      const { data } = await axios.get(baseURL);
+
       if (inputValues.verse || inputValues.versemde) {
-        const myData = originalData.bibleData.slice(
+        const myData = data.bibleData.slice(
           inputValues.verse - 1,
           inputValues.versemde ? inputValues.versemde : inputValues.verse
         );
-        setfilteredData({ ...filteredData, bibleData: myData });
-      } else {
-        const { data } = await axios.get(baseURL);
-        setOriginalData(data);
-        const myData = data.bibleData?.slice(0, 1);
         setfilteredData({ ...data, bibleData: myData });
+      } else {
+        setfilteredData(data);
       }
     };
 
     fetch();
-  }, [inputValues, baseURL, setfilteredData]);
+  }, [inputValues]);
 
   const changeInputValue = (e, triggleAction) => {
     inputDispatch({
@@ -56,6 +55,7 @@ const Header = ({ onSave }) => {
         return { value: i + 1, label: i + 1, id: "versemde" };
       })
       .slice(inputValues.verse);
+
   return (
     <>
       <div className="w-full">
@@ -94,11 +94,6 @@ const Header = ({ onSave }) => {
           {/* wigni */}
           <Select
             placeholder={"წიგნი"}
-            defaultValue={{
-              value: 4,
-              label: "დაბადება",
-              id: "book",
-            }}
             options={book}
             isClearable={true}
             isSearchable={true}

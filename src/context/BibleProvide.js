@@ -145,12 +145,13 @@ const BibleProvide = ({ children }) => {
       "ახალი გადამუშავებული გამოცემა 2015",
     book: 1,
     chapter: 1,
-    verse: 1,
+    verse: null,
     versemde: null,
     phrase: "",
     language: localStorage.getItem("previewLanguage") || "geo",
     darkmode: localStorage.getItem("darkmode") === "true" ? true : false,
     fontSize: localStorage.getItem("fontSize") || 5,
+    separate: false,
   };
 
   const bibleDataReducer = (state, { type, payload }) => {
@@ -185,6 +186,16 @@ const BibleProvide = ({ children }) => {
             };
           }
         } else {
+          if (e?.id === "book" || e?.id === "chapter") {
+            return {
+              ...state,
+              [e?.id]: e?.value,
+              phrase: "",
+              verse: null,
+              versemde: null,
+            };
+          }
+
           return { ...state, [e?.id]: e?.value, phrase: "" };
         }
       case "CHANGE_LANGUAGE_AND_VERSION":
@@ -194,7 +205,13 @@ const BibleProvide = ({ children }) => {
         } else if (e.id === "language") {
           localStorage.setItem("previewLanguage", e.value);
         }
-        return { ...state, [e?.id]: e?.value, phrase: "" };
+        return {
+          ...state,
+          [e?.id]: e?.value,
+          verse: null,
+          versemde: null,
+          phrase: "",
+        };
 
       case "CHANGE_DARK_MODE":
         localStorage.setItem("darkmode", !state.darkmode);
@@ -227,18 +244,28 @@ const BibleProvide = ({ children }) => {
           chapter: null,
           verse: null,
           versemde: null,
+          separate: true,
           phrase: payload.event.target.value,
         };
-      case "FROM_PREVIEW":
+      case "SEPARATE_PREVIEW":
         const { wigni, tavi, muxli } = payload;
 
         return {
           ...state,
           book: +wigni + 3,
           chapter: +tavi,
-          verse: +muxli,
+          verse: muxli,
           phrase: "",
+          separate: true,
         };
+
+      case "MAKE_SEPARATE_FALSE":
+        return {
+          ...state,
+
+          separate: false,
+        };
+
       default:
         break;
     }
@@ -248,8 +275,6 @@ const BibleProvide = ({ children }) => {
     bibleDataReducer,
     inputValueInitial
   );
-
-  console.log(inputValues);
   const [filteredData, setfilteredData] = useState(initialState);
 
   const [result, setResult] = useState(

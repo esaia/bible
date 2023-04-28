@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Select from "react-select";
 import Preview from "./Preview";
@@ -12,21 +12,38 @@ const Header = ({ onSave }) => {
     useBibleContext();
 
   const { languages, versions, book, chapter, verse } = useData();
-
+  const [originalData, setOriginalData] = useState({});
   const baseURL = `https://holybible.ge/service.php?w=${inputValues.book}&t=${inputValues.chapter}&m=&s=${inputValues.phrase}&mv=${inputValues?.version}&language=${inputValues.language}&page=1`;
-
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get(baseURL);
-
+      // if verse and versemde are in inputvalues then check if separate button clicked go to api and if not then optimaizing with slice
       if (inputValues.verse || inputValues.versemde) {
-        const myData = data.bibleData.slice(
-          inputValues.verse - 1,
-          inputValues.versemde ? inputValues.versemde : inputValues.verse
-        );
-        setfilteredData({ ...data, bibleData: myData });
+        if (inputValues.separate) {
+          inputDispatch({ type: "MAKE_SEPARATE_FALSE" });
+          const { data } = await axios.get(baseURL);
+          setOriginalData(data);
+          const myData = data.bibleData.slice(
+            inputValues.verse - 1,
+            inputValues.versemde ? inputValues.versemde : inputValues.verse
+          );
+          setfilteredData({ ...originalData, bibleData: myData });
+        } else {
+          const myData = originalData.bibleData.slice(
+            inputValues.verse - 1,
+            inputValues.versemde ? inputValues.versemde : inputValues.verse
+          );
+          setfilteredData({ ...originalData, bibleData: myData });
+        }
       } else {
-        setfilteredData(data);
+        const { data } = await axios.get(baseURL);
+        setOriginalData(data);
+        let myData;
+        if (inputValues.separate) {
+          myData = data.bibleData;
+        } else {
+          myData = data.bibleData.slice(0, 1);
+        }
+        setfilteredData({ ...data, bibleData: myData });
       }
     };
 
@@ -94,6 +111,11 @@ const Header = ({ onSave }) => {
           {/* wigni */}
           <Select
             placeholder={"წიგნი"}
+            defaultValue={{
+              value: 4,
+              label: "დაბადება",
+              id: "book",
+            }}
             options={book}
             isClearable={true}
             isSearchable={true}

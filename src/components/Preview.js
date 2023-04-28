@@ -1,6 +1,6 @@
 import React from "react";
 import useBibleContext from "../hooks/useBibleContext";
-import axios from "axios";
+import { BsUiChecksGrid } from "react-icons/bs";
 
 const Preview = () => {
   const { filteredData, inputDispatch, inputValues, setfilteredData } =
@@ -30,9 +30,12 @@ const Preview = () => {
                 {inputValues.phrase && (
                   <button
                     className="px-4 py-1 m-4 bg-[#e7dfdf] text-black dark:text-white dark:bg-gray-600 rounded-sm  select-none"
-                    onClick={() =>
-                      inputDispatch({ type: "FROM_PREVIEW", payload: item })
-                    }
+                    onClick={() => {
+                      inputDispatch({
+                        type: "SEPARATE_PREVIEW",
+                        payload: item,
+                      });
+                    }}
                   >
                     separate
                   </button>

@@ -15,7 +15,11 @@ const VersionSelect = ({
   return (
     <div className=" flex items-center ">
       <label className=" dark:text-white w-[130px]">{title}</label>
-      <Checkbox onChange={() => setLanguage(!language)} checked={language} />
+      <Checkbox
+        id={title}
+        onChange={() => setLanguage(!language)}
+        checked={language}
+      />
       <Select
         options={data}
         isSearchable={true}

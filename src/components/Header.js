@@ -38,6 +38,7 @@ const Header = ({ onSave }) => {
         const { data } = await axios.get(baseURL);
         setOriginalData(data);
         let myData;
+        // when user searching something not slice
         if (inputValues.separate) {
           myData = data.bibleData;
         } else {

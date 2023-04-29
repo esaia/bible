@@ -188,4 +188,4 @@ const Header = ({ onSave }) => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

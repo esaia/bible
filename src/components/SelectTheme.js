@@ -156,4 +156,4 @@ const SelectTheme = () => {
   );
 };
 
-export default SelectTheme;
+export default React.memo(SelectTheme);

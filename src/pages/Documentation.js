@@ -4,7 +4,7 @@ import useBibleContext from "../hooks/useBibleContext";
 import { FaFacebookMessenger, FaTelegram } from "react-icons/fa";
 
 const Documentation = () => {
-  const { isDarkMode, setisDarkMode } = useBibleContext();
+  const { inputValues, inputDispatch } = useBibleContext();
   return (
     <div className="w-full flex justify-center min-h-[100vh] dark:text-white ">
       <div className="w-full max-w-[600px]  p-4 py-16 ">
@@ -118,9 +118,9 @@ const Documentation = () => {
         <div className="flex">
           <Switch
             color="indigo"
-            label={isDarkMode ? "light" : "dark"}
-            onChange={() => setisDarkMode(!isDarkMode)}
-            checked={isDarkMode}
+            label={inputValues.darkmode ? "light" : "dark"}
+            onChange={() => inputDispatch({ type: "CHANGE_DARK_MODE" })}
+            checked={inputValues.darkmode}
             ripple={true}
           />
         </div>

@@ -38,9 +38,9 @@ const Show = () => {
   }, []);
 
   return (
-    <div className="flex justify-center items-center w-full h-[100vh]">
+    <div className="flex justify-center items-center w-full h-screen ">
       <div
-        className={`w-full h-[100vh] px-10 flex justify-center items-start  flex-col  gap-16 bg-blend-overlay bgblind showbackground
+        className={`w-full h-full px-10 flex justify-center items-start  flex-col  gap-12 bg-blend-overlay bgblind showbackground 
       ${(() => {
         switch (theme) {
           case "1":

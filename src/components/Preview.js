@@ -1,10 +1,8 @@
 import React from "react";
 import useBibleContext from "../hooks/useBibleContext";
-import { BsUiChecksGrid } from "react-icons/bs";
 
 const Preview = () => {
-  const { filteredData, inputDispatch, inputValues, setfilteredData } =
-    useBibleContext();
+  const { filteredData, inputDispatch, inputValues } = useBibleContext();
 
   return (
     <div className="w-full ">
@@ -48,4 +46,4 @@ const Preview = () => {
   );
 };
 
-export default Preview;
+export default React.memo(Preview);

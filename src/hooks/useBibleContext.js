@@ -3,8 +3,6 @@ import { BibleContext } from "../context/BibleProvide";
 
 const useBibleContext = () => {
   const {
-    isDarkMode,
-    setisDarkMode,
     filteredData,
     setfilteredData,
     result,
@@ -16,8 +14,6 @@ const useBibleContext = () => {
   } = useContext(BibleContext);
 
   return {
-    isDarkMode,
-    setisDarkMode,
     filteredData,
     setfilteredData,
     result,

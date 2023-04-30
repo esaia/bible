@@ -1,17 +1,8 @@
-import React, { useEffect, useState } from "react";
-import useData from "../../hooks/useData";
+import React from "react";
 import useBibleContext from "../../hooks/useBibleContext";
 
 const FontSize = () => {
-  const { isLanguage, inputValues, inputDispatch } = useBibleContext();
-  const { fontSizes } = useData();
-  const [fontSize, setFontSize] = useState(
-    +JSON.parse(localStorage.getItem("fontSize")) || 5
-  );
-
-  useEffect(() => {
-    localStorage.setItem("languages", JSON.stringify(isLanguage));
-  }, [isLanguage, fontSize]);
+  const { inputValues, inputDispatch } = useBibleContext();
 
   return (
     <div className="w-72">

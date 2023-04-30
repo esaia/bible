@@ -4,7 +4,7 @@ import useData from "../hooks/useData";
 import useBibleContext from "../hooks/useBibleContext";
 
 const VerseArrows = ({ inputValues, onSave }) => {
-  const { filteredData, inputDispatch } = useBibleContext();
+  const { filteredData, inputDispatch, isLoadingResult } = useBibleContext();
   const { verse } = useData();
   const left = () => {
     inputDispatch({ type: "DECREASE_VERSE" });
@@ -31,10 +31,11 @@ const VerseArrows = ({ inputValues, onSave }) => {
           />
 
           <button
-            className="bg-gray-200 rounded-sm px-3 cursor-pointer text-black dark:text-gray-200  dark:bg-[#374151] hover:bg-gray-400 hover:dark:bg-[#282f3b]"
+            className="bg-gray-200 w-20 rounded-sm px-3 cursor-pointer text-black dark:text-gray-200  dark:bg-[#374151] hover:bg-gray-400 hover:dark:bg-[#282f3b]"
             onClick={() => onSave()}
+            disabled={isLoadingResult}
           >
-            Show
+            {isLoadingResult ? "Wait..." : "Show"}
           </button>
         </div>
       )}

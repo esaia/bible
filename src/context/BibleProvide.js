@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { createContext, useEffect, useReducer, useState } from "react";
 
 export const BibleContext = createContext();
@@ -276,30 +277,157 @@ const BibleProvide = ({ children }) => {
     inputValueInitial
   );
   const [filteredData, setfilteredData] = useState(initialState);
+  const [isLoadingResult, setIsLoadingResult] = useState(false);
+  const [versions, setVersions] = useState(
+    JSON.parse(localStorage.getItem("versions")) || {
+      geo: "ახალი გადამუშავებული გამოცემა 2015",
+      eng: "KJV King James Version",
+      rus: "Синодальный перевод",
+    }
+  );
 
   const [result, setResult] = useState(
     JSON.parse(localStorage.getItem("result"))
   );
 
   const [isLanguage, setIsLanguage] = useState(
-    JSON.parse(localStorage?.getItem("languages")) || null
+    JSON.parse(localStorage?.getItem("languages")) || {
+      geo: false,
+      eng: false,
+      rus: false,
+    }
   );
+
+  useEffect(() => {
+    localStorage.setItem("languages", JSON.stringify(isLanguage));
+  }, [isLanguage]);
 
   useEffect(() => {
     localStorage.setItem("result", JSON.stringify(result));
   }, [result]);
+
+  useEffect(() => {
+    localStorage.setItem("versions", JSON.stringify(versions));
+  }, [versions]);
+
+  const onSave = async () => {
+    setIsLoadingResult(true);
+    const wigni = +filteredData.bibleData[0].wigni;
+    const tavi = +filteredData.bibleData[0].tavi;
+    const muxli = +filteredData.bibleData[0].muxli;
+
+    const mappings = {
+      49: 63,
+      50: 64,
+      51: 65,
+      52: 66,
+      53: 67,
+      54: 68,
+      55: 48,
+      56: 49,
+      57: 50,
+      58: 51,
+      59: 52,
+      60: 53,
+      61: 54,
+      62: 55,
+      63: 56,
+      64: 57,
+      65: 58,
+      66: 59,
+      67: 60,
+      68: 61,
+    };
+    let englishWigni = mappings[wigni + 3] || null;
+
+    if (filteredData.bibleData.length === 0) {
+      return console.log("bibleData not exeists");
+    }
+
+    const geoURL = `https://holybible.ge/service.php?w=${
+      wigni + 3
+    }&t=${tavi}&m=&s=&mv=${versions.geo}&language=geo&page=1`;
+    const engURL = `https://holybible.ge/service.php?w=${
+      englishWigni ? englishWigni : wigni + 3
+    }&t=${tavi}&m=&s=&mv=${versions.eng}&language=eng&page=1`;
+    const rusURL = `https://holybible.ge/service.php?w=${
+      wigni + 3
+    }&t=${tavi}&m=&s=&mv=${versions.rus}&language=russian&page=1`;
+
+    const [dataGeo, dataEng, dataRus] = await Promise.all([
+      axios.get(geoURL),
+      axios.get(engURL),
+      axios.get(rusURL),
+    ]);
+
+    const muxliMde =
+      filteredData.bibleData[+filteredData.bibleData.length - 1].muxli;
+
+    if (filteredData.bibleData.length === 1) {
+      const filteredGeo = dataGeo.data.bibleData.slice(muxli - 1, muxli);
+      const filteredEng = dataEng.data.bibleData.slice(muxli - 1, muxli);
+      const filteredRus = dataRus.data.bibleData.slice(muxli - 1, muxli);
+
+      setResult({
+        geo: {
+          data: filteredGeo,
+          tavimuxli: `${dataGeo.data.bibleNames[wigni + 2]} ${tavi}:${muxli}`,
+        },
+        eng: {
+          data: filteredEng,
+          tavimuxli: `${
+            dataEng.data.bibleNames[englishWigni ? englishWigni - 1 : wigni + 2]
+          } ${tavi}:${muxli}`,
+        },
+        rus: {
+          data: filteredRus,
+          tavimuxli: `${dataRus.data.bibleNames[wigni + 2]} ${tavi}:${muxli}`,
+        },
+      });
+    } else if (filteredData.bibleData.length > 1) {
+      const filteredGeo = dataGeo.data.bibleData.slice(muxli - 1, muxliMde);
+      const filteredEng = dataEng.data.bibleData.slice(muxli - 1, muxliMde);
+      const filteredRus = dataRus.data.bibleData.slice(muxli - 1, muxliMde);
+
+      setResult({
+        geo: {
+          data: filteredGeo,
+          tavimuxli: `${
+            dataGeo.data.bibleNames[wigni + 2]
+          } ${tavi}:${muxli}-${muxliMde}`,
+        },
+        eng: {
+          data: filteredEng,
+          tavimuxli: `${
+            dataEng.data.bibleNames[englishWigni ? englishWigni - 1 : wigni + 2]
+          } ${tavi}:${muxli}-${muxliMde}`,
+        },
+        rus: {
+          data: filteredRus,
+          tavimuxli: `${
+            dataRus.data.bibleNames[wigni + 2]
+          } ${tavi}:${muxli}-${muxliMde}`,
+        },
+      });
+    }
+    setIsLoadingResult(false);
+  };
 
   return (
     <BibleContext.Provider
       value={{
         filteredData,
         setfilteredData,
+        versions,
+        setVersions,
         result,
         setResult,
         isLanguage,
         setIsLanguage,
         inputDispatch,
         inputValues,
+        onSave,
+        isLoadingResult,
       }}
     >
       <div className={`${inputValues.darkmode && "dark"} font-banner`}>

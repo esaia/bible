@@ -29,7 +29,7 @@ const TextShow = ({ result, showLanguage, lang, fontSize }) => {
                           return "text-7xl";
                         case 8:
                           return "text-8xl";
-                        case 8:
+                        case 9:
                           return "text-9xl";
                         default:
                           return "text-5xl";

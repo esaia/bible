@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useData from "../../hooks/useData";
 import useBibleContext from "../../hooks/useBibleContext";
-import Select from "react-select";
 
 const FontSize = () => {
   const { isLanguage, inputValues, inputDispatch } = useBibleContext();
@@ -15,7 +14,7 @@ const FontSize = () => {
   }, [isLanguage, fontSize]);
 
   return (
-    <div className="w-52">
+    <div className="w-72">
       <label
         htmlFor="minmax-range"
         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -32,28 +31,19 @@ const FontSize = () => {
         onChange={(e) =>
           inputDispatch({ type: "CHANGE_FONT_SIZE", payload: +e.target.value })
         }
-        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+        className="range w-full cursor-pointer"
+        step="1"
       />
-      {/* 
-      <Select
-        options={fontSizes}
-        placeholder="font"
-        defaultValue={{
-          value: inputValues.fontSize,
-          label: inputValues.fontSize,
-          id: "fontSize",
-        }}
-        onChange={(e) =>
-          inputDispatch({ type: "CHANGE_FONT_SIZE", payload: +e.value })
-        }
-        className="my-react-select-container w-[100px] flex-auto"
-        classNamePrefix="my-react-select"
-        value={{
-          value: inputValues.fontSize,
-          label: inputValues.fontSize,
-          id: "version",
-        }}
-      /> */}
+      <div className="w-full flex justify-between text-xs px-2">
+        <span className="dark:text-white">|</span>
+        <span className="dark:text-white">|</span>
+        <span className="dark:text-white">|</span>
+        <span className="dark:text-white">|</span>
+        <span className="dark:text-white">|</span>
+        <span className="dark:text-white">|</span>
+        <span className="dark:text-white">|</span>
+        <span className="dark:text-white">|</span>
+      </div>
     </div>
   );
 };

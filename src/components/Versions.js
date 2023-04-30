@@ -183,9 +183,9 @@ const Versions = () => {
           activeLang={Object.keys(versions)[2]}
         />
 
-        <div className="flex items-center justify-center gap-5 py-10  w-full">
+        <div className="flex items-center justify-center gap-5 py-10  w-full ">
           <Button
-            className="flex items-center gap-3 px-4 py-2 bg-green-400"
+            className="flex items-center gap-3 px-4 py-2 bg-green-600"
             onClick={onSave}
           >
             <BsRocketTakeoff
@@ -197,7 +197,7 @@ const Versions = () => {
           </Button>
 
           <Button
-            className="flex items-center gap-3 text-md px-4 py-2 bg-red-400"
+            className="flex items-center gap-3 text-md px-4 py-2 bg-red-600"
             onClick={clearAll}
           >
             Clear

@@ -11,6 +11,7 @@ import { motion } from "framer-motion";
 const Header = ({ onSave }) => {
   const { filteredData, setfilteredData, inputValues, inputDispatch } =
     useBibleContext();
+  const [isLoading, setIsLoading] = useState(true);
 
   const { languages, versions, book, chapter, verse } = useData();
   const [originalData, setOriginalData] = useState({});
@@ -36,6 +37,7 @@ const Header = ({ onSave }) => {
           setfilteredData({ ...originalData, bibleData: myData });
         }
       } else {
+        setIsLoading(true);
         const { data } = await axios.get(baseURL);
         setOriginalData(data);
         let myData;
@@ -45,6 +47,7 @@ const Header = ({ onSave }) => {
         } else {
           myData = data.bibleData.slice(0, 1);
         }
+        setIsLoading(false);
         setfilteredData({ ...data, bibleData: myData });
       }
     };
@@ -194,8 +197,18 @@ const Header = ({ onSave }) => {
         </motion.div>
       </div>
 
-      {filteredData.bibleData.length === 0 ? (
+      {/* {filteredData.bibleData.length === 0 && (
+        <p className="dark:text-white p-3 text-2xl text-center mt-10">
+          there is no post
+        </p>
+      )} */}
+
+      {isLoading ? (
         <Skeleton />
+      ) : filteredData.bibleData.length === 0 ? (
+        <p className="dark:text-white p-3 text-2xl text-center mt-10">
+          there is no post
+        </p>
       ) : (
         <>
           <VerseArrows inputValues={inputValues} onSave={onSave} />

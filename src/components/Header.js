@@ -197,17 +197,11 @@ const Header = ({ onSave }) => {
         </motion.div>
       </div>
 
-      {/* {filteredData.bibleData.length === 0 && (
-        <p className="dark:text-white p-3 text-2xl text-center mt-10">
-          there is no post
-        </p>
-      )} */}
-
       {isLoading ? (
         <Skeleton />
       ) : filteredData.bibleData.length === 0 ? (
         <p className="dark:text-white p-3 text-2xl text-center mt-10">
-          there is no post
+          No matches found: "{inputValues.phrase}"
         </p>
       ) : (
         <>

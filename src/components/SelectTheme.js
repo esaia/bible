@@ -1,4 +1,3 @@
-import { Radio } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
 import Theme from "./result-versions/Theme";
 

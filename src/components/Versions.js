@@ -9,6 +9,8 @@ import useData from "../hooks/useData";
 import VersionSelect from "./result-versions/VersionSelect";
 import FontSize from "./result-versions/FontSize";
 import MadeBy from "./result-versions/MadeBy";
+import { motion } from "framer-motion";
+import FramerMotionWrapper from "./FramerMotionWrapper";
 
 const Versions = () => {
   const { filteredData, setResult, setIsLanguage } = useBibleContext();
@@ -184,25 +186,32 @@ const Versions = () => {
         />
 
         <div className="flex items-center justify-center gap-5 py-10  w-full ">
-          <Button
-            className="flex items-center gap-3 px-4 py-2 bg-green-600"
-            onClick={onSave}
-          >
-            <BsRocketTakeoff
-              width={200}
-              height={400}
-              className="text-5x cursor-pointer "
-            />
-            Show
-          </Button>
+          <FramerMotionWrapper>
+            <Button
+              className="flex items-center gap-3 px-4 py-2 bg-green-600"
+              onClick={onSave}
+            >
+              <BsRocketTakeoff
+                width={200}
+                height={400}
+                className="text-5x cursor-pointer "
+              />
+              Show
+            </Button>
+          </FramerMotionWrapper>
 
-          <Button
-            className="flex items-center gap-3 text-md px-4 py-2 bg-red-600"
-            onClick={clearAll}
-          >
-            Clear
-          </Button>
-          <FontSize />
+          <FramerMotionWrapper>
+            <Button
+              className="flex items-center gap-3 text-md px-4 py-2 bg-red-600"
+              onClick={clearAll}
+            >
+              Clear
+            </Button>
+          </FramerMotionWrapper>
+
+          <FramerMotionWrapper>
+            <FontSize />
+          </FramerMotionWrapper>
         </div>
 
         <SelectTheme />

@@ -1,15 +1,22 @@
 import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const TextShow = ({ result, showLanguage, lang, fontSize }) => {
   return (
-    <>
+    <AnimatePresence>
       {result && showLanguage && (
         <div className="w-full">
           {result?.[lang].data.map((item) => {
             return (
-              <div key={item.id}>
-                <p
-                  className={`showText 
+              <motion.div
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 5 }}
+                transition={{ duration: 0.3, type: "tween" }}
+              >
+                <div key={item.id}>
+                  <p
+                    className={`showText  
 
                     ${(() => {
                       switch (fontSize) {
@@ -37,16 +44,25 @@ const TextShow = ({ result, showLanguage, lang, fontSize }) => {
                     })()}
 
                    `}
-                >
-                  {item.bv}
-                </p>
-              </div>
+                  >
+                    {item.bv}
+                  </p>
+                </div>
+              </motion.div>
             );
           })}
-          <h3 className="tavimuxli">{result?.[lang]?.tavimuxli}</h3>
+
+          <motion.div
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 5 }}
+            transition={{ duration: 0.3, type: "tween" }}
+          >
+            <h3 className="tavimuxli">{result?.[lang]?.tavimuxli}</h3>
+          </motion.div>
         </div>
       )}
-    </>
+    </AnimatePresence>
   );
 };
 

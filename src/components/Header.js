@@ -24,13 +24,13 @@ const Header = ({ onSave }) => {
           inputDispatch({ type: "MAKE_SEPARATE_FALSE" });
           const { data } = await axios.get(baseURL);
           setOriginalData(data);
-          const myData = data.bibleData.slice(
+          const myData = data.bibleData?.slice(
             inputValues.verse - 1,
             inputValues.versemde ? inputValues.versemde : inputValues.verse
           );
           setfilteredData({ ...originalData, bibleData: myData });
         } else {
-          const myData = originalData.bibleData.slice(
+          const myData = originalData?.bibleData.slice(
             inputValues.verse - 1,
             inputValues.versemde ? inputValues.versemde : inputValues.verse
           );
@@ -53,7 +53,16 @@ const Header = ({ onSave }) => {
     };
 
     fetch();
-  }, [inputValues]);
+  }, [
+    inputValues.version,
+    inputValues.book,
+    inputValues.chapter,
+    inputValues.verse,
+    inputValues.versemde,
+    inputValues.phrase,
+    inputValues.language,
+    inputValues.separate,
+  ]);
 
   const changeInputValue = (e, triggleAction) => {
     inputDispatch({

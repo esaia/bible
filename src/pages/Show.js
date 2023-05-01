@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import useBibleContext from "../hooks/useBibleContext";
 import { SlSizeFullscreen } from "react-icons/sl";
 import TextShow from "../components/result-versions/TextShow";
-import { motion, AnimatePresence } from "framer-motion";
 
 const Show = () => {
   const { result, isLanguage, setResult, setIsLanguage, inputValues } =

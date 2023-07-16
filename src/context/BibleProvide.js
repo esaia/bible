@@ -1,5 +1,11 @@
 import axios from "axios";
-import React, { createContext, useEffect, useReducer, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 
 export const BibleContext = createContext();
 
@@ -310,7 +316,7 @@ const BibleProvide = ({ children }) => {
     localStorage.setItem("versions", JSON.stringify(versions));
   }, [versions]);
 
-  const onSave = async () => {
+  const onSave = useCallback(async () => {
     setIsLoadingResult(true);
     const wigni = +filteredData.bibleData[0].wigni;
     const tavi = +filteredData.bibleData[0].tavi;
@@ -411,7 +417,7 @@ const BibleProvide = ({ children }) => {
       });
     }
     setIsLoadingResult(false);
-  };
+  }, [filteredData]);
 
   return (
     <BibleContext.Provider

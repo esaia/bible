@@ -323,6 +323,7 @@ const BibleProvide = ({ children }) => {
     const muxli = +filteredData.bibleData[0].muxli;
 
     const mappings = {
+      48: 62,
       49: 63,
       50: 64,
       51: 65,
@@ -345,7 +346,6 @@ const BibleProvide = ({ children }) => {
       68: 61,
     };
     let englishWigni = mappings[wigni + 3] || null;
-
     if (filteredData.bibleData.length === 0) {
       return console.log("bibleData not exeists");
     }

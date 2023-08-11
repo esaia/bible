@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+# Bible App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The BibleVerse Projector App is a user-friendly application designed to display Bible verses on projectors or large screens. With support for multiple languages, customizable fonts, background photos, and a dark mode, this app empowers you to create captivating and impactful scripture displays for your audience.
 
-## Available Scripts
+### Table of Contents
 
-In the project directory, you can run:
+- [Key Features](#Key-Features)
+- [Tech Stack](#tech-stack)
+- [Resources](#resources)
+- [Screenshots](#screenshots)
 
-### `npm start`
+### Key Features:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Multilingual Support: Display Bible verses in English, Georgian, and Russian, catering to a diverse audience and ensuring everyone can engage with the scripture in their preferred language.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Dynamic Font Management
 
-### `npm test`
+- Background Customization: Choose from a variety of background photos and create a visually immersive environment.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Engaging Dark Mode
 
-### `npm run build`
+- Effortless Navigation: Easily switch between different Bible versions and translations to suit your audience's preferences and theological needs.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Tech Stack
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [ReactJS](https://react.dev/) - The library for web and native user interfaces
+- [react select](https://react-select.com/home) - A flexible and beautiful Select Input control for ReactJS
+- [framer-motion](https://www.framer.com/motion/) - Framer Motion is a simple yet powerful motion library for React.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### screenshots
 
-### `npm run eject`
+![App Screenshot](/public/images/biblelight.jpg)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![App Screenshot](/public/images/bibledark.jpg)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![App Screenshot](/public/images/show.jpg)

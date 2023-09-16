@@ -21,7 +21,7 @@ const Preview = () => {
               {/* <h1>{item.bv}</h1> */}
 
               <div className="flex items-center justify-between">
-                <p>
+                <p className="italic text-gray-700 dark:text-gray-400 text-[17px]">
                   {filteredData.bibleNames[+item.wigni + 2]} {item.tavi}:
                   {item.muxli}
                 </p>

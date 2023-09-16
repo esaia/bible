@@ -12,29 +12,21 @@ import MadeBy from "./result-versions/MadeBy";
 import FramerMotionWrapper from "./FramerMotionWrapper";
 
 const Versions = () => {
-  const { onSave, setIsLanguage, versions, setVersions, isLoadingResult } =
+  const { onSave, isLanguage, setIsLanguage, versions, isLoadingResult } =
     useBibleContext();
+
   const { versionGeo, versionEN, versionRU } = useData();
 
-  const [isGeorgia, setisGeorgia] = useState(
-    JSON.parse(localStorage?.getItem("languages"))?.geo || false
-  );
-  const [isEnglish, setisEnglish] = useState(
-    JSON.parse(localStorage?.getItem("languages"))?.eng || false
-  );
-  const [isRussian, setisRussian] = useState(
-    JSON.parse(localStorage?.getItem("languages"))?.rus || false
-  );
-
   const clearAll = () => {
-    setisGeorgia(false);
-    setisEnglish(false);
-    setisRussian(false);
+    // make all value false
+    const updatedState = {};
+    for (const key in isLanguage) {
+      if (isLanguage.hasOwnProperty(key)) {
+        updatedState[key] = false;
+      }
+    }
+    setIsLanguage(updatedState);
   };
-
-  useEffect(() => {
-    setIsLanguage({ geo: isGeorgia, eng: isEnglish, rus: isRussian });
-  }, [isEnglish, isGeorgia, isRussian]);
 
   return (
     <div>
@@ -45,10 +37,6 @@ const Versions = () => {
           title={"Georgia"}
           data={versionGeo}
           activeversion={versions.geo}
-          versions={versions}
-          setVersions={setVersions}
-          language={isGeorgia}
-          setLanguage={setisGeorgia}
           activeLang={Object.keys(versions)[0]}
         />
 
@@ -56,20 +44,13 @@ const Versions = () => {
           title={"English"}
           data={versionEN}
           activeversion={versions.eng}
-          versions={versions}
-          setVersions={setVersions}
-          language={isEnglish}
-          setLanguage={setisEnglish}
           activeLang={Object.keys(versions)[1]}
         />
+
         <VersionSelect
           title={"Russian"}
           data={versionRU}
           activeversion={versions.rus}
-          versions={versions}
-          setVersions={setVersions}
-          language={isRussian}
-          setLanguage={setisRussian}
           activeLang={Object.keys(versions)[2]}
         />
 

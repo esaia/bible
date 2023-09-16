@@ -77,7 +77,6 @@ const Header = ({ onSave }) => {
       payload: { event: e, triggleAction },
     });
   };
-
   const versemde =
     filteredData?.muxli &&
     new Array(+filteredData?.muxli[0].cc)

@@ -5,11 +5,11 @@ const FramerMotionWrapper = ({ children }) => {
   return (
     <div>
       <motion.div
-        initial={{ opacity: 0, marginBottom: 100 }}
+        initial={{ opacity: 0, marginBottom: 2 }}
         animate={{ opacity: 1, marginBottom: 0 }}
         transition={{
           type: "spring",
-          delay: "1.2",
+          delay: "0.8",
           stiffness: 50,
         }}
       >

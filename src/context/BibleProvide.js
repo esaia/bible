@@ -345,6 +345,7 @@ const BibleProvide = ({ children }) => {
       67: 60,
       68: 61,
     };
+
     let englishWigni = mappings[wigni + 3] || null;
     if (filteredData.bibleData.length === 0) {
       return console.log("bibleData not exeists");
@@ -417,7 +418,7 @@ const BibleProvide = ({ children }) => {
       });
     }
     setIsLoadingResult(false);
-  }, [filteredData]);
+  }, [filteredData, versions]);
 
   return (
     <BibleContext.Provider

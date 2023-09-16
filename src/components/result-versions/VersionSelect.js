@@ -1,27 +1,26 @@
 import React from "react";
 import { Checkbox } from "@material-tailwind/react";
 import Select from "react-select";
-import { motion } from "framer-motion";
 import FramerMotionWrapper from "../FramerMotionWrapper";
+import useBibleContext from "../../hooks/useBibleContext";
 
-const VersionSelect = ({
-  title,
-  data,
-  activeversion,
-  versions,
-  setVersions,
-  language,
-  setLanguage,
-  activeLang,
-}) => {
+const VersionSelect = ({ title, data, activeversion, activeLang }) => {
+  const { isLanguage, setIsLanguage, versions, setVersions } =
+    useBibleContext();
+
   return (
     <FramerMotionWrapper>
       <div className=" flex items-center ">
         <label className=" dark:text-white w-[130px]">{title}</label>
         <Checkbox
           id={title}
-          onChange={() => setLanguage(!language)}
-          checked={language}
+          onChange={() => {
+            setIsLanguage({
+              ...isLanguage,
+              [activeLang]: !isLanguage[activeLang],
+            });
+          }}
+          checked={isLanguage[activeLang]}
         />
         <Select
           options={data}

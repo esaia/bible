@@ -370,53 +370,32 @@ const BibleProvide = ({ children }) => {
     const muxliMde =
       filteredData.bibleData[+filteredData.bibleData.length - 1].muxli;
 
-    if (filteredData.bibleData.length === 1) {
-      const filteredGeo = dataGeo.data.bibleData.slice(muxli - 1, muxli);
-      const filteredEng = dataEng.data.bibleData.slice(muxli - 1, muxli);
-      const filteredRus = dataRus.data.bibleData.slice(muxli - 1, muxli);
-
-      setResult({
-        geo: {
-          data: filteredGeo,
-          tavimuxli: `${dataGeo.data.bibleNames[wigni + 2]} ${tavi}:${muxli}`,
-        },
-        eng: {
-          data: filteredEng,
-          tavimuxli: `${
+    const filteredGeo = dataGeo.data.bibleData.slice(muxli - 1, muxliMde);
+    const filteredEng = dataEng.data.bibleData.slice(muxli - 1, muxliMde);
+    const filteredRus = dataRus.data.bibleData.slice(muxli - 1, muxliMde);
+    const taviMuxliStr =
+      " " +
+      `${tavi}:${muxli}${
+        filteredData.bibleData.length > 1 ? `-${muxliMde}` : ""
+      }`;
+    setResult({
+      geo: {
+        data: filteredGeo,
+        tavimuxli: `${dataGeo.data.bibleNames[wigni + 2]}` + taviMuxliStr,
+      },
+      eng: {
+        data: filteredEng,
+        tavimuxli:
+          `${
             dataEng.data.bibleNames[englishWigni ? englishWigni - 1 : wigni + 2]
-          } ${tavi}:${muxli}`,
-        },
-        rus: {
-          data: filteredRus,
-          tavimuxli: `${dataRus.data.bibleNames[wigni + 2]} ${tavi}:${muxli}`,
-        },
-      });
-    } else if (filteredData.bibleData.length > 1) {
-      const filteredGeo = dataGeo.data.bibleData.slice(muxli - 1, muxliMde);
-      const filteredEng = dataEng.data.bibleData.slice(muxli - 1, muxliMde);
-      const filteredRus = dataRus.data.bibleData.slice(muxli - 1, muxliMde);
+          }` + taviMuxliStr,
+      },
+      rus: {
+        data: filteredRus,
+        tavimuxli: `${dataRus.data.bibleNames[wigni + 2]}` + taviMuxliStr,
+      },
+    });
 
-      setResult({
-        geo: {
-          data: filteredGeo,
-          tavimuxli: `${
-            dataGeo.data.bibleNames[wigni + 2]
-          } ${tavi}:${muxli}-${muxliMde}`,
-        },
-        eng: {
-          data: filteredEng,
-          tavimuxli: `${
-            dataEng.data.bibleNames[englishWigni ? englishWigni - 1 : wigni + 2]
-          } ${tavi}:${muxli}-${muxliMde}`,
-        },
-        rus: {
-          data: filteredRus,
-          tavimuxli: `${
-            dataRus.data.bibleNames[wigni + 2]
-          } ${tavi}:${muxli}-${muxliMde}`,
-        },
-      });
-    }
     setIsLoadingResult(false);
   }, [filteredData, versions]);
 

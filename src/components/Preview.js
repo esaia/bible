@@ -3,7 +3,6 @@ import useBibleContext from "../hooks/useBibleContext";
 
 const Preview = () => {
   const { filteredData, inputDispatch, inputValues } = useBibleContext();
-
   return (
     <div className="w-full ">
       {filteredData?.bibleData &&

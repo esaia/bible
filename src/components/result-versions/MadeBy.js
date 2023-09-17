@@ -8,7 +8,7 @@ const MadeBy = () => {
         <a
           href="https://www.facebook.com/esaia.gafrindashvili/"
           className="underline"
-          target="_blank"
+          target="noreferrer"
         >
           Eso
         </a>

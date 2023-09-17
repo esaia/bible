@@ -146,16 +146,17 @@ const BibleProvide = ({ children }) => {
     },
     bibleData2: "",
   };
+
+  const searchParams = new URLSearchParams(document.location.search);
   const inputValueInitial = {
     version:
-      localStorage.getItem("previewVersion") ||
-      "ახალი გადამუშავებული გამოცემა 2015",
-    book: 1,
-    chapter: 1,
-    verse: null,
-    versemde: null,
+      searchParams.get("version") || "ახალი გადამუშავებული გამოცემა 2015",
+    book: +searchParams.get("book") || 4,
+    chapter: +searchParams.get("chapter") || 1,
+    verse: +searchParams.get("verse") || 1,
+    versemde: +searchParams.get("versemde"),
     phrase: "",
-    language: localStorage.getItem("previewLanguage") || "geo",
+    language: +searchParams.get("language") || "geo",
     darkmode: localStorage.getItem("darkmode") === "true" ? true : false,
     fontSize: localStorage.getItem("fontSize") || 5,
     separate: false,

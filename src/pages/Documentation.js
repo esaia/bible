@@ -90,7 +90,7 @@ const Documentation = () => {
               <a
                 href="https://www.facebook.com/esaia.gafrindashvili/"
                 className="w-full flex items-center justify-center gap-2 mt-2 "
-                target="_blank"
+                target="noreferrer"
               >
                 <button>Messenger</button>
                 <FaFacebookMessenger />
@@ -98,7 +98,7 @@ const Documentation = () => {
               <a
                 href="https://t.me/esoeso27"
                 className="w-full flex items-center justify-center gap-2 mt-2 "
-                target="_blank"
+                target="noreferrer"
               >
                 <button>Telegram</button>
                 <FaTelegram />

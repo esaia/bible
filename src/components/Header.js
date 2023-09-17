@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Select from "react-select";
 import Preview from "./Preview";
@@ -7,6 +7,7 @@ import Skeleton from "./Skeleton";
 import VerseArrows from "./VerseArrows";
 import useData from "../hooks/useData";
 import { motion } from "framer-motion";
+import { useSearchParams } from "react-router-dom";
 
 const Header = ({ onSave }) => {
   const { filteredData, setfilteredData, inputValues, inputDispatch } =
@@ -16,67 +17,78 @@ const Header = ({ onSave }) => {
   const { languages, versions, book, chapter, verse } = useData();
   const [originalData, setOriginalData] = useState({});
   const baseURL = `https://holybible.ge/service.php?w=${inputValues.book}&t=${inputValues.chapter}&m=&s=${inputValues.phrase}&mv=${inputValues?.version}&language=${inputValues.language}&page=1`;
+
+  const isFirstRender = useRef(true);
+
   useEffect(() => {
     const fetch = async () => {
-      // if verse and versemde are in inputvalues then check if separate button clicked go to api and if not then optimaizing with slice
-      if (inputValues.verse || inputValues.versemde) {
-        if (inputValues.separate) {
-          inputDispatch({ type: "MAKE_SEPARATE_FALSE" });
-          const { data } = await axios.get(baseURL);
-          setOriginalData(data);
-          const myData = data.bibleData?.slice(
-            inputValues.verse - 1,
-            inputValues.versemde ? inputValues.versemde : inputValues.verse
-          );
-          setfilteredData({ ...originalData, bibleData: myData });
-        } else {
-          const myData = originalData?.bibleData.slice(
-            inputValues.verse - 1,
-            inputValues.versemde ? inputValues.versemde : inputValues.verse
-          );
-          setfilteredData({ ...originalData, bibleData: myData });
-        }
-      } else {
-        setIsLoading(true);
-        const { data } = await axios.get(baseURL);
-        setOriginalData(data);
-        let myData;
-        // when user searching something not slice
-        if (inputValues.separate) {
-          myData = data.bibleData;
-        } else {
-          myData = data.bibleData.slice(0, 1);
-        }
-        setIsLoading(false);
-        setfilteredData({ ...data, bibleData: myData });
-      }
+      const { data } = await axios.get(baseURL);
+
+      const startIndex = (inputValues.verse && inputValues.verse - 1) || 0;
+      const endIndex = inputValues.versemde || inputValues.verse || 1;
+
+      const slicedData = data.bibleData.slice(startIndex, endIndex);
+
+      setOriginalData(data);
+      setfilteredData({
+        ...data,
+        bibleData: slicedData,
+      });
+      setIsLoading(false);
     };
+
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+
+      fetch();
+    }
 
     fetch();
   }, [
     inputValues.version,
     inputValues.book,
     inputValues.chapter,
-    inputValues.verse,
-    inputValues.versemde,
+
     inputValues.phrase,
     inputValues.language,
     inputValues.separate,
   ]);
+
+  useEffect(() => {
+    if (originalData.bibleData) {
+      const data = originalData.bibleData.slice(
+        inputValues.verse - 1,
+        inputValues.versemde || inputValues.verse
+      );
+      setfilteredData({ ...filteredData, bibleData: data });
+    }
+  }, [inputValues.verse, inputValues.versemde]);
+
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const changeInputValue = (e, triggleAction) => {
     inputDispatch({
       type: "CHANGE_INPUT_VALUE",
       payload: { event: e, triggleAction },
     });
+    // setup query in url
+    if (e) {
+      if (e.id === "chapter" || e.id === "book") {
+        searchParams.delete("verse");
+        searchParams.delete("versemde");
+      }
+
+      if (searchParams.get(e.id)) {
+        searchParams.delete(e.id);
+        searchParams.append(e.id, e.value);
+        searchParams.sort();
+      } else {
+        searchParams.append(e.id, e.value);
+      }
+      setSearchParams(searchParams);
+    }
   };
 
-  const changeLanguageAndVersion = (e, triggleAction) => {
-    inputDispatch({
-      type: "CHANGE_LANGUAGE_AND_VERSION",
-      payload: { event: e, triggleAction },
-    });
-  };
   const versemde =
     filteredData?.muxli &&
     new Array(+filteredData?.muxli[0].cc)
@@ -85,7 +97,6 @@ const Header = ({ onSave }) => {
         return { value: i + 1, label: i + 1, id: "versemde" };
       })
       .slice(inputValues.verse);
-
   return (
     <>
       <div className="w-full">
@@ -109,7 +120,7 @@ const Header = ({ onSave }) => {
               options={languages}
               isSearchable={true}
               onChange={(e, triggleAction) =>
-                changeLanguageAndVersion(e, triggleAction)
+                changeInputValue(e, triggleAction)
               }
               className="my-react-select-container  w-[100px]  flex-auto z-50"
               classNamePrefix="my-react-select"
@@ -125,7 +136,7 @@ const Header = ({ onSave }) => {
               options={versions}
               isSearchable={true}
               onChange={(e, triggleAction) =>
-                changeLanguageAndVersion(e, triggleAction)
+                changeInputValue(e, triggleAction)
               }
               className="my-react-select-container w-[300px]  flex-auto  z-50"
               classNamePrefix="my-react-select"
@@ -133,11 +144,9 @@ const Header = ({ onSave }) => {
             {/* wigni */}
             <Select
               placeholder={"წიგნი"}
-              defaultValue={{
-                value: 4,
-                label: "დაბადება",
-                id: "book",
-              }}
+              defaultValue={book
+                .flatMap((item) => item.options)
+                .find((option) => option.value === inputValues.book)}
               options={book}
               isClearable={true}
               isSearchable={true}
@@ -149,7 +158,7 @@ const Header = ({ onSave }) => {
             />
             {/* Tavi */}
             <Select
-              value={chapter?.filter(
+              value={chapter?.find(
                 (option) => option.label === inputValues.chapter || null
               )}
               placeholder={"თავი"}

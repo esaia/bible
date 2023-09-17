@@ -1,5 +1,4 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BsRocketTakeoff } from "react-icons/bs";
 import useBibleContext from "../hooks/useBibleContext";
 import { Button } from "@material-tailwind/react";

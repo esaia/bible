@@ -21,11 +21,18 @@ const Header = ({ onSave }) => {
   const isFirstRender = useRef(true);
 
   useEffect(() => {
+    setIsLoading(true);
+
     const fetch = async () => {
       const { data } = await axios.get(baseURL);
 
       const startIndex = (inputValues.verse && inputValues.verse - 1) || 0;
-      const endIndex = inputValues.versemde || inputValues.verse || 1;
+      let endIndex;
+      if (inputValues.phrase) {
+        endIndex = 6;
+      } else {
+        endIndex = inputValues.versemde || inputValues.verse || 1;
+      }
 
       const slicedData = data.bibleData.slice(startIndex, endIndex);
 
@@ -48,13 +55,14 @@ const Header = ({ onSave }) => {
     inputValues.version,
     inputValues.book,
     inputValues.chapter,
-
     inputValues.phrase,
     inputValues.language,
     inputValues.separate,
   ]);
 
   useEffect(() => {
+    setIsLoading(true);
+
     if (originalData.bibleData) {
       const data = originalData.bibleData.slice(
         inputValues.verse - 1,
@@ -62,6 +70,7 @@ const Header = ({ onSave }) => {
       );
       setfilteredData({ ...filteredData, bibleData: data });
     }
+    setIsLoading(false);
   }, [inputValues.verse, inputValues.versemde]);
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -75,6 +84,9 @@ const Header = ({ onSave }) => {
     if (e) {
       if (e.id === "chapter" || e.id === "book") {
         searchParams.delete("verse");
+        searchParams.delete("versemde");
+      }
+      if (e.id === "verse") {
         searchParams.delete("versemde");
       }
 
@@ -216,7 +228,7 @@ const Header = ({ onSave }) => {
 
       {isLoading ? (
         <Skeleton />
-      ) : filteredData.bibleData.length === 0 ? (
+      ) : filteredData.bibleData.length === 0 && inputValues.phrase ? (
         <p className="dark:text-white p-3 text-2xl text-center mt-10">
           No matches found: "{inputValues.phrase}"
         </p>

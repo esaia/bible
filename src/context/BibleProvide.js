@@ -156,7 +156,7 @@ const BibleProvide = ({ children }) => {
     verse: +searchParams.get("verse") || 1,
     versemde: +searchParams.get("versemde"),
     phrase: "",
-    language: +searchParams.get("language") || "geo",
+    language: searchParams.get("language") || "geo",
     darkmode: localStorage.getItem("darkmode") === "true" ? true : false,
     fontSize: localStorage.getItem("fontSize") || 5,
     separate: false,
@@ -200,6 +200,13 @@ const BibleProvide = ({ children }) => {
               [e?.id]: e?.value,
               phrase: "",
               verse: null,
+              versemde: null,
+            };
+          }
+          if (e?.id === "verse") {
+            return {
+              ...state,
+              [e?.id]: e?.value,
               versemde: null,
             };
           }

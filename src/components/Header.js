@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Select from "react-select";
 import Preview from "./Preview";
@@ -17,8 +17,6 @@ const Header = ({ onSave }) => {
   const { languages, versions, book, chapter, verse } = useData();
   const [originalData, setOriginalData] = useState({});
   const baseURL = `https://holybible.ge/service.php?w=${inputValues.book}&t=${inputValues.chapter}&m=&s=${inputValues.phrase}&mv=${inputValues?.version}&language=${inputValues.language}&page=1`;
-
-  const isFirstRender = useRef(true);
 
   useEffect(() => {
     setIsLoading(true);
@@ -43,12 +41,6 @@ const Header = ({ onSave }) => {
       });
       setIsLoading(false);
     };
-
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-
-      fetch();
-    }
 
     fetch();
   }, [
@@ -160,7 +152,7 @@ const Header = ({ onSave }) => {
                 .flatMap((item) => item.options)
                 .find((option) => option.value === inputValues.book)}
               options={book}
-              isClearable={true}
+              // isClearable={true}
               isSearchable={true}
               onChange={(e, triggleAction) =>
                 changeInputValue(e, triggleAction)

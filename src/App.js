@@ -2,6 +2,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Documentation from "./pages/Documentation";
 import Filteres from "./pages/Filteres";
 import Show from "./pages/Show";
+import { useEffect, useState } from "react";
+import { button } from "@material-tailwind/react";
 
 function App() {
   return (

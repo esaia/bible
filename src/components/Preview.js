@@ -1,8 +1,11 @@
 import React from "react";
 import useBibleContext from "../hooks/useBibleContext";
+import { FacebookShareButton } from "react-share";
+import { TbBrandStackshare } from "react-icons/tb";
 
 const Preview = () => {
   const { filteredData, inputDispatch, inputValues } = useBibleContext();
+
   return (
     <div className="w-full ">
       {filteredData?.bibleData &&
@@ -37,6 +40,9 @@ const Preview = () => {
                     separate
                   </button>
                 )}
+                <FacebookShareButton url={window.location.href}>
+                  <TbBrandStackshare />
+                </FacebookShareButton>
               </div>
             </div>
           );

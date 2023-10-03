@@ -13,6 +13,7 @@ const Theme = ({ id, setThemeNumber, checked, src }) => {
           onChange={(e) => setThemeNumber(e.target.value)}
           checked={checked}
         />
+
         <img src={src} alt="theme img" className="themeimg" />
       </div>
     </FramerMotionWrapper>

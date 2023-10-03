@@ -4,12 +4,20 @@ import { SlSizeFullscreen } from "react-icons/sl";
 import TextShow from "../components/result-versions/TextShow";
 
 const Show = () => {
-  const { result, isLanguage, setResult, setIsLanguage, inputValues } =
-    useBibleContext();
+  const { result, setResult } = useBibleContext();
 
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem("themeNumber") || 1);
-  const [fontSize, setFontSize] = useState(inputValues.fontSize);
+  const [fontSize, setFontSize] = useState(
+    localStorage.getItem("fontSize") || 4
+  );
+  const [projectorLanguages, setProjectorLanguages] = useState(
+    JSON.parse(localStorage?.getItem("languages")) || {
+      geo: false,
+      eng: false,
+      rus: false,
+    }
+  );
 
   const handleFullscreenClick = () => {
     if (!isFullScreen) {
@@ -25,7 +33,10 @@ const Show = () => {
   useEffect(() => {
     const handleStorageChange = () => {
       setResult(JSON.parse(localStorage.getItem("result")));
-      setIsLanguage(JSON.parse(localStorage.getItem("languages")));
+
+      setProjectorLanguages(
+        JSON.parse(localStorage.getItem("projectorLanguages"))
+      );
       setFontSize(JSON.parse(localStorage.getItem("fontSize")));
       setTheme(localStorage.getItem("themeNumber"));
     };
@@ -103,20 +114,20 @@ const Show = () => {
 
         <TextShow
           lang="eng"
-          showLanguage={isLanguage.eng}
+          showLanguage={projectorLanguages.eng}
           result={result}
           fontSize={fontSize}
         />
         <TextShow
           lang="geo"
-          showLanguage={isLanguage.geo}
+          showLanguage={projectorLanguages.geo}
           result={result}
           fontSize={fontSize}
         />
 
         <TextShow
           lang="rus"
-          showLanguage={isLanguage.rus}
+          showLanguage={projectorLanguages.rus}
           result={result}
           fontSize={fontSize}
         />

@@ -1,10 +1,15 @@
 import React from "react";
 import { Switch } from "@material-tailwind/react";
-import useBibleContext from "../hooks/useBibleContext";
 import { motion } from "framer-motion";
+import { useBibleSettingContext } from "../context/BibleSettingProvider";
 
 const FixedDetails = () => {
-  const { inputValues, inputDispatch } = useBibleContext();
+  const { darkMode, setDarkMode } = useBibleSettingContext();
+
+  const changeDarkMode = () => {
+    setDarkMode(!darkMode);
+    localStorage.setItem("darkmode", !darkMode);
+  };
 
   return (
     <div>
@@ -28,9 +33,9 @@ const FixedDetails = () => {
             </a>
             <Switch
               color="indigo"
-              label={inputValues.darkmode ? "light" : "dark"}
-              onChange={() => inputDispatch({ type: "CHANGE_DARK_MODE" })}
-              checked={inputValues.darkmode}
+              label={darkMode ? "light" : "dark"}
+              onChange={changeDarkMode}
+              checked={darkMode}
               ripple={true}
             />
           </div>

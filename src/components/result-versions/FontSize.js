@@ -1,16 +1,21 @@
-import React from "react";
-import useBibleContext from "../../hooks/useBibleContext";
+import React, { useState } from "react";
 
 const FontSize = () => {
-  const { inputValues, inputDispatch } = useBibleContext();
+  const [fontSize, setFontSize] = useState(
+    localStorage.getItem("fontSize") || 4
+  );
 
+  const changeFontSize = (e) => {
+    localStorage.setItem("fontSize", +e.target.value);
+    setFontSize(+e.target.value);
+  };
   return (
     <div className="w-72">
       <label
         htmlFor="minmax-range"
         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
       >
-        Font Size: {inputValues.fontSize}
+        Font Size: {fontSize}
       </label>
 
       <input
@@ -18,10 +23,8 @@ const FontSize = () => {
         type="range"
         min="2"
         max="9"
-        value={inputValues.fontSize}
-        onChange={(e) =>
-          inputDispatch({ type: "CHANGE_FONT_SIZE", payload: +e.target.value })
-        }
+        value={fontSize}
+        onChange={(e) => changeFontSize(e)}
         className="range w-full cursor-pointer"
         step="1"
       />

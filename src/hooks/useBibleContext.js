@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { BibleContext } from "../context/BibleProvide";
+import { BibleContext } from "../context/InputValuesProvider";
 
 const useBibleContext = () => {
   const {
@@ -10,11 +10,11 @@ const useBibleContext = () => {
     result,
     setResult,
     isLanguage,
-    setIsLanguage,
+
     inputValues,
     inputDispatch,
-    onSave,
-    isLoadingResult,
+    isFetching,
+    refetch,
   } = useContext(BibleContext);
 
   return {
@@ -25,11 +25,11 @@ const useBibleContext = () => {
     result,
     setResult,
     isLanguage,
-    setIsLanguage,
+
     inputValues,
     inputDispatch,
-    onSave,
-    isLoadingResult,
+    isFetching,
+    refetch,
   };
 };
 

@@ -1,12 +1,18 @@
 import React from "react";
 import { Switch } from "@material-tailwind/react";
-import useBibleContext from "../hooks/useBibleContext";
 import { FaFacebookMessenger, FaTelegram } from "react-icons/fa";
+import { useBibleSettingContext } from "../context/BibleSettingProvider";
 
 const Documentation = () => {
-  const { inputValues, inputDispatch } = useBibleContext();
+  const { darkMode, setDarkMode } = useBibleSettingContext();
+
+  const changeDarkMode = () => {
+    setDarkMode(!darkMode);
+    localStorage.setItem("darkmode", !darkMode);
+  };
+
   return (
-    <div className="w-full flex justify-center min-h-[100vh] dark:text-white ">
+    <div className="w-full flex justify-center min-h-[100vh] dark:text-white  dark:bg-[#101828] ">
       <div className="w-full max-w-[600px]  p-4 py-16 ">
         <h1 className=" text-center text-2xl mb-4">დოკუმენტაცია</h1>
         <p className="">
@@ -113,9 +119,9 @@ const Documentation = () => {
         <div className="flex">
           <Switch
             color="indigo"
-            label={inputValues.darkmode ? "light" : "dark"}
-            onChange={() => inputDispatch({ type: "CHANGE_DARK_MODE" })}
-            checked={inputValues.darkmode}
+            label={darkMode ? "light" : "dark"}
+            onChange={changeDarkMode}
+            checked={darkMode}
             ripple={true}
           />
         </div>

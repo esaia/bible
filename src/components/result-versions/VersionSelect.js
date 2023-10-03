@@ -2,11 +2,35 @@ import React from "react";
 import { Checkbox } from "@material-tailwind/react";
 import Select from "react-select";
 import FramerMotionWrapper from "../FramerMotionWrapper";
-import useBibleContext from "../../hooks/useBibleContext";
+import { useBibleSettingContext } from "../../context/BibleSettingProvider";
+import useData from "../../hooks/useData";
 
-const VersionSelect = ({ title, data, activeversion, activeLang }) => {
-  const { isLanguage, setIsLanguage, versions, setVersions } =
-    useBibleContext();
+const VersionSelect = ({
+  title,
+  activeLang,
+  projectorLanguages,
+  setProjectorLanguages,
+}) => {
+  const { versions, setVersions } = useBibleSettingContext();
+
+  const { allVersions } = useData();
+
+  const check = () => {
+    const updatedState = {
+      ...projectorLanguages,
+      [activeLang]: !projectorLanguages[activeLang],
+    };
+
+    localStorage.setItem("projectorLanguages", JSON.stringify(updatedState));
+    setProjectorLanguages(updatedState);
+  };
+
+  const updateVersion = (e) => {
+    const updatedState = { ...versions, [activeLang]: e.value };
+
+    localStorage.setItem("versions", JSON.stringify(updatedState));
+    setVersions(updatedState);
+  };
 
   return (
     <FramerMotionWrapper>
@@ -14,23 +38,18 @@ const VersionSelect = ({ title, data, activeversion, activeLang }) => {
         <label className=" dark:text-white w-[130px]">{title}</label>
         <Checkbox
           id={title}
-          onChange={() => {
-            setIsLanguage({
-              ...isLanguage,
-              [activeLang]: !isLanguage[activeLang],
-            });
-          }}
-          checked={isLanguage[activeLang]}
+          onChange={check}
+          checked={projectorLanguages[activeLang]}
         />
         <Select
-          options={data}
+          options={allVersions[activeLang]}
           isSearchable={true}
-          onChange={(e) => setVersions({ ...versions, [activeLang]: e.value })}
+          onChange={(e) => updateVersion(e)}
           className="my-react-select-container  pl-5 w-[300px]"
           classNamePrefix="my-react-select"
           value={{
-            value: activeversion,
-            label: activeversion,
+            value: versions[activeLang],
+            label: versions[activeLang],
             id: "version",
           }}
         />

@@ -1,53 +1,74 @@
-import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import useData from '../../hooks/useData';
 
-const TextShow = ({ result, showLanguage, lang, fontSize }) => {
+const TextShow = ({ showData, lang, fontSize }) => {
+  const { bibleNames } = useData();
+  const [fontSizeStr, setFontSizeStr] = useState('');
+
+  useEffect(() => {
+    let _fontSizeStr;
+
+    switch (+fontSize) {
+      case 1:
+        _fontSizeStr = 'text-1xl';
+        break;
+      case 2:
+        _fontSizeStr = 'text-2xl';
+        break;
+      case 3:
+        _fontSizeStr = 'text-3xl';
+        break;
+      case 4:
+        _fontSizeStr = 'text-4xl';
+        break;
+      case 5:
+        _fontSizeStr = 'text-5xl';
+        break;
+      case 6:
+        _fontSizeStr = 'text-6xl';
+        break;
+      case 7:
+        _fontSizeStr = 'text-7xl';
+        break;
+      case 8:
+        _fontSizeStr = 'text-8xl';
+        break;
+      case 9:
+        _fontSizeStr = 'text-9xl';
+        break;
+      default:
+        _fontSizeStr = 'text-5xl';
+    }
+
+    setFontSizeStr(_fontSizeStr);
+  }, [fontSize]);
+
+  const lastIndex = showData[lang].length - 1;
+  const name = bibleNames[lang][+showData[lang][0]?.wigni + 2];
+  const chapter = showData[lang][0]?.tavi;
+  const muxli =
+    showData[lang].length > 1
+      ? `${showData[lang][0]?.muxli}-${showData[lang][lastIndex]?.muxli}`
+      : showData[lang][0]?.muxli;
+
+  const taviMuxli = `${name} ${chapter}:${muxli}`;
+
   return (
     <AnimatePresence>
-      {result && showLanguage && (
+      {showData[lang].length !== 0 && (
         <div className="w-full">
-          {result?.[lang].data.map((item, i) => {
+          {showData[lang].map((item, i) => {
             return (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 5 }}
-                transition={{ duration: 0.3, type: "tween" }}
+                transition={{ duration: 0.3, type: 'tween' }}
               >
                 <div key={item.id}>
-                  <p
-                    className={`showText  
-
-                    ${(() => {
-                      switch (fontSize) {
-                        case 1:
-                          return "text-1xl";
-                        case 2:
-                          return "text-2xl";
-                        case 3:
-                          return "text-3xl";
-                        case 4:
-                          return "text-4xl";
-                        case 5:
-                          return "text-5xl";
-                        case 6:
-                          return "text-6xl";
-                        case 7:
-                          return "text-7xl";
-                        case 8:
-                          return "text-8xl";
-                        case 9:
-                          return "text-9xl";
-                        default:
-                          return "text-5xl";
-                      }
-                    })()}
-
-                   `}
-                  >
-                    {item.bv}
-                  </p>
+                  <p className={`showText ${fontSizeStr}`}>{item.bv}</p>
                 </div>
               </motion.div>
             );
@@ -57,40 +78,9 @@ const TextShow = ({ result, showLanguage, lang, fontSize }) => {
             initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 5 }}
-            transition={{ duration: 0.3, type: "tween" }}
+            transition={{ duration: 0.3, type: 'tween' }}
           >
-            <h3
-              className={`
-              showText italic text-gray-300/90
-                    ${(() => {
-                      switch (fontSize) {
-                        case 1:
-                          return "text-1xl";
-                        case 2:
-                          return "text-1xl";
-                        case 3:
-                          return "text-2xl";
-                        case 4:
-                          return "text-3xl";
-                        case 5:
-                          return "text-4xl";
-                        case 6:
-                          return "text-5xl";
-                        case 7:
-                          return "text-6xl";
-                        case 8:
-                          return "text-7xl";
-                        case 9:
-                          return "text-8xl";
-                        default:
-                          return "text-4xl";
-                      }
-                    })()}
-
-            `}
-            >
-              {result?.[lang]?.tavimuxli}
-            </h3>
+            <h3 className={`showText italic text-gray-300/90  ${fontSizeStr}`}>{taviMuxli}</h3>
           </motion.div>
         </div>
       )}

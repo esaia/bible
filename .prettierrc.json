@@ -4,13 +4,13 @@
   "jsxBracketSameLine": true,
   "arrowParens": "avoid",
   "proseWrap": "preserve",
-  "printWidth": 150,
+  "printWidth": 120,
   "overrides": [
     {
       "files": "*.js",
       "options": {
         "parser": "babel",
-        "semi": false,
+        "semi": true,
         "bracketSpacing": true,
         "singleQuote": true,
         "jsxBracketSameLine": false

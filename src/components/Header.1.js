@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Select from 'react-select';
 import useBibleContext from '../hooks/useBibleContext';
 import useData from '../hooks/useData';
 import { motion } from 'framer-motion';
 
-const Header = () => {
-  const { inputValues, inputDispatch, refetch } = useBibleContext();
+export const Header = () => {
+  const { inputValues, inputDispatch, refetch, setfilteredData } = useBibleContext();
   const { languages, versions, book, chapter, verse, versemde } = useData();
 
   const changeInputValue = (e, triggleAction) => {
@@ -15,6 +15,51 @@ const Header = () => {
     });
   };
 
+  const params = {
+    w: inputValues.book,
+    t: inputValues.chapter,
+    m: '',
+    s: inputValues.phrase,
+    mv: inputValues.version || '',
+    language: inputValues.language,
+    page: 1,
+  };
+
+  // const [{ data: dataGeo, refetch: refetchGeo }, { data: dataEng, refetch: refetchEng }] = useQueries([
+  //   {
+  //     queryKey: ['dataGeo', params.t],
+  //     queryFn: () => fetchData({ ...params, language: 'geo' }),
+  //     enabled: false,
+  //   },
+  //   {
+  //     queryKey: ['dataEng', params.t],
+  //     queryFn: () => fetchData({ ...params, language: 'eng' }),
+  //     enabled: false,
+  //   },
+  // ]);
+  const changeChapter = async (e, triggleAction) => {
+    inputDispatch({
+      type: 'CHANGE_INPUT_VALUE',
+      payload: { event: e, triggleAction },
+    });
+
+    // params.chapter = e.value;
+    // const fetch = async () => {
+    //   await Promise.all([refetchGeo(), refetchEng()]);
+    // };
+    // fetch();
+  };
+
+  // useEffect(() => {
+  //   // if (dataGeo?.bibleData) {
+  //   //   console.log(dataGeo);
+  //   // }
+  //   // if (dataGeo?.bibleData) {
+  //   //   setfilteredData(dataGeo);
+  //   // }
+  //   // if (dataGeo?.bibleData && dataEng?.bibleData)
+  //   //   localStorage.setItem('result', JSON.stringify({ geo: dataGeo?.bibleData, eng: dataEng?.bibleData }));
+  // }, [dataGeo, dataEng]);
   const submitSearchForm = e => {
     e.preventDefault();
     const inputValueBlankAndFetch = async () => {
@@ -80,7 +125,7 @@ const Header = () => {
               options={chapter}
               isSearchable={true}
               isClearable={true}
-              onChange={(e, triggleAction) => changeInputValue(e, triggleAction)}
+              onChange={(e, triggleAction) => changeChapter(e, triggleAction)}
               className="my-react-select-container w-[180px] flex-auto "
               classNamePrefix="my-react-select"
             />
@@ -131,5 +176,3 @@ const Header = () => {
     </>
   );
 };
-
-export default Header;

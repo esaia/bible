@@ -1,12 +1,12 @@
-import React from "react";
-import "react-awesome-button/dist/styles.css";
-import FixedDetails from "../components/FixedDetails";
-import Versions from "../components/Versions";
-import Header from "../components/Header";
-import useBibleContext from "../hooks/useBibleContext";
-import Skeleton from "../components/Skeleton";
-import VerseArrows from "../components/VerseArrows";
-import Preview from "../components/Preview";
+import React from 'react';
+import 'react-awesome-button/dist/styles.css';
+import FixedDetails from '../components/FixedDetails';
+import Versions from '../components/Versions';
+import Header from '../components/Header';
+import useBibleContext from '../hooks/useBibleContext';
+import Skeleton from '../components/Skeleton';
+import VerseArrows from '../components/VerseArrows';
+import Preview from '../components/Preview';
 
 const Filteres = () => {
   const { filteredData, inputValues, isFetching } = useBibleContext();
@@ -18,12 +18,8 @@ const Filteres = () => {
 
         {isFetching ? (
           <Skeleton />
-        ) : filteredData &&
-          filteredData?.bibleData?.length === 0 &&
-          inputValues.phrase ? (
-          <p className="dark:text-white p-3 text-2xl text-center mt-10">
-            No matches found: "{inputValues.phrase}"
-          </p>
+        ) : filteredData && filteredData?.bibleData?.length === 0 && inputValues.phrase ? (
+          <p className="dark:text-white p-3 text-2xl text-center mt-10">No matches found: "{inputValues.phrase}"</p>
         ) : (
           <>
             {!inputValues.versemde && <VerseArrows />}

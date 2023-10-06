@@ -1,22 +1,20 @@
-import React, { useEffect, useState } from "react";
-import useBibleContext from "../hooks/useBibleContext";
-import { SlSizeFullscreen } from "react-icons/sl";
-import TextShow from "../components/result-versions/TextShow";
+import React, { useEffect, useState } from 'react';
+import { SlSizeFullscreen } from 'react-icons/sl';
+import TextShow from '../components/result-versions/TextShow';
 
 const Show = () => {
-  const { result, setResult } = useBibleContext();
-
   const [isFullScreen, setIsFullScreen] = useState(false);
-  const [theme, setTheme] = useState(localStorage.getItem("themeNumber") || 1);
-  const [fontSize, setFontSize] = useState(
-    localStorage.getItem("fontSize") || 4
-  );
+  const [bgStr, setBgStr] = useState('');
+
+  const [showData, setShowData] = useState(JSON.parse(localStorage.getItem('showData')));
+  const [theme, setTheme] = useState(localStorage.getItem('themeNumber') || 1);
+  const [fontSize, setFontSize] = useState(localStorage.getItem('fontSize') || 4);
   const [projectorLanguages, setProjectorLanguages] = useState(
-    JSON.parse(localStorage?.getItem("languages")) || {
+    JSON.parse(localStorage.getItem('projectorLanguages')) || {
       geo: false,
       eng: false,
       rus: false,
-    }
+    },
   );
 
   const handleFullscreenClick = () => {
@@ -32,105 +30,106 @@ const Show = () => {
 
   useEffect(() => {
     const handleStorageChange = () => {
-      setResult(JSON.parse(localStorage.getItem("result")));
-
-      setProjectorLanguages(
-        JSON.parse(localStorage.getItem("projectorLanguages"))
-      );
-      setFontSize(JSON.parse(localStorage.getItem("fontSize")));
-      setTheme(localStorage.getItem("themeNumber"));
+      setProjectorLanguages(JSON.parse(localStorage.getItem('projectorLanguages')));
+      setFontSize(JSON.parse(localStorage.getItem('fontSize')));
+      setTheme(localStorage.getItem('themeNumber'));
+      setShowData(JSON.parse(localStorage.getItem('showData')));
     };
 
-    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener('storage', handleStorageChange);
 
     return () => {
-      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener('storage', handleStorageChange);
     };
   }, []);
+
+  useEffect(() => {
+    let themeClass;
+
+    switch (theme) {
+      case '1':
+        themeClass = 'bg-1img';
+        break;
+      case '2':
+        themeClass = 'bg-2img';
+        break;
+      case '3':
+        themeClass = 'bg-3img';
+        break;
+      case '4':
+        themeClass = 'bg-4img';
+        break;
+      case '5':
+        themeClass = 'bg-5img';
+        break;
+      case '6':
+        themeClass = 'bg-6img';
+        break;
+      case '7':
+        themeClass = 'bg-7img';
+        break;
+      case '8':
+        themeClass = 'bg-8img';
+        break;
+      case '9':
+        themeClass = 'bg-9img';
+        break;
+      case '10':
+        themeClass = 'bg-10img';
+        break;
+      case '11':
+        themeClass = 'bg-11img';
+        break;
+      case '12':
+        themeClass = 'bg-12img';
+        break;
+      case '13':
+        themeClass = 'bg-13img';
+        break;
+      case '14':
+        themeClass = 'bg-14img';
+        break;
+      case '15':
+        themeClass = 'bg-15img';
+        break;
+      case '16':
+        themeClass = 'bg-16img';
+        break;
+      case '17':
+        themeClass = 'bg-17img';
+        break;
+      case '18':
+        themeClass = 'bg-18img';
+        break;
+      case '19':
+        themeClass = 'bg-19img';
+        break;
+      case '20':
+        themeClass = 'bg-20img';
+        break;
+      default:
+        themeClass = 'bg-1img';
+    }
+
+    setBgStr(themeClass);
+  }, [theme]);
 
   return (
     <div className="flex justify-center items-center w-full h-screen ">
       <div
-        className={`w-full h-full px-10 flex justify-center items-start  flex-col  gap-12 bg-blend-overlay bgblind showbackground 
-      ${(() => {
-        switch (theme) {
-          case "1":
-            return "bg-1img";
-          case "2":
-            return "bg-2img";
-          case "3":
-            return "bg-3img";
-          case "4":
-            return "bg-4img";
-          case "5":
-            return "bg-5img";
-          case "6":
-            return "bg-6img";
-          case "7":
-            return "bg-7img";
-          case "8":
-            return "bg-8img";
-          case "9":
-            return "bg-9img";
-          case "10":
-            return "bg-10img";
-          case "11":
-            return "bg-11img";
-          case "12":
-            return "bg-12img";
-          case "13":
-            return "bg-13img";
-          case "14":
-            return "bg-14img";
-          case "15":
-            return "bg-15img";
-          case "16":
-            return "bg-16img";
-          case "17":
-            return "bg-17img";
-          case "18":
-            return "bg-18img";
-          case "19":
-            return "bg-19img";
-          case "20":
-            return "bg-20img";
-
-          default:
-            return "bg-1img";
-        }
-      })()}
-      
-      
-      `}
+        className={`w-full h-full px-10 flex justify-center items-start  flex-col  gap-12 bg-blend-overlay bgblind showbackground ${bgStr}`}
       >
         {!isFullScreen && (
           <div className="absolute right-0 bottom-0 bg-white p-4 cursor-pointer">
-            <SlSizeFullscreen
-              onClick={handleFullscreenClick}
-              className="text-4xl"
-            />
+            <SlSizeFullscreen onClick={handleFullscreenClick} className="text-4xl" />
           </div>
         )}
 
-        <TextShow
-          lang="eng"
-          showLanguage={projectorLanguages.eng}
-          result={result}
-          fontSize={fontSize}
-        />
-        <TextShow
-          lang="geo"
-          showLanguage={projectorLanguages.geo}
-          result={result}
-          fontSize={fontSize}
-        />
+        {projectorLanguages.eng && showData && <TextShow lang="eng" showData={showData} fontSize={fontSize} />}
 
-        <TextShow
-          lang="rus"
-          showLanguage={projectorLanguages.rus}
-          result={result}
-          fontSize={fontSize}
-        />
+        {projectorLanguages.geo && showData && <TextShow lang="geo" showData={showData} fontSize={fontSize} />}
+
+        {/* <TextShow lang="rus" showLanguage={projectorLanguages.rus} result={result} fontSize={fontSize} />  */}
       </div>
     </div>
   );

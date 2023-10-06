@@ -1,14 +1,14 @@
-import React, { createContext, useEffect, useReducer, useState } from 'react'
-import { useQuery, useQueryClient } from 'react-query'
-import { fetchData } from '../lib/axios'
-import { useSearchParams } from 'react-router-dom'
+import React, { createContext, useEffect, useReducer, useState } from 'react';
+import { useQueries, useQuery, useQueryClient } from 'react-query';
+import { fetchData } from '../lib/axios';
+import { useSearchParams } from 'react-router-dom';
 
-export const BibleContext = createContext()
+export const BibleContext = createContext();
 
 const InputValuesProvider = ({ children }) => {
-  const initialState = {}
+  const initialState = {};
 
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const inputValueInitial = {
     language: searchParams.get('language') || 'geo',
@@ -19,71 +19,71 @@ const InputValuesProvider = ({ children }) => {
     versemde: +searchParams.get('versemde'),
     phrase: '',
     separate: false,
-  }
+  };
   const bibleDataReducer = (state, { type, payload }) => {
-    const e = payload?.event
-    const triggleAction = payload?.triggleAction
+    const e = payload?.event;
+    const triggleAction = payload?.triggleAction;
 
     const appendQueryInUrl = e => {
-      searchParams.delete(e.id)
-      searchParams.append(e.id, e.value)
-      searchParams.sort()
-    }
+      searchParams.delete(e.id);
+      searchParams.append(e.id, e.value);
+      searchParams.sort();
+    };
 
     switch (type) {
       case 'CHANGE_INPUT_VALUE':
         if (triggleAction.action === 'clear' && triggleAction?.removedValues) {
-          const { id } = triggleAction.removedValues[0]
+          const { id } = triggleAction.removedValues[0];
           let newState = {
             ...state,
-          }
+          };
 
           switch (id) {
             case 'chapter':
-              searchParams.delete(id)
-              searchParams.delete('verse')
-              searchParams.delete('versemde')
+              searchParams.delete(id);
+              searchParams.delete('verse');
+              searchParams.delete('versemde');
 
               newState = {
                 ...newState,
                 [id]: null,
                 verse: null,
                 versemde: null,
-              }
-              break
+              };
+              break;
             case 'verse':
-              searchParams.delete(id)
-              searchParams.delete('versemde')
+              searchParams.delete(id);
+              searchParams.delete('versemde');
 
               newState = {
                 ...newState,
                 [id]: null,
                 versemde: null,
-              }
-              break
+              };
+              break;
 
             default:
-              searchParams.delete(id)
+              searchParams.delete(id);
 
               newState = {
                 ...newState,
                 [id]: null,
-              }
+              };
           }
 
-          return newState
+          return newState;
         } else {
           let newState = {
             ...state,
-          }
+          };
 
           switch (e?.id) {
             case 'book':
-              searchParams.delete('chapter')
-              searchParams.delete('verse')
-              searchParams.delete('versemde')
+              searchParams.delete('chapter');
+              searchParams.delete('verse');
+              searchParams.delete('versemde');
 
-              appendQueryInUrl(e)
+              appendQueryInUrl(e);
               newState = {
                 ...newState,
                 [e?.id]: e?.value,
@@ -92,13 +92,13 @@ const InputValuesProvider = ({ children }) => {
                 verse: null,
                 versemde: null,
                 separate: false,
-              }
-              break
+              };
+              break;
 
             case 'chapter':
-              searchParams.delete('verse')
-              searchParams.delete('versemde')
-              appendQueryInUrl(e)
+              searchParams.delete('verse');
+              searchParams.delete('versemde');
+              appendQueryInUrl(e);
 
               newState = {
                 ...newState,
@@ -107,49 +107,49 @@ const InputValuesProvider = ({ children }) => {
                 verse: null,
                 versemde: null,
                 separate: false,
-              }
-              break
+              };
+              break;
 
             case 'verse':
-              searchParams.delete('versemde')
+              searchParams.delete('versemde');
 
-              appendQueryInUrl(e)
+              appendQueryInUrl(e);
 
               newState = {
                 ...newState,
                 [e?.id]: e?.value,
                 versemde: null,
                 separate: false,
-              }
-              break
+              };
+              break;
 
             default:
-              appendQueryInUrl(e)
+              appendQueryInUrl(e);
 
               newState = {
                 ...newState,
                 [e?.id]: e?.value,
-              }
+              };
           }
 
-          return newState
+          return newState;
         }
 
       case 'DECREASE_VERSE':
         if (state.verse === 1) {
           return {
             ...state,
-          }
+          };
         }
         return {
           ...state,
           verse: +state.verse - 1,
-        }
+        };
       case 'INCREASE_VERSE':
         return {
           ...state,
           verse: +state.verse + 1,
-        }
+        };
       case 'MAKE_BLANK':
         return {
           ...state,
@@ -159,23 +159,23 @@ const InputValuesProvider = ({ children }) => {
           verse: null,
           versemde: null,
           separate: true,
-        }
+        };
       case 'PHRASE_INPUT':
         return {
           ...state,
           phrase: payload.event.target.value,
-        }
+        };
       case 'SEPARATE_PREVIEW':
-        const { wigni, tavi, muxli } = payload
+        const { wigni, tavi, muxli } = payload;
 
-        searchParams.delete('book')
-        searchParams.delete('chapter')
-        searchParams.delete('verse')
-        searchParams.delete('versemde')
+        searchParams.delete('book');
+        searchParams.delete('chapter');
+        searchParams.delete('verse');
+        searchParams.delete('versemde');
 
-        searchParams.append('book', +wigni + 3)
-        searchParams.append('chapter', tavi)
-        searchParams.append('verse', muxli)
+        searchParams.append('book', +wigni + 3);
+        searchParams.append('chapter', tavi);
+        searchParams.append('verse', muxli);
 
         return {
           ...state,
@@ -184,16 +184,16 @@ const InputValuesProvider = ({ children }) => {
           verse: muxli,
           phrase: '',
           separate: false,
-        }
+        };
 
       default:
-        break
+        break;
     }
-  }
+  };
 
-  const [inputValues, inputDispatch] = useReducer(bibleDataReducer, inputValueInitial)
-  const [filteredData, setfilteredData] = useState(initialState)
-  const queryClient = new useQueryClient()
+  const [inputValues, inputDispatch] = useReducer(bibleDataReducer, inputValueInitial);
+  const [filteredData, setfilteredData] = useState(initialState);
+  const queryClient = new useQueryClient();
 
   const params = {
     w: inputValues.book,
@@ -203,9 +203,9 @@ const InputValuesProvider = ({ children }) => {
     mv: inputValues.version || '',
     language: inputValues.language,
     page: 1,
-  }
+  };
 
-  const { verse, versemde, separate, ...newInputValues } = inputValues
+  const { verse, versemde, separate, ...newInputValues } = inputValues;
 
   const {
     data: previousFilteredData,
@@ -216,45 +216,70 @@ const InputValuesProvider = ({ children }) => {
     queryKey: ['getBibleData', newInputValues],
     queryFn: () => fetchData(params),
     enabled: false,
-  })
+  });
 
   useEffect(() => {
-    if (isFetched) setfilteredData(previousFilteredData)
-  }, [previousFilteredData])
+    if (isFetched) setfilteredData(previousFilteredData);
+  }, [previousFilteredData]);
 
   useEffect(() => {
-    if (!queryClient.getQueryData(['getBibleData', newInputValues]) && !inputValues.separate) refetch()
-  }, [inputValues.version, inputValues.book, inputValues.chapter, inputValues.language])
+    if (!queryClient.getQueryData(['getBibleData', newInputValues]) && !inputValues.separate) refetch();
+  }, [inputValues.version, inputValues.book, inputValues.chapter, inputValues.language]);
 
   useEffect(() => {
-    setSearchParams(searchParams)
-  }, [inputValues])
+    setSearchParams(searchParams);
+  }, [inputValues]);
 
-  // //////////////////////////////////////////////////////////////////////////
+  // const [result, setResult] = useState(JSON.parse(localStorage.getItem('result')))
+  // const [resultTrim, setResultTrim] = useState({ verse: inputValues.verse, versemde: inputValues.versemde })
 
-  const [result, setResult] = useState(JSON.parse(localStorage.getItem('result')))
+  // const [{ data: dataGeo, refetch: refetchGeo }, { data: dataEng, refetch: refetchEng }] = useQueries([
+  //   {
+  //     queryKey: ['dataGeo'],
+  //     queryFn: () => fetchData({ ...params, language: 'geo' }),
+  //     enabled: false,
+  //   },
+  //   {
+  //     queryKey: ['dataEng'],
+  //     queryFn: () => fetchData({ ...params, language: 'eng' }),
+  //     enabled: false,
+  //   },
+  // ])
 
-  useEffect(() => {
-    localStorage.setItem('result', JSON.stringify(result))
-  }, [result])
+  // useEffect(() => {
+  //   refetchGeo()
+  //   refetchEng()
+  //   refetch()
+  //   if (dataGeo && dataEng)
+  //     setResult({
+  //       geo: dataGeo?.bibleData,
+  //       eng: dataEng?.bibleData,
+  //     })
+  // }, [inputValues.chapter])
+
+  // const onSave = () => {
+  //   setResultTrim({ verse: inputValues.verse, versemde: inputValues.versemde })
+  // }
+  // useEffect(() => {
+  //   localStorage.setItem('result', JSON.stringify(result))
+  // }, [result])
 
   return (
     <BibleContext.Provider
       value={{
         filteredData,
-        result,
-        setResult,
         inputDispatch,
         inputValues,
         isFetching,
         refetch,
+        setfilteredData,
       }}
     >
       <div>
         <div>{children}</div>
       </div>
     </BibleContext.Provider>
-  )
-}
+  );
+};
 
-export default InputValuesProvider
+export default InputValuesProvider;

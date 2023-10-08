@@ -125,11 +125,9 @@ const Show = () => {
           </div>
         )}
 
-        {projectorLanguages.eng && showData && <TextShow lang="eng" showData={showData} fontSize={fontSize} />}
-
-        {projectorLanguages.geo && showData && <TextShow lang="geo" showData={showData} fontSize={fontSize} />}
-
-        {/* <TextShow lang="rus" showLanguage={projectorLanguages.rus} result={result} fontSize={fontSize} />  */}
+        {projectorLanguages?.eng && showData && <TextShow lang="eng" showData={showData} fontSize={fontSize} />}
+        {projectorLanguages?.geo && showData && <TextShow lang="geo" showData={showData} fontSize={fontSize} />}
+        {projectorLanguages?.rus && showData && <TextShow lang="rus" showData={showData} fontSize={fontSize} />}
       </div>
     </div>
   );

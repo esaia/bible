@@ -5,6 +5,7 @@ import useData from '../../hooks/useData';
 const TextShow = ({ showData, lang, fontSize }) => {
   const { bibleNames } = useData();
   const [fontSizeStr, setFontSizeStr] = useState('');
+  const [taviMuxli, setTaviMuxli] = useState('');
 
   useEffect(() => {
     let _fontSizeStr;
@@ -44,15 +45,19 @@ const TextShow = ({ showData, lang, fontSize }) => {
     setFontSizeStr(_fontSizeStr);
   }, [fontSize]);
 
-  const lastIndex = showData[lang].length - 1;
-  const name = bibleNames[lang][+showData[lang][0]?.wigni + 2];
-  const chapter = showData[lang][0]?.tavi;
-  const muxli =
-    showData[lang].length > 1
-      ? `${showData[lang][0]?.muxli}-${showData[lang][lastIndex]?.muxli}`
-      : showData[lang][0]?.muxli;
+  useEffect(() => {
+    if (showData) {
+      const lastIndex = showData[lang]?.length - 1;
+      const name = bibleNames[lang][+showData[lang][0]?.wigni + 2];
+      const chapter = showData[lang][0]?.tavi;
+      const muxli =
+        showData[lang].length > 1
+          ? `${showData[lang][0]?.muxli}-${showData[lang][lastIndex]?.muxli}`
+          : showData[lang][0]?.muxli;
 
-  const taviMuxli = `${name} ${chapter}:${muxli}`;
+      setTaviMuxli(`${name} ${chapter}:${muxli}`);
+    }
+  }, [showData]);
 
   return (
     <AnimatePresence>

@@ -16,16 +16,18 @@ const Filteres = () => {
       <div className="flex flex-col items-center w-full ">
         <Header />
 
-        {isFetching ? (
-          <Skeleton />
-        ) : filteredData && filteredData?.bibleData?.length === 0 && inputValues.phrase ? (
-          <p className="dark:text-white p-3 text-2xl text-center mt-10">No matches found: "{inputValues.phrase}"</p>
-        ) : (
-          <>
-            {!inputValues.versemde && <VerseArrows />}
-            <Preview />
-          </>
-        )}
+        <div className="min-h-[200px] w-full">
+          {isFetching ? (
+            <Skeleton />
+          ) : filteredData && filteredData?.bibleData?.length === 0 && inputValues.phrase ? (
+            <p className="dark:text-white p-3 text-2xl text-center mt-10">No matches found: "{inputValues.phrase}"</p>
+          ) : (
+            <>
+              {!inputValues.versemde && <VerseArrows />}
+              <Preview />
+            </>
+          )}
+        </div>
 
         <Versions />
         <FixedDetails />

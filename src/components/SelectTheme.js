@@ -10,7 +10,7 @@ const SelectTheme = () => {
 
   return (
     <div>
-      <div className=" grid grid-cols-3 grid-rows-5 gap-4 justify-center items-center md:grid-cols-4 xl:grid-cols-5 ">
+      <div className=" grid grid-cols-3 grid-rows-2 gap-4 justify-center items-center md:grid-cols-4 xl:grid-cols-5 ">
         <Theme id="1" setThemeNumber={setThemeNumber} checked={themeNumber === '1'} src="./images/1.jpeg" />
         <Theme id="2" setThemeNumber={setThemeNumber} checked={themeNumber === '2'} src="./images/2.jpeg" />
         <Theme id="3" setThemeNumber={setThemeNumber} checked={themeNumber === '3'} src="./images/3.jpeg" />

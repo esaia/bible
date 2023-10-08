@@ -1,22 +1,17 @@
-import React from "react";
-import { Radio } from "@material-tailwind/react";
-import FramerMotionWrapper from "../FramerMotionWrapper";
+import React from 'react';
+import { Radio } from '@material-tailwind/react';
 
 const Theme = ({ id, setThemeNumber, checked, src }) => {
   return (
-    <FramerMotionWrapper>
+    <>
       <div className="flex flex-wrap cursor-pointer">
-        <Radio
-          id={id}
-          value={id}
-          color="blue"
-          onChange={(e) => setThemeNumber(e.target.value)}
-          checked={checked}
-        />
+        <Radio id={id} value={id} color="blue-gray" onChange={e => setThemeNumber(e.target.value)} checked={checked} />
 
-        <img src={src} alt="theme img" className="themeimg" />
+        <label htmlFor={id} className="cursor-pointer">
+          <img src={src} alt="theme img" className="themeimg rounded-md " />
+        </label>
       </div>
-    </FramerMotionWrapper>
+    </>
   );
 };
 

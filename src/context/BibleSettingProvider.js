@@ -8,7 +8,7 @@ const bibleSettingContext = createContext();
 const BibleSettingProvider = ({ children }) => {
   const queryClient = useQueryClient();
 
-  const { inputValues, refetch, setfilteredData } = useBibleContext();
+  const { inputValues } = useBibleContext();
 
   const [darkMode, setDarkMode] = useState(localStorage.getItem('darkmode') === 'true');
 
@@ -33,11 +33,42 @@ const BibleSettingProvider = ({ children }) => {
   const onSave = async () => {
     const keyGeo = ['geoData', params.w, inputValues.chapter, versions.geo];
     const keyEng = ['engData', params.w, inputValues.chapter, versions.eng];
+    const keyRus = ['rusData', params.w, inputValues.chapter, versions.eng];
     const queryDataGeo = queryClient.getQueryData(keyGeo);
     const queryDataEng = queryClient.getQueryData(keyEng);
+    const queryDataRus = queryClient.getQueryData(keyRus);
 
     const startIndex = inputValues.verse - 1;
     const endIndex = inputValues.versemde || inputValues.verse;
+
+    const requestManagement = JSON.parse(localStorage.getItem('requestManagement'));
+
+    if (!requestManagement?.geo && !requestManagement?.eng && !requestManagement?.rus) {
+      return;
+    }
+
+    let preparedData = { geo: [], eng: [], rus: [] };
+
+    if (!queryDataGeo) {
+      if (requestManagement?.geo) {
+        const dataGeo = await queryClient.fetchQuery({
+          queryKey: keyGeo,
+          queryFn: () => fetchData({ ...params, language: 'geo', t: inputValues.chapter, mv: versions.geo }),
+        });
+
+        if (dataGeo) {
+          preparedData = {
+            ...preparedData,
+            geo: dataGeo?.bibleData?.slice(startIndex, endIndex),
+          };
+        }
+      }
+    } else {
+      preparedData = {
+        ...preparedData,
+        geo: queryDataGeo.bibleData.slice(startIndex, endIndex),
+      };
+    }
 
     const englishBooks = {
       48: 62,
@@ -65,38 +96,56 @@ const BibleSettingProvider = ({ children }) => {
 
     let englishBook = englishBooks[inputValues.book] || null;
 
-    if (!queryDataGeo || !queryDataEng) {
-      const dataGeo = await queryClient.fetchQuery({
-        queryKey: keyGeo,
-        queryFn: () => fetchData({ ...params, language: 'geo', t: inputValues.chapter, mv: versions.geo }),
-      });
+    if (!queryDataEng) {
+      if (requestManagement?.eng) {
+        const dataEng = await queryClient.fetchQuery({
+          queryKey: keyEng,
+          queryFn: () =>
+            fetchData({
+              ...params,
+              language: 'eng',
+              w: englishBook || inputValues.book,
+              t: inputValues.chapter,
+              mv: versions.eng,
+            }),
+        });
 
-      const dataEng = await queryClient.fetchQuery({
-        queryKey: keyEng,
-        queryFn: () =>
-          fetchData({
-            ...params,
-            language: 'eng',
-            t: inputValues.chapter,
-            w: englishBook || inputValues.book,
-            mv: versions.eng,
-          }),
-      });
-
-      if (dataGeo && dataEng) {
-        const preparedData = {
-          geo: dataGeo.bibleData.slice(startIndex, endIndex),
-          eng: dataEng.bibleData.slice(startIndex, endIndex),
-        };
-        localStorage.setItem('showData', JSON.stringify(preparedData));
+        if (dataEng) {
+          preparedData = {
+            ...preparedData,
+            eng: dataEng?.bibleData?.slice(startIndex, endIndex),
+          };
+        }
       }
     } else {
-      const preparedData = {
-        geo: queryDataGeo.bibleData.slice(startIndex, endIndex),
+      preparedData = {
+        ...preparedData,
         eng: queryDataEng.bibleData.slice(startIndex, endIndex),
       };
-      localStorage.setItem('showData', JSON.stringify(preparedData));
     }
+
+    if (!queryDataRus) {
+      if (requestManagement?.rus) {
+        const dataRus = await queryClient.fetchQuery({
+          queryKey: keyRus,
+          queryFn: () => fetchData({ ...params, language: 'ru', t: inputValues.chapter, mv: versions.rus }),
+        });
+
+        if (dataRus) {
+          preparedData = {
+            ...preparedData,
+            rus: dataRus?.bibleData?.slice(startIndex, endIndex),
+          };
+        }
+      }
+    } else {
+      preparedData = {
+        ...preparedData,
+        rus: queryDataRus.bibleData.slice(startIndex, endIndex),
+      };
+    }
+
+    localStorage.setItem('showData', JSON.stringify(preparedData));
   };
 
   return (

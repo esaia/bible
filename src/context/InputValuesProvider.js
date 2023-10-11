@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useReducer, useState } from 'react';
-import { useQueries, useQuery, useQueryClient } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import { fetchData } from '../lib/axios';
 import { useSearchParams } from 'react-router-dom';
 
@@ -220,7 +220,7 @@ const InputValuesProvider = ({ children }) => {
 
   useEffect(() => {
     if (isFetched) setfilteredData(previousFilteredData);
-  }, [previousFilteredData]);
+  }, [previousFilteredData, isFetched]);
 
   useEffect(() => {
     if (!queryClient.getQueryData(['getBibleData', newInputValues]) && !inputValues.separate) refetch();
@@ -229,40 +229,6 @@ const InputValuesProvider = ({ children }) => {
   useEffect(() => {
     setSearchParams(searchParams);
   }, [inputValues]);
-
-  // const [result, setResult] = useState(JSON.parse(localStorage.getItem('result')))
-  // const [resultTrim, setResultTrim] = useState({ verse: inputValues.verse, versemde: inputValues.versemde })
-
-  // const [{ data: dataGeo, refetch: refetchGeo }, { data: dataEng, refetch: refetchEng }] = useQueries([
-  //   {
-  //     queryKey: ['dataGeo'],
-  //     queryFn: () => fetchData({ ...params, language: 'geo' }),
-  //     enabled: false,
-  //   },
-  //   {
-  //     queryKey: ['dataEng'],
-  //     queryFn: () => fetchData({ ...params, language: 'eng' }),
-  //     enabled: false,
-  //   },
-  // ])
-
-  // useEffect(() => {
-  //   refetchGeo()
-  //   refetchEng()
-  //   refetch()
-  //   if (dataGeo && dataEng)
-  //     setResult({
-  //       geo: dataGeo?.bibleData,
-  //       eng: dataEng?.bibleData,
-  //     })
-  // }, [inputValues.chapter])
-
-  // const onSave = () => {
-  //   setResultTrim({ verse: inputValues.verse, versemde: inputValues.versemde })
-  // }
-  // useEffect(() => {
-  //   localStorage.setItem('result', JSON.stringify(result))
-  // }, [result])
 
   return (
     <BibleContext.Provider

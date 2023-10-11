@@ -117,7 +117,7 @@ const Show = () => {
   return (
     <div className="flex justify-center items-center w-full h-screen ">
       <div
-        className={`w-full h-full px-10 flex justify-center items-start  flex-col  gap-12 bg-blend-overlay bgblind showbackground ${bgStr}`}
+        className={`w-full h-full px-10 flex justify-center items-center  flex-col  gap-12 bg-blend-overlay bgblind showbackground ${bgStr}`}
       >
         {!isFullScreen && (
           <div className="absolute right-0 bottom-0 bg-white p-4 cursor-pointer">
@@ -125,9 +125,11 @@ const Show = () => {
           </div>
         )}
 
-        {projectorLanguages?.eng && showData && <TextShow lang="eng" showData={showData} fontSize={fontSize} />}
-        {projectorLanguages?.geo && showData && <TextShow lang="geo" showData={showData} fontSize={fontSize} />}
-        {projectorLanguages?.rus && showData && <TextShow lang="rus" showData={showData} fontSize={fontSize} />}
+        <div className="max-w-[2000px]">
+          {projectorLanguages?.eng && showData && <TextShow lang="eng" showData={showData} fontSize={fontSize} />}
+          {projectorLanguages?.geo && showData && <TextShow lang="geo" showData={showData} fontSize={fontSize} />}
+          {projectorLanguages?.rus && showData && <TextShow lang="rus" showData={showData} fontSize={fontSize} />}
+        </div>
       </div>
     </div>
   );

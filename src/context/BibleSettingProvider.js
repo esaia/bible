@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import useBibleContext from '../hooks/useBibleContext';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQueryClient } from 'react-query';
 import { fetchData } from '../lib/axios';
 
 const bibleSettingContext = createContext();

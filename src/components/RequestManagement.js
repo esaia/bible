@@ -68,7 +68,7 @@ const RequestManagement = () => {
           <div className="w-full h-fit  p-5 rounded-md">
             <h3 className="font-bold text-black text-2xl">Request Management</h3>
             <p className="text-gray-700 mt-2 dark:text-4xl ">
-              When you click show button, it is expencive operation, 3 requests are made for Georgian, English and
+              When you click show button, it is expensive operation, 3 requests are made for Georgian, English and
               Russian languages.
             </p>
 

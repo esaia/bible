@@ -3,7 +3,6 @@ import { BsRocketTakeoff } from 'react-icons/bs';
 import { Button } from '@material-tailwind/react';
 import SelectTheme from './SelectTheme';
 import VersionSelect from './result-versions/VersionSelect';
-import FontSize from './result-versions/FontSize';
 import MadeBy from './result-versions/MadeBy';
 import FramerMotionWrapper from './FramerMotionWrapper';
 import { useBibleSettingContext } from '../context/BibleSettingProvider';
@@ -65,8 +64,6 @@ const Versions = () => {
           <Button className="flex items-center gap-3 text-md px-4 py-2 bg-red-600" onClick={clearAll}>
             Clear
           </Button>
-
-          <FontSize />
         </div>
 
         <SelectTheme />

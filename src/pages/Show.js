@@ -36,7 +36,7 @@ const Show = () => {
       setProjectorLanguages(JSON.parse(localStorage.getItem('projectorLanguages')));
       setTheme(localStorage.getItem('themeNumber'));
       setShowData(JSON.parse(localStorage.getItem('showData')));
-      resizeText();
+      // resizeText();
     };
 
     window.addEventListener('storage', handleStorageChange);
@@ -135,7 +135,7 @@ const Show = () => {
     let boxHeight = 0;
     innerContainerRef.current.style.fontSize = '10px';
 
-    for (let i = 2; i < 60; i++) {
+    for (let i = 2; i < 70; i++) {
       innerContainerRef.current.style.fontSize = ` ${i}px`;
       bodyHeight = window.innerHeight;
       boxHeight = innerContainerRef?.current.offsetHeight;
@@ -157,7 +157,7 @@ const Show = () => {
           </div>
         )}
 
-        <div ref={innerContainerRef}>
+        <div className="max-w-[2000px] py-[10px]" ref={innerContainerRef}>
           {projectorLanguages?.eng && showData && <TextShow lang="eng" showData={showData} />}
           {projectorLanguages?.geo && showData && <TextShow lang="geo" showData={showData} />}
           {projectorLanguages?.rus && showData && <TextShow lang="rus" showData={showData} />}

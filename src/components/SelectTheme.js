@@ -1,39 +1,87 @@
 import React, { useEffect, useState } from 'react';
-import Theme from './result-versions/Theme';
+import { Radio } from '@material-tailwind/react';
+
+const themeImages = [
+  { id: '1', src: './images/1.jpeg' },
+  { id: '2', src: './images/2.jpeg' },
+  { id: '3', src: './images/3.jpeg' },
+  { id: '4', src: './images/4.jpeg' },
+  { id: '5', src: './images/5.jpeg' },
+  { id: '6', src: './images/6.jpeg' },
+  { id: '7', src: './images/7.jpeg' },
+  { id: '8', src: './images/8.jpeg' },
+  { id: '9', src: './images/9.jpeg' },
+  { id: '10', src: './images/10.jpeg' },
+  { id: '11', src: './images/11.jpeg' },
+  { id: '12', src: './images/12.jpeg' },
+  { id: '13', src: './images/13.jpeg' },
+  { id: '14', src: './images/14.jpeg' },
+  { id: '15', src: './images/15.jpeg' },
+  { id: '16', src: './images/16.jpeg' },
+  { id: '17', src: './images/17.jpeg' },
+  { id: '18', src: './images/18.jpeg' },
+  { id: '19', src: './images/19.jpeg' },
+  { id: '20', src: './images/20.jpeg' },
+];
 
 const SelectTheme = () => {
-  const [themeNumber, setThemeNumber] = useState(localStorage.getItem('themeNumber'));
+  const [themeNumber, setThemeNumber] = useState(() => localStorage.getItem('themeNumber'));
+  const [dynamicImage, setDynamicImage] = useState(() => localStorage.getItem('dynamicImage'));
 
   useEffect(() => {
     localStorage.setItem('themeNumber', themeNumber);
   }, [themeNumber]);
 
+  const handleThemeChange = newThemeNumber => {
+    setThemeNumber(newThemeNumber);
+  };
+
+  const imageInputChange = e => {
+    const newValue = e.target.value;
+    setDynamicImage(newValue);
+    localStorage.setItem('dynamicImage', newValue);
+  };
   return (
     <div>
-      <div className=" grid grid-cols-3 grid-rows-2 gap-4 justify-center items-center md:grid-cols-4 xl:grid-cols-5 ">
-        <Theme id="1" setThemeNumber={setThemeNumber} checked={themeNumber === '1'} src="./images/1.jpeg" />
-        <Theme id="2" setThemeNumber={setThemeNumber} checked={themeNumber === '2'} src="./images/2.jpeg" />
-        <Theme id="3" setThemeNumber={setThemeNumber} checked={themeNumber === '3'} src="./images/3.jpeg" />
-        <Theme id="4" setThemeNumber={setThemeNumber} checked={themeNumber === '4'} src="./images/4.jpeg" />
-        <Theme id="5" setThemeNumber={setThemeNumber} checked={themeNumber === '5'} src="./images/5.jpeg" />
-        <Theme id="6" setThemeNumber={setThemeNumber} checked={themeNumber === '6'} src="./images/6.jpeg" />
-        <Theme id="7" setThemeNumber={setThemeNumber} checked={themeNumber === '7'} src="./images/7.jpeg" />
-        <Theme id="8" setThemeNumber={setThemeNumber} checked={themeNumber === '8'} src="./images/8.jpeg" />
-        <Theme id="9" setThemeNumber={setThemeNumber} checked={themeNumber === '9'} src="./images/9.jpeg" />
-        <Theme id="10" setThemeNumber={setThemeNumber} checked={themeNumber === '10'} src="./images/10.jpeg" />
-        <Theme id="11" setThemeNumber={setThemeNumber} checked={themeNumber === '11'} src="./images/11.jpeg" />
-        <Theme id="12" setThemeNumber={setThemeNumber} checked={themeNumber === '12'} src="./images/12.jpeg" />
-        <Theme id="13" setThemeNumber={setThemeNumber} checked={themeNumber === '13'} src="./images/13.jpeg" />
-        <Theme id="14" setThemeNumber={setThemeNumber} checked={themeNumber === '14'} src="./images/14.jpeg" />
-        <Theme id="15" setThemeNumber={setThemeNumber} checked={themeNumber === '15'} src="./images/15.jpeg" />
-        <Theme id="16" setThemeNumber={setThemeNumber} checked={themeNumber === '16'} src="./images/16.jpeg" />
-        <Theme id="17" setThemeNumber={setThemeNumber} checked={themeNumber === '17'} src="./images/17.jpeg" />
-        <Theme id="18" setThemeNumber={setThemeNumber} checked={themeNumber === '18'} src="./images/18.jpeg" />
-        <Theme id="19" setThemeNumber={setThemeNumber} checked={themeNumber === '19'} src="./images/19.jpeg" />
-        <Theme id="20" setThemeNumber={setThemeNumber} checked={themeNumber === '20'} src="./images/20.jpeg" />
+      <div className="grid grid-cols-3 grid-rows-2 gap-4 justify-center items-center md:grid-cols-4 xl:grid-cols-5">
+        {themeImages.map(theme => (
+          <Theme
+            key={theme.id}
+            id={theme.id}
+            setThemeNumber={handleThemeChange}
+            checked={themeNumber === theme.id}
+            src={theme.src}
+          />
+        ))}
+      </div>
+      <div className="flex items-center mt-5">
+        <Radio
+          id={'dynamic'}
+          value={'dynamicIMG'}
+          color="blue-gray"
+          onChange={e => handleThemeChange(e.target.value)}
+          checked={themeNumber === 'dynamicIMG'}
+        />
+        <input
+          className="w-80 rounded-sm  h-fit outline-none p-1 dark:border-white/30 border-gray-300 border-[1px] dark:bg-[#374151] dark:text-white "
+          type="text"
+          value={dynamicImage}
+          onChange={e => imageInputChange(e)}
+        />
       </div>
     </div>
   );
 };
 
 export default React.memo(SelectTheme);
+
+const Theme = ({ id, setThemeNumber, checked, src }) => {
+  return (
+    <div className="flex flex-wrap cursor-pointer">
+      <Radio id={id} value={id} color="blue-gray" onChange={e => setThemeNumber(e.target.value)} checked={checked} />
+      <label htmlFor={id} className="cursor-pointer">
+        <img src={src} alt="theme img" className="themeimg rounded-md" />
+      </label>
+    </div>
+  );
+};

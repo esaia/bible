@@ -4,6 +4,7 @@ import TextShow from '../components/result-versions/TextShow';
 
 const Show = () => {
   const [isFullScreen, setIsFullScreen] = useState(false);
+
   const [bgStr, setBgStr] = useState('');
 
   const [showData, setShowData] = useState(JSON.parse(localStorage.getItem('showData')));
@@ -16,6 +17,7 @@ const Show = () => {
     },
   );
 
+  const imageContainer = useRef();
   const innerContainerRef = useRef();
 
   const handleFullscreenClick = () => {
@@ -46,6 +48,8 @@ const Show = () => {
 
   useEffect(() => {
     let themeClass;
+
+    imageContainer.current.style.backgroundImage = '';
 
     switch (theme) {
       case '1':
@@ -108,6 +112,13 @@ const Show = () => {
       case '20':
         themeClass = 'bg-20img';
         break;
+      case 'dynamicIMG':
+        const localStorageImg = localStorage.getItem('dynamicImage');
+        imageContainer.current.style.backgroundImage = `url(${localStorageImg})`;
+
+        themeClass = '';
+
+        break;
       default:
         themeClass = 'bg-1img';
     }
@@ -137,6 +148,7 @@ const Show = () => {
   return (
     <div className="flex justify-center items-center w-full h-screen ">
       <div
+        ref={imageContainer}
         className={`w-full h-full px-10 flex justify-center items-center  flex-col  gap-12 bg-blend-overlay bgblind showbackground  overflow-hidden   ${bgStr} `}
       >
         {!isFullScreen && (

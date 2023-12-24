@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { BibleContext } from '../context/InputValuesProvider';
 import useBibleContext from '../hooks/useBibleContext';
+import { useBibleSettingContext } from '../context/BibleSettingProvider';
 const useData = () => {
   const { filteredData } = useContext(BibleContext);
   const { inputValues } = useBibleContext();
@@ -513,6 +514,8 @@ const useData = () => {
 
   const bibleNames = { geo: bibleNamesGeo, eng: bibleNamesEng, rus: bibleNamesRus };
 
+  const { fontTitle, setFontTitle } = useBibleSettingContext();
+
   return {
     languages,
     versions,
@@ -523,6 +526,8 @@ const useData = () => {
     allVersions,
     fontSizes,
     bibleNames,
+    fontTitle,
+    setFontTitle,
   };
 };
 

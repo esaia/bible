@@ -9,6 +9,7 @@ const Show = () => {
 
   const [showData, setShowData] = useState(JSON.parse(localStorage.getItem('showData')));
   const [theme, setTheme] = useState(localStorage.getItem('themeNumber') || 1);
+  const [font, setFont] = useState(localStorage.getItem('font') || 'font-banner');
   const [projectorLanguages, setProjectorLanguages] = useState(
     JSON.parse(localStorage.getItem('projectorLanguages')) || {
       geo: false,
@@ -36,6 +37,8 @@ const Show = () => {
       setProjectorLanguages(JSON.parse(localStorage.getItem('projectorLanguages')));
       setTheme(localStorage.getItem('themeNumber'));
       setShowData(JSON.parse(localStorage.getItem('showData')));
+      setFont(localStorage.getItem('font'));
+
       // resizeText();
     };
 
@@ -146,7 +149,7 @@ const Show = () => {
   };
 
   return (
-    <div className="flex justify-center items-center w-full h-screen ">
+    <div className={`flex justify-center items-center w-full h-screen ${font}`}>
       <div
         ref={imageContainer}
         className={`w-full h-full px-10 flex justify-center items-center  flex-col  gap-12 bg-blend-overlay bgblind showbackground  overflow-hidden   ${bgStr} `}

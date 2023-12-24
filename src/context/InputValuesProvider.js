@@ -212,6 +212,7 @@ const InputValuesProvider = ({ children }) => {
     refetch,
     isFetched,
     isFetching,
+    error,
   } = useQuery({
     queryKey: ['getBibleData', newInputValues],
     queryFn: () => fetchData(params),
@@ -242,7 +243,18 @@ const InputValuesProvider = ({ children }) => {
       }}
     >
       <div>
-        <div>{children}</div>
+        <div>
+          {!error ? (
+            children
+          ) : (
+            <div className="w-full flex h-screen justify-center items-center">
+              <h3 className="bold text-3xl">Network Error</h3>
+              <a href="/" className="p-4 m-3 bg-gray-300 rounded-sm text-black">
+                refresh
+              </a>
+            </div>
+          )}
+        </div>
       </div>
     </BibleContext.Provider>
   );

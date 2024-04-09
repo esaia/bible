@@ -51,6 +51,7 @@ module.exports = withMT({
     fontFamily: {
       valera: 'Varela Round',
       banner: 'BPG Banner Caps',
+      Roboto: 'Roboto',
     },
   },
 

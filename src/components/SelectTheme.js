@@ -26,8 +26,9 @@ const themeImages = [
 ];
 
 const fonts = [
-  { id: 'banner', value: 'font-banner', title: 'banner' },
-  { id: 'valera', value: 'font-valera', title: 'valera' },
+  { id: 'banner', value: 'font-banner', title: 'Banner' },
+  { id: 'valera', value: 'font-valera', title: 'Valera' },
+  { id: 'Roboto', value: 'font-Roboto', title: 'Roboto' },
 ];
 
 const SelectTheme = () => {

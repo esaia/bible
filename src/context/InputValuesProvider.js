@@ -9,13 +9,12 @@ const InputValuesProvider = ({ children }) => {
   const initialState = {};
 
   const [searchParams, setSearchParams] = useSearchParams();
-
   const inputValueInitial = {
-    language: searchParams.get('language') || 'geo',
-    version: searchParams.get('version') || 'ახალი გადამუშავებული გამოცემა 2015',
-    book: +searchParams.get('book') || 4,
-    chapter: +searchParams.get('chapter'),
-    verse: +searchParams.get('verse'),
+    language: searchParams.get('language') || 'eng',
+    version: +searchParams.get('version') || 1101,
+    book: +searchParams.get('book') || 1,
+    chapter: +searchParams.get('chapter') || 1,
+    verse: +searchParams.get('verse') || 1,
     versemde: +searchParams.get('versemde'),
     phrase: '',
     separate: false,
@@ -89,7 +88,7 @@ const InputValuesProvider = ({ children }) => {
                 [e?.id]: e?.value,
                 chapter: 1,
                 phrase: '',
-                verse: null,
+                verse: 1,
                 versemde: null,
                 separate: false,
               };
@@ -104,7 +103,7 @@ const InputValuesProvider = ({ children }) => {
                 ...newState,
                 [e?.id]: e?.value,
                 phrase: '',
-                verse: null,
+                verse: 1,
                 versemde: null,
                 separate: false,
               };
@@ -121,6 +120,36 @@ const InputValuesProvider = ({ children }) => {
                 versemde: null,
                 separate: false,
               };
+              break;
+            case 'language':
+              if (e?.value === 'eng') {
+                appendQueryInUrl({ id: 'version', value: 7979 });
+                appendQueryInUrl(e);
+
+                newState = {
+                  ...newState,
+                  version: 7979,
+                  [e?.id]: e?.value,
+                };
+              } else if (e?.value === 'rus') {
+                appendQueryInUrl({ id: 'version', value: 6001 });
+                appendQueryInUrl(e);
+
+                newState = {
+                  ...newState,
+                  version: 6001,
+                  [e?.id]: e?.value,
+                };
+              } else {
+                appendQueryInUrl({ id: 'version', value: 1101 });
+                appendQueryInUrl(e);
+
+                newState = {
+                  ...newState,
+                  version: 1101,
+                  [e?.id]: e?.value,
+                };
+              }
               break;
 
             default:
@@ -166,22 +195,22 @@ const InputValuesProvider = ({ children }) => {
           phrase: payload.event.target.value,
         };
       case 'SEPARATE_PREVIEW':
-        const { wigni, tavi, muxli } = payload;
+        const { book, chapter, verse } = payload;
 
         searchParams.delete('book');
         searchParams.delete('chapter');
         searchParams.delete('verse');
         searchParams.delete('versemde');
 
-        searchParams.append('book', +wigni + 3);
-        searchParams.append('chapter', tavi);
-        searchParams.append('verse', muxli);
+        searchParams.append('book', +book);
+        searchParams.append('chapter', chapter);
+        searchParams.append('verse', verse);
 
         return {
           ...state,
-          book: +wigni + 3,
-          chapter: +tavi,
-          verse: muxli,
+          book: +book,
+          chapter: +chapter,
+          verse: verse,
           phrase: '',
           separate: false,
         };
@@ -196,12 +225,12 @@ const InputValuesProvider = ({ children }) => {
   const queryClient = new useQueryClient();
 
   const params = {
-    w: inputValues.book,
-    t: inputValues.chapter,
+    w: inputValues?.book,
+    t: inputValues?.chapter,
     m: '',
-    s: inputValues.phrase,
-    mv: inputValues.version || '',
-    language: inputValues.language,
+    s: inputValues?.phrase,
+    mv: inputValues?.version || '2202',
+    language: inputValues?.language,
     page: 1,
   };
 
@@ -244,15 +273,15 @@ const InputValuesProvider = ({ children }) => {
     >
       <div>
         <div>
-          {!error ? (
-            children
-          ) : (
+          {error ? (
             <div className="w-full flex h-screen justify-center items-center">
               <h3 className="bold text-3xl">Network Error</h3>
               <a href="/" className="p-4 m-3 bg-gray-300 rounded-sm text-black">
                 refresh
               </a>
             </div>
+          ) : (
+            children
           )}
         </div>
       </div>

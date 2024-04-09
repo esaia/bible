@@ -1,21 +1,21 @@
-import React from 'react'
-import useBibleContext from '../hooks/useBibleContext'
-import { FacebookShareButton } from 'react-share'
-import { TbBrandStackshare } from 'react-icons/tb'
+import React from 'react';
+import useBibleContext from '../hooks/useBibleContext';
+import { FacebookShareButton } from 'react-share';
+import { TbBrandStackshare } from 'react-icons/tb';
 
 const Preview = () => {
-  const { filteredData, inputDispatch, inputValues } = useBibleContext()
+  const { filteredData, inputDispatch, inputValues } = useBibleContext();
 
   // Check if inputvalue.verse exists
-  let renderedData
+  let renderedData;
 
   if (filteredData.bibleData) {
     if (inputValues.separate && !inputValues.verse) {
-      renderedData = filteredData.bibleData.slice(0, 15)
+      renderedData = filteredData.bibleData.slice(0, 15);
     } else if (!inputValues.verse) {
-      renderedData = filteredData.bibleData.slice(0, 1)
+      renderedData = filteredData.bibleData.slice(0, 1);
     } else {
-      renderedData = filteredData.bibleData.slice(inputValues.verse - 1, inputValues.versemde || inputValues.verse)
+      renderedData = filteredData.bibleData.slice(inputValues.verse - 1, inputValues.versemde || inputValues.verse);
     }
   }
 
@@ -30,14 +30,14 @@ const Preview = () => {
             >
               <div
                 dangerouslySetInnerHTML={{
-                  __html: item.bv,
+                  __html: item?.bv,
                 }}
               ></div>
               {/* <h1>{item.bv}</h1> */}
 
               <div className="flex items-center justify-between">
                 <p className="italic text-gray-700 dark:text-gray-400 text-[17px]">
-                  {filteredData.bibleNames[+item.wigni + 2]} {item.tavi}:{item.muxli}
+                  {filteredData.bibleNames[+item.book - 1]} {item.chapter}:{item.verse}
                 </p>
                 {inputValues.separate && (
                   <button
@@ -46,7 +46,7 @@ const Preview = () => {
                       inputDispatch({
                         type: 'SEPARATE_PREVIEW',
                         payload: item,
-                      })
+                      });
                     }}
                   >
                     separate
@@ -57,10 +57,10 @@ const Preview = () => {
                 </FacebookShareButton>
               </div>
             </div>
-          )
+          );
         })}
     </div>
-  )
-}
+  );
+};
 
-export default React.memo(Preview)
+export default React.memo(Preview);

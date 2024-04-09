@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 const Header = () => {
   const { inputValues, inputDispatch, refetch } = useBibleContext();
-  const { languages, versions, book, chapter, verse, versemde } = useData();
+  const { languages, versions, book, chapter, verse, versemde, allVersions } = useData();
 
   const changeInputValue = (e, triggleAction) => {
     inputDispatch({
@@ -24,6 +24,12 @@ const Header = () => {
 
     inputValueBlankAndFetch();
   };
+
+  const findVersionByValue = versionValue => {
+    const findedVersion = allVersions[inputValues?.language || 'geo'].find(version => version.value === versionValue);
+    return findedVersion;
+  };
+
   return (
     <>
       <div className="w-full">
@@ -38,10 +44,10 @@ const Header = () => {
         >
           <div className="flex justify-start items-center flex-grow-4 gap-3 my-4   lg:flex-nowrap flex-wrap">
             <Select
-              placeholder={'ენა'}
+              placeholder={'language'}
               defaultValue={{
-                value: inputValues.language,
-                label: inputValues.language,
+                value: inputValues?.language,
+                label: inputValues?.language,
                 id: 'language',
               }}
               options={languages}
@@ -50,23 +56,30 @@ const Header = () => {
               className="my-react-select-container  w-[100px]  flex-auto z-50"
               classNamePrefix="my-react-select"
             />
+
+            {/* {allVersions.length > 0 && ( */}
             <Select
-              placeholder={'ვერსია'}
-              defaultValue={{
-                value: inputValues.version,
-                label: inputValues.version,
-                id: 'version',
-              }}
+              value={
+                findVersionByValue(inputValues?.version)?.label
+                  ? {
+                      id: 'versions',
+                      label: findVersionByValue(inputValues?.version)?.label,
+                      value: findVersionByValue(inputValues?.version)?.value,
+                    }
+                  : null
+              }
+              placeholder={'Version'}
               options={versions}
               isSearchable={true}
               onChange={(e, triggleAction) => changeInputValue(e, triggleAction)}
               className="my-react-select-container w-[300px]  flex-auto  z-50"
               classNamePrefix="my-react-select"
             />
+            {/* )} */}
 
             <Select
-              placeholder={'წიგნი'}
-              value={book.flatMap(item => item.options).find(option => option.value === inputValues.book)}
+              placeholder={'Book'}
+              value={book.flatMap(item => item?.options).find(option => option?.value === inputValues?.book)}
               options={book}
               isSearchable={true}
               onChange={(e, triggleAction) => changeInputValue(e, triggleAction)}
@@ -75,8 +88,8 @@ const Header = () => {
             />
 
             <Select
-              value={chapter?.find(option => option.label === inputValues.chapter || null) || null}
-              placeholder={'თავი'}
+              value={chapter ? chapter?.find(option => option?.label === inputValues?.chapter || null) : null}
+              placeholder={'Chapter'}
               options={chapter}
               isSearchable={true}
               isClearable={true}
@@ -86,9 +99,9 @@ const Header = () => {
             />
 
             <Select
-              value={verse?.filter(option => option.label === inputValues.verse || null)}
-              defaultValue={verse?.filter(option => option.label === 1)}
-              placeholder={'მუხლი'}
+              value={verse?.filter(option => option?.label === inputValues?.verse || null)}
+              // defaultValue={verse?.filter(option => option?.label === 1)}
+              placeholder={'Verse - (from)'}
               options={verse}
               isSearchable={true}
               isClearable={true}
@@ -97,17 +110,19 @@ const Header = () => {
               classNamePrefix="my-react-select"
             />
 
-            <Select
-              value={versemde?.filter(option => option.label === inputValues.versemde || null)}
-              placeholder={'(მდე)'}
-              options={versemde}
-              isSearchable={true}
-              isClearable={true}
-              isDisabled={inputValues.verse ? false : true}
-              onChange={(e, triggleAction) => changeInputValue(e, triggleAction)}
-              className="my-react-select-container w-[180px] flex-auto"
-              classNamePrefix="my-react-select"
-            />
+            {versemde && (
+              <Select
+                value={versemde?.filter(option => option?.label === inputValues?.versemde || null)}
+                placeholder={'(To)'}
+                options={versemde}
+                isSearchable={true}
+                isClearable={true}
+                isDisabled={inputValues?.verse ? false : true}
+                onChange={(e, triggleAction) => changeInputValue(e, triggleAction)}
+                className="my-react-select-container w-[180px] flex-auto"
+                classNamePrefix="my-react-select"
+              />
+            )}
 
             <form
               onSubmit={e => submitSearchForm(e)}

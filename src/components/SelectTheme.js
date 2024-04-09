@@ -109,7 +109,10 @@ const SelectTheme = () => {
                   onChange={e => handleFont(item.value)}
                   checked={item.value === fontTitle}
                 />
-                <label for={item.id} className={`dark:text-white cursor-pointer ${generateFontClassStr(item.title)}`}>
+                <label
+                  htmlFor={item.id}
+                  className={`dark:text-white cursor-pointer ${generateFontClassStr(item.title)}`}
+                >
                   {item.title}
                 </label>
               </div>

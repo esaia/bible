@@ -41,6 +41,17 @@
     @apply dark:bg-[#374151] dark:text-white;
   }
 
+  /* .my-react-select-container .my-react-select__control--is-focused {
+    @apply dark:bg-[#374151] dark:text-white;
+  } */
+
+  /* .dark .my-react-select__option .my-react-select__option--is-focused .css-d7l1ni-option {
+    @apply dark:bg-black dark:text-white;
+  }
+  .dark .css-d7l1ni-option {
+    @apply dark:bg-black dark:text-white;
+  } */
+
   .my-react-select-container .my-react-select__menu {
     @apply dark:bg-[#374151] dark:text-white;
   }

@@ -24,6 +24,7 @@ const Filteres = () => {
           ) : (
             <>
               {!inputValues.versemde && <VerseArrows />}
+
               <Preview />
             </>
           )}

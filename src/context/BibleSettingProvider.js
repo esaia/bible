@@ -13,28 +13,22 @@ const BibleSettingProvider = ({ children }) => {
   const [darkMode, setDarkMode] = useState(localStorage.getItem('darkmode') === 'true');
   const [fontTitle, setFontTitle] = useState(() => localStorage.getItem('font'));
 
-  const [versions, setVersions] = useState(
-    JSON.parse(localStorage.getItem('versions')) || {
-      geo: 'ახალი გადამუშავებული გამოცემა 2015',
-      eng: 'KJV King James Version',
-      rus: 'Синодальный перевод',
-    },
-  );
+  const [versions, setVersions] = useState(JSON.parse(localStorage.getItem('versions')));
 
   const params = {
-    w: inputValues.book,
-    t: inputValues.chapter,
+    w: inputValues?.book,
+    t: inputValues?.chapter,
     m: '',
-    s: inputValues.phrase,
-    mv: inputValues.version || '',
-    language: inputValues.language,
+    s: inputValues?.phrase,
+    mv: inputValues?.version || '',
+    language: inputValues?.language,
     page: 1,
   };
 
   const onSave = async () => {
-    const keyGeo = ['geoData', params.w, inputValues.chapter, versions.geo];
-    const keyEng = ['engData', params.w, inputValues.chapter, versions.eng];
-    const keyRus = ['rusData', params.w, inputValues.chapter, versions.eng];
+    const keyGeo = ['geoData', params?.w, inputValues?.chapter, versions?.geo];
+    const keyEng = ['engData', params?.w, inputValues?.chapter, versions?.eng];
+    const keyRus = ['rusData', params?.w, inputValues?.chapter, versions?.eng];
     const queryDataGeo = queryClient.getQueryData(keyGeo);
     const queryDataEng = queryClient.getQueryData(keyEng);
     const queryDataRus = queryClient.getQueryData(keyRus);
@@ -72,13 +66,16 @@ const BibleSettingProvider = ({ children }) => {
     }
 
     const englishBooks = {
+      45: 59,
+      46: 60,
+      47: 61,
       48: 62,
       49: 63,
       50: 64,
       51: 65,
-      52: 66,
-      53: 67,
-      54: 68,
+      52: 45,
+      53: 46,
+      54: 47,
       55: 48,
       56: 49,
       57: 50,
@@ -90,9 +87,6 @@ const BibleSettingProvider = ({ children }) => {
       63: 56,
       64: 57,
       65: 58,
-      66: 59,
-      67: 60,
-      68: 61,
     };
 
     let englishBook = englishBooks[inputValues.book] || null;
@@ -129,7 +123,7 @@ const BibleSettingProvider = ({ children }) => {
       if (requestManagement?.rus) {
         const dataRus = await queryClient.fetchQuery({
           queryKey: keyRus,
-          queryFn: () => fetchData({ ...params, language: 'ru', t: inputValues.chapter, mv: versions.rus }),
+          queryFn: () => fetchData({ ...params, language: 'rus', t: inputValues.chapter, mv: versions.rus }),
         });
 
         if (dataRus) {

@@ -25,12 +25,24 @@ const Show = () => {
     if (!isFullScreen) {
       document.documentElement.requestFullscreen();
 
-      setIsFullScreen(true);
+      // setIsFullScreen(true);
     } else {
       document.exitFullscreen();
       setIsFullScreen(false);
     }
   };
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullScreen(document.fullscreenElement !== null);
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  }, [isFullScreen]);
 
   useEffect(() => {
     const handleStorageChange = () => {

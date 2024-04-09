@@ -9,12 +9,12 @@ const TextShow = ({ showData, lang }) => {
   useEffect(() => {
     if (showData) {
       const lastIndex = showData[lang]?.length - 1;
-      const name = bibleNames[lang][+showData[lang][0]?.wigni + 2];
-      const chapter = showData[lang][0]?.tavi;
+      const name = bibleNames[lang][+showData[lang][0]?.book + 2];
+      const chapter = showData[lang][0]?.chapter;
       const muxli =
         showData[lang].length > 1
-          ? `${showData[lang][0]?.muxli}-${showData[lang][lastIndex]?.muxli}`
-          : showData[lang][0]?.muxli;
+          ? `${showData[lang][0]?.verse}-${showData[lang][lastIndex]?.verse}`
+          : showData[lang][0]?.verse;
 
       setTaviMuxli(`${name} ${chapter}:${muxli}`);
     }

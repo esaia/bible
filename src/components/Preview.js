@@ -25,7 +25,7 @@ const Preview = () => {
         renderedData?.map((item, i) => {
           return (
             <div
-              className="w-full shadow-sm bg-[#eff1f3] max-w-6xl mx-auto  p-5  text-black text-xl mt-6 rounded-md  dark:bg-[#374151] dark:text-white "
+              className="w-full shadow-sm bg-[#eff1f3] max-w-6xl mx-auto  p-5  text-black text-xl mb-6 rounded-md  dark:bg-[#374151] dark:text-white "
               key={i}
             >
               <div

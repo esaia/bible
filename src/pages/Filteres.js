@@ -23,7 +23,7 @@ const Filteres = () => {
             <p className="dark:text-white p-3 text-2xl text-center mt-10">No matches found: "{inputValues.phrase}"</p>
           ) : (
             <>
-              {!inputValues.versemde && <VerseArrows />}
+              <VerseArrows />
 
               <Preview />
             </>

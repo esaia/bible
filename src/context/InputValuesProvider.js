@@ -11,7 +11,7 @@ const InputValuesProvider = ({ children }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const inputValueInitial = {
     language: searchParams.get('language') || 'eng',
-    version: +searchParams.get('version') || 1101,
+    version: +searchParams.get('version') || 7979,
     book: +searchParams.get('book') || 1,
     chapter: +searchParams.get('chapter') || 1,
     verse: +searchParams.get('verse') || 1,
@@ -165,20 +165,34 @@ const InputValuesProvider = ({ children }) => {
         }
 
       case 'DECREASE_VERSE':
-        if (state.verse === 1) {
+        if (state.verse === 1 || state.verse <= payload) {
           return {
             ...state,
+            versemde: null,
           };
         }
         return {
           ...state,
-          verse: +state.verse - 1,
+          verse: +state.verse - payload,
+          versemde: +state.versemde - payload,
         };
       case 'INCREASE_VERSE':
-        return {
-          ...state,
-          verse: +state.verse + 1,
-        };
+        if (payload === 1 && !state.versemde) {
+          return {
+            ...state,
+            verse: +state.verse + 1,
+            versemde: null,
+          };
+        } else {
+          return {
+            ...state,
+            verse: +state.verse + payload,
+            versemde: +state.versemde + payload,
+          };
+        }
+      case 'VERSEMDE_NULL':
+        return { ...state, versemde: null };
+
       case 'MAKE_BLANK':
         return {
           ...state,

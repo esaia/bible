@@ -29,7 +29,6 @@ const Header = () => {
     const findedVersion = allVersions[inputValues?.language || 'geo'].find(version => version.value === versionValue);
     return findedVersion;
   };
-
   return (
     <>
       <div className="w-full">
@@ -42,7 +41,7 @@ const Header = () => {
             delay: '0.4',
           }}
         >
-          <div className="flex justify-start items-center flex-grow-4 gap-3 my-4   lg:flex-nowrap flex-wrap">
+          <div className="flex justify-start items-center flex-grow-4 gap-3 my-4   2xl:flex-nowrap flex-wrap">
             <Select
               placeholder={'language'}
               defaultValue={{
@@ -66,8 +65,9 @@ const Header = () => {
                       label: findVersionByValue(inputValues?.version)?.label,
                       value: findVersionByValue(inputValues?.version)?.value,
                     }
-                  : null
+                  : { value: 7979, label: 'NASB New American Standard Bible', id: 'version' }
               }
+              // defaultInputValue={{ value: 7979, label: 'NASB New American Standard Bible', id: 'version' }}
               placeholder={'Version'}
               options={versions}
               isSearchable={true}

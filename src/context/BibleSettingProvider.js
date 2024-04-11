@@ -42,29 +42,6 @@ const BibleSettingProvider = ({ children }) => {
       return;
     }
 
-    let preparedData = { geo: [], eng: [], rus: [] };
-
-    if (!queryDataGeo) {
-      if (requestManagement?.geo) {
-        const dataGeo = await queryClient.fetchQuery({
-          queryKey: keyGeo,
-          queryFn: () => fetchData({ ...params, language: 'geo', t: inputValues.chapter, mv: versions.geo }),
-        });
-
-        if (dataGeo) {
-          preparedData = {
-            ...preparedData,
-            geo: dataGeo?.bibleData?.slice(startIndex, endIndex),
-          };
-        }
-      }
-    } else {
-      preparedData = {
-        ...preparedData,
-        geo: queryDataGeo.bibleData.slice(startIndex, endIndex),
-      };
-    }
-
     const englishBooks = {
       45: 59,
       46: 60,
@@ -89,7 +66,65 @@ const BibleSettingProvider = ({ children }) => {
       65: 58,
     };
 
-    let englishBook = englishBooks[inputValues.book] || null;
+    const booksForEnglishLang = {
+      59: 45,
+      60: 46,
+      61: 47,
+      62: 48,
+      63: 49,
+      64: 50,
+      65: 51,
+      45: 52,
+      46: 53,
+      47: 54,
+      48: 55,
+      49: 56,
+      50: 57,
+      51: 58,
+      52: 59,
+      53: 60,
+      54: 61,
+      55: 62,
+      56: 63,
+      57: 64,
+      58: 65,
+    };
+
+    let geoBook = booksForEnglishLang[inputValues.book] || inputValues.book;
+
+    const isEngLang = inputValues.language === 'eng';
+
+    let preparedData = { geo: [], eng: [], rus: [] };
+
+    if (!queryDataGeo) {
+      if (requestManagement?.geo) {
+        const dataGeo = await queryClient.fetchQuery({
+          queryKey: keyGeo,
+          queryFn: () =>
+            fetchData({
+              ...params,
+              language: 'geo',
+              w: !isEngLang ? params.w : geoBook,
+              t: inputValues.chapter,
+              mv: versions.geo,
+            }),
+        });
+
+        if (dataGeo) {
+          preparedData = {
+            ...preparedData,
+            geo: dataGeo?.bibleData?.slice(startIndex, endIndex),
+          };
+        }
+      }
+    } else {
+      preparedData = {
+        ...preparedData,
+        geo: queryDataGeo.bibleData.slice(startIndex, endIndex),
+      };
+    }
+
+    let englishBook = englishBooks[inputValues.book] || inputValues.book;
 
     if (!queryDataEng) {
       if (requestManagement?.eng) {
@@ -99,7 +134,7 @@ const BibleSettingProvider = ({ children }) => {
             fetchData({
               ...params,
               language: 'eng',
-              w: englishBook || inputValues.book,
+              w: isEngLang ? params.w : englishBook,
               t: inputValues.chapter,
               mv: versions.eng,
             }),
@@ -123,7 +158,14 @@ const BibleSettingProvider = ({ children }) => {
       if (requestManagement?.rus) {
         const dataRus = await queryClient.fetchQuery({
           queryKey: keyRus,
-          queryFn: () => fetchData({ ...params, language: 'rus', t: inputValues.chapter, mv: versions.rus }),
+          queryFn: () =>
+            fetchData({
+              ...params,
+              language: 'rus',
+              w: !isEngLang ? params.w : geoBook,
+              t: inputValues.chapter,
+              mv: versions.rus,
+            }),
         });
 
         if (dataRus) {

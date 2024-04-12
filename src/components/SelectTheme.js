@@ -96,6 +96,7 @@ const SelectTheme = () => {
             className="w-80 rounded-sm  h-fit outline-none p-1 dark:border-white/30 border-gray-300 border-[1px] dark:bg-[#374151] dark:text-white "
             type="text"
             value={dynamicImage || ''}
+            placeholder="Paste image URL..."
             onChange={e => imageInputChange(e)}
           />
         </div>

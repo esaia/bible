@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Switch } from '@material-tailwind/react';
 import { FaFacebookMessenger, FaTelegram } from 'react-icons/fa';
 import { useBibleSettingContext } from '../context/BibleSettingProvider';
+import Donation from '../components/Donation';
 
 const Documentation = () => {
   const { darkMode, setDarkMode } = useBibleSettingContext();
@@ -13,20 +14,20 @@ const Documentation = () => {
   };
 
   return (
-    <div className="w-full flex justify-center min-h-[100vh] dark:text-white  dark:bg-[#101828] font-Roboto ">
-      <div className="w-full max-w-[800px]  px-10 py-14 my-6  bg-gray-100 dark:bg-[#161d2b] border border-gray-300 dark:border-gray-800 ">
+    <div className="w-full flex justify-center min-h-[100vh] dark:text-white   dark:bg-[#101828] font-Roboto ">
+      <div className="w-full max-w-[800px] mx-3  px-3 md:px-7 py-10 my-6  bg-gray-100 dark:bg-[#161d2b] border border-gray-300 dark:border-gray-800 rounded-sm  ">
         {language === 'geo' ? (
-          <div className="font-banner">
+          <div className="font-valera">
             <h1 className=" text-center text-2xl mb-4">დოკუმენტაცია</h1>
             <p className="">
               ეს აპლიკაცია გამოიყენება ეკლესიაში ბიბლიის მუხლების გასაშვებად პროექტორზე. მისი გამოყენება ძალიან
               მარტივია.
             </p>
-            <p className="mt-4">არის ორი მხარე. ერთია პანელი საიდანაც ვაკონტროლებთ ყველაფერს</p>
+            <p className="mt-4">მას აქვს ორი მხარე. ერთია პანელი საიდანაც ვაკონტროლებთ ყველაფერს</p>
             <ul className="list-disc	py-3 px-7">
               <li> რომელი მუხლები გავიდეს </li>
               <li> რომელი თარგმანით </li>
-              <li> რამხელა ფონტით </li>
+              <li> რომელი ვერსიის </li>
               <li> რა ბექგრაუნდ სურათით </li>
             </ul>
 
@@ -35,9 +36,13 @@ const Documentation = () => {
               <span className="text-red-400"> ამ მხარეს მხოლოდ შენ უნდა ხედავდე </span> და მეორე მხარე რომელსაც ვუშვებთ
               პროექტორზე.
             </p>
-            <div className="flex items-center gap-4 my-4 flex-col md:flex-row">
-              <img src="/images/bibledark.webp" alt="bibleverse" className="flex-1 md:w-6/12 h-[200px] object-cover" />
-              <img src="/images/show.jpg" alt="bibleverse" className="flex-1 md:  w-6/12 h-[200px] object-cover" />
+            <div className="flex items-center gap-4 my-4 flex-col md:flex-row md:h-[200px]  ">
+              <div className="w-full h-full">
+                <img src="/images/bibledark.webp" alt="bibleverse" className="w-full h-full" />
+              </div>
+              <div className="w-full h-full">
+                <img src="/images/show.jpg" alt="bibleverse" className="w-full h-full" />
+              </div>
             </div>
             <img src="/images/filteres.jpeg" alt="filteres" className="object-contain w-full py-5" />
             <p className="">
@@ -49,24 +54,23 @@ const Documentation = () => {
               <span className="text-red-400">კიდევ ერთხელ ეს არ ცვლის პროექტორზე გასულ ვერსიას! </span>
               <img src="/images/versia.jpeg" alt="filteres" className="object-contain w-[250px] py-5" />
               <br />
-              3. შემდეგი ნაბიჯია წიგნის, თავის და მუხლის არჩევა. თუ რამოდენიმე მუხლის ჩვენება გინდა ერთდროულად "მუხლი
-              (მდე)"-ში ირჩევ თუ სადამდე გინდა მუხლები აჩვენოს. შედეგი ავტომატურად გამოჩნდება.
+              3. შემდეგი ნაბიჯია წიგნის, თავის და მუხლის არჩევა.
             </p>
             <br />
             <hr />
             <br />
-            <h2 className="font-bold mb-1">როგორ ვაჩვენო პროექტორზე?</h2>
+            <h2 className="font-bold mb-1 text-[20px]">როგორ ვაჩვენო პროექტორზე?</h2>
             <p>
               დაბლითა მარჯვენა კუთხეში დაინახავ ღილაკს "Open Present View" დააჭირე და გადაგიყვანს ახალ ტაბზე. ეს გვერდი
-              უნდა აჩვენო პროექტორზე. იმისათვის რომ ბრაუზერის ზედა მხარე არ გამოჩნდეს თუ ვინდოუსზე ხარ დააჭირე F11-ს ან
-              დაბლითა მარჯვენა კუთხეში აქვს გადიდების იკონი.
+              უნდა აჩვენო პროექტორზე. ბრაუზერის ზედა მხარე რომ არ გამოჩნდეს თუ ვინდოუსზე ხარ დააჭირე F11-ს ან დაბლითა
+              მარჯვენა კუთხეში აქვს გადიდების იკონი.
               <br />
               <br />
               იმისთვის რომ სასურველი ტექსტი სასურველ ენაზე გამოჩნეს დაბრუნდი ისევ მთავარ გვერდზე, უნდა აირჩიო ენა და
-              შესაბამისი ვერსიები და show ღილაკს დააწექი. ასევე შეგიძლია აკონტროლო ფონტის ზომა.
+              შესაბამისი ვერსიები და show ღილაკს დააწვე.
             </p>
-            <img src="/images/lang.jpeg" alt="filteres" className="object-contain w-[400px] py-5" />
-            <p>ამ განყოფილებაშ კი ირჩევთ სასურველ ბექგრაუნდს</p>
+            <img src="/images/versions.gif" alt="filteres" className="object-contain w-[400px] py-5" />
+            <p>ამ განყოფილებაში კი ირჩევთ სასურველ ბექგრაუნდს.</p>
             <img src="/images/backg.jpeg" alt="filteres" className="object-contain w-[400px] py-5" />
             <div
               className="p-4 mb-4  text-black  rounded-lg bg-green-50 dark:bg-gray-800 dark:text-white mt-3"
@@ -103,15 +107,17 @@ const Documentation = () => {
                 </div>
               </li>
             </ul>
+
+            <div className="my-10">
+              <Donation />
+            </div>
           </div>
         ) : (
           <> hello world</>
         )}
       </div>
-
       {/* Fixed */}
-
-      <div className=" p-3  right-0 bottom-0 text-white m-4 fixed  ">
+      <div className=" p-3  right-0 bottom-0 text-white m-4 fixed border border-gray-400 bg-gray-200  dark:bg-[#15354f] md:bg-transparent md:dark:bg-transparent md:border-none rounded-sm  ">
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-2 cursor-pointer">
             <input
@@ -158,13 +164,12 @@ const Documentation = () => {
           />
         </div>
       </div>
-
       {/* left */}
-      <div className=" p-3  left-0 bottom-0 text-white m-4 fixed  ">
+      <div className=" p-3  left-0 bottom-0 text-white m-4 fixed   ">
         <div className="flex">
           <a href="/">
             <button className=" px-4 py-2 mx-5 dark:bg-[#374151] hover:shadow-lg dark:text-white bg-white text-black border-[#cccccc]  border-[1px]">
-              Edit
+              Back
             </button>
           </a>
         </div>

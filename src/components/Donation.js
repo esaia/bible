@@ -48,13 +48,15 @@ export default Donation;
 
 const PaymentMethod = ({ text, bankName, recipient, img, btnText, onButtonClick, cryptoQr }) => {
   const copyText = () => {
+    alert(navigator.clipboard);
+
     navigator.clipboard
       .writeText(text)
       .then(() => {
         alert('Text copied to clipboard!');
       })
       .catch(error => {
-        console.error('Failed to copy text: ', error);
+        console.error('Failed to copy text');
       });
   };
 

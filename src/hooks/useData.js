@@ -45,11 +45,11 @@ const useData = () => {
 
   const book = [
     {
-      label: 'ძველი აღთქმა',
+      label: 'Old Testament',
       options: oldTest,
     },
     {
-      label: 'ახალი აღთქმა',
+      label: 'New Testament',
       options: newTest,
     },
   ];

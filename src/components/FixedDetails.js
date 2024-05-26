@@ -51,6 +51,12 @@ const FixedDetails = () => {
                 Documentation
               </button>
             </a>
+
+            <a href="/donation" target="_blank">
+              <button className=" px-4 py-2 mx-5 rounded-md dark:bg-[#374151] hover:shadow-lg dark:text-white bg-white text-black border-[#cccccc]  border-[1px]">
+                Donation 🎁
+              </button>
+            </a>
           </div>
         </div>
       </motion.div>

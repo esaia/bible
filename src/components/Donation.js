@@ -13,8 +13,9 @@ const Donation = ({ lang }) => {
             <a className="underline" href="https://www.facebook.com/esaia.gafrindashvili/" target="_blank">
               you can see my FB here.
             </a>{' '}
-            I have been actively using this application for 1 year. I improve and add new features time to time. I
-            created this app because ProPresenter doesn't support my country's Bible translation.
+            I have been actively using this application for 1 year. I improve and add new features time to time. I share
+            my app with anyone who wants to use it. This will make me very happy. I created this app because
+            ProPresenter doesn't support my country's Bible translation.
           </p>
 
           <br />

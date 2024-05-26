@@ -7,7 +7,7 @@ const Donate = () => {
   return (
     <div className="h-svh dark:text-white mx-3 ">
       <div className="max-w-[800px] m-auto">
-        <Donation />
+        <Donation lang={'en'} />
         <Link to={'/'}>
           <Button>Back</Button>
         </Link>

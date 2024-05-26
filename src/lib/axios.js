@@ -11,8 +11,14 @@ import axios from 'axios';
 // http://localhost:8000/api/data
 
 export const fetchData = async params => {
-  const { data } = await axios.get(`${process.env.REACT_APP_API}/data`, {
-    params,
-  });
+  const { data } = await axios.get(
+    `${process.env.REACT_APP_API}/data`,
+    {
+      params,
+    },
+    {
+      Headers: { 'Access-Control-Allow-Origin': '*' },
+    },
+  );
   return data;
 };

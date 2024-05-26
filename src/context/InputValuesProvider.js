@@ -32,6 +32,8 @@ const InputValuesProvider = ({ children }) => {
     switch (type) {
       case 'CHANGE_INPUT_VALUE':
         if (triggleAction.action === 'clear' && triggleAction?.removedValues) {
+          if (!triggleAction?.removedValues?.length) return state;
+
           const { id } = triggleAction.removedValues[0];
           let newState = {
             ...state,
@@ -288,11 +290,15 @@ const InputValuesProvider = ({ children }) => {
       <div>
         <div>
           {error ? (
-            <div className="w-full flex h-screen justify-center items-center">
-              <h3 className="bold text-3xl">Network Error</h3>
-              <a href="/" className="p-4 m-3 bg-gray-300 rounded-sm text-black">
-                refresh
-              </a>
+            <div className="w-full h-screen flex flex-col justify-center items-center">
+              <div className="flex  justify-center items-center">
+                <h3 className="bold text-3xl">Fetch Error</h3>
+                <a href="/" className="p-4 m-3 bg-gray-300 rounded-sm text-black">
+                  refresh
+                </a>
+              </div>
+
+              <p> We have a technical problem, please try again later </p>
             </div>
           ) : (
             children

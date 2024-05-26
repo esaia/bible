@@ -1,45 +1,90 @@
 import React from 'react';
 
-const Donation = () => {
+const Donation = ({ lang }) => {
   return (
     <div className="py-4">
-      <h3 className="text-[30px] text-center font-bold ">დონაცია</h3>
-      <br />
-      <p>
-        ამ აპლიკაციის მოხმარება 100%-ით უფასოა, თუმცა მსგავსი სერვისები საჭიროებს ფინანსურ მხარდაჭერას. სწორედ ამიტომ
-        საიტზე მითითებულია დონაციის რეკვიზიტები.
-      </p>
-      <div className="border border-gray-400 dark:border-gray-800 rounded-sm overflow-hidden p-5 flex flex-col space-y-6  my-4 ">
-        <PaymentMethod
-          text="GE42BG0000000534460839"
-          bankName="საქართველოს ბანკი"
-          recipient="მიმღები : ესაია გაფრინდაშვილი"
-          img="/images/bog.png"
-        />
-        <PaymentMethod
-          text="GE74TB7572745061100113"
-          bankName="თბს ბანკი"
-          recipient="მიმღები : ესაია გაფრინდაშვილი"
-          img="/images/tbc.png"
-        />
+      {lang === 'en' ? (
+        <div>
+          <h3 className="text-[30px] text-center font-bold ">Donation 🎁</h3>
+          <br />
+          <p>
+            The use of this application is 100% free, but similar services require financial support. Therefore,
+            donation details are provided on the website. Thank you in advance for your generosity.
+          </p>
 
-        <PaymentMethod
-          text="Esaia Gaprindashvili"
-          bankName="Paypal"
-          recipient=""
-          img="/images/paypal.png"
-          btnText="open"
-          onButtonClick={() => window.open('https://www.paypal.com/ncp/payment/X37DMGGGMPSBL', '_blank')}
-        />
+          <div className="border border-gray-400 dark:border-gray-800 rounded-sm overflow-hidden p-5 flex flex-col space-y-6  my-4 ">
+            <PaymentMethod
+              text="GE42BG0000000534460839"
+              bankName="Bank Of Georgia"
+              recipient="recipient : Esaia Gaprindashvili"
+              img="/images/bog.png"
+            />
+            <PaymentMethod
+              text="GE74TB7572745061100113"
+              bankName="TBC Bank"
+              recipient="recipient : Esaia Gaprindashvili"
+              img="/images/tbc.png"
+            />
 
-        <PaymentMethod
-          text="TYyBNQWGAKh9pN1YLJDeosQKM1u5GVwPz4"
-          bankName="ტეზერი (USDT)"
-          recipient="ქსელი: TRX Tron (TRC20)"
-          img="/images/tether.png"
-          cryptoQr="/images/usdt_trc_20.jpg"
-        />
-      </div>
+            <PaymentMethod
+              text="Esaia Gaprindashvili"
+              bankName="Paypal"
+              recipient=""
+              img="/images/paypal.png"
+              btnText="open"
+              onButtonClick={() => window.open('https://www.paypal.com/ncp/payment/X37DMGGGMPSBL', '_blank')}
+            />
+
+            <PaymentMethod
+              text="TYyBNQWGAKh9pN1YLJDeosQKM1u5GVwPz4"
+              bankName="tether (USDT)"
+              recipient="Network: TRX Tron (TRC20)"
+              img="/images/tether.png"
+              cryptoQr="/images/usdt_trc_20.jpg"
+            />
+          </div>
+        </div>
+      ) : (
+        <div>
+          <h3 className="text-[30px] text-center font-bold ">დონაცია</h3>
+          <br />
+          <p>
+            ამ აპლიკაციის მოხმარება 100%-ით უფასოა, თუმცა მსგავსი სერვისები საჭიროებს ფინანსურ მხარდაჭერას. სწორედ
+            ამიტომ საიტზე მითითებულია დონაციის რეკვიზიტები. წინასწარ მადლობას გიხდით გულუხვობისთვის.
+          </p>
+          <div className="border border-gray-400 dark:border-gray-800 rounded-sm overflow-hidden p-5 flex flex-col space-y-6  my-4 ">
+            <PaymentMethod
+              text="GE42BG0000000534460839"
+              bankName="საქართველოს ბანკი"
+              recipient="მიმღები : ესაია გაფრინდაშვილი"
+              img="/images/bog.png"
+            />
+            <PaymentMethod
+              text="GE74TB7572745061100113"
+              bankName="თბს ბანკი"
+              recipient="მიმღები : ესაია გაფრინდაშვილი"
+              img="/images/tbc.png"
+            />
+
+            <PaymentMethod
+              text="Esaia Gaprindashvili"
+              bankName="Paypal"
+              recipient=""
+              img="/images/paypal.png"
+              btnText="open"
+              onButtonClick={() => window.open('https://www.paypal.com/ncp/payment/X37DMGGGMPSBL', '_blank')}
+            />
+
+            <PaymentMethod
+              text="TYyBNQWGAKh9pN1YLJDeosQKM1u5GVwPz4"
+              bankName="ტეზერი (USDT)"
+              recipient="ქსელი: TRX Tron (TRC20)"
+              img="/images/tether.png"
+              cryptoQr="/images/usdt_trc_20.jpg"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

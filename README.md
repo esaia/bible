@@ -31,6 +31,7 @@ The BibleVerse Projector App is a user-friendly application designed to display 
 
 ![App Screenshot](/public/images/biblelight.webp)
 
+
 ![App Screenshot](/public/images/bibledark.webp)
 
 ![App Screenshot](/public/images/show.jpg)

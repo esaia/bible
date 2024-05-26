@@ -7,6 +7,22 @@ const Donation = ({ lang }) => {
         <div>
           <h3 className="text-[30px] text-center font-bold ">Donation 🎁</h3>
           <br />
+
+          <p>
+            Hey, My name is Esaia.{' '}
+            <a className="underline" href="https://www.facebook.com/esaia.gafrindashvili/" target="_blank">
+              you can see my FB here.
+            </a>{' '}
+            I have been actively using this application for 1 year. I improve and add new features time to time. I
+            created this app because ProPresenter doesn't support my country's Bible translation.
+          </p>
+
+          <br />
+
+          <img src="/images/pp7.png" alt="pp7 vs bible verses app" />
+
+          <br />
+
           <p>
             The use of this application is 100% free, but similar services require financial support. Therefore,
             donation details are provided on the website. Thank you in advance for your generosity.
@@ -93,12 +109,10 @@ export default Donation;
 
 const PaymentMethod = ({ text, bankName, recipient, img, btnText, onButtonClick, cryptoQr }) => {
   const copyText = () => {
-    alert(navigator.clipboard);
-
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        alert('Text copied to clipboard!');
+        alert('Text copied to clipboard successfully!');
       })
       .catch(error => {
         console.error('Failed to copy text');

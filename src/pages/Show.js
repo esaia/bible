@@ -150,11 +150,11 @@ const Show = () => {
     let boxHeight = 0;
     innerContainerRef.current.style.fontSize = '10px';
 
-    for (let i = 2; i < 70; i++) {
+    for (let i = 2; i < 120; i++) {
       innerContainerRef.current.style.fontSize = ` ${i}px`;
       bodyHeight = window.innerHeight;
       boxHeight = innerContainerRef?.current.offsetHeight;
-      if (boxHeight + 150 > bodyHeight) {
+      if (boxHeight + 200 > bodyHeight) {
         break;
       }
     }
@@ -172,7 +172,7 @@ const Show = () => {
           </div>
         )}
 
-        <div className="max-w-[2000px] py-[10px]" ref={innerContainerRef}>
+        <div className=" py-[10px]" ref={innerContainerRef}>
           {projectorLanguages?.eng && showData && <TextShow lang="eng" showData={showData} />}
           {projectorLanguages?.geo && showData && <TextShow lang="geo" showData={showData} />}
           {projectorLanguages?.rus && showData && <TextShow lang="rus" showData={showData} />}

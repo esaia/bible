@@ -173,8 +173,8 @@ const Show = () => {
         )}
 
         <div className=" py-[10px]" ref={innerContainerRef}>
-          {projectorLanguages?.eng && showData && <TextShow lang="eng" showData={showData} />}
           {projectorLanguages?.geo && showData && <TextShow lang="geo" showData={showData} />}
+          {projectorLanguages?.eng && showData && <TextShow lang="eng" showData={showData} />}
           {projectorLanguages?.rus && showData && <TextShow lang="rus" showData={showData} />}
         </div>
       </div>

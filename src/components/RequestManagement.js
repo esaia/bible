@@ -65,31 +65,27 @@ const RequestManagement = () => {
         </button>
 
         <Dialog open={open} handler={handleOpen}>
-          <div className="w-full h-fit  p-5 rounded-md">
-            <h3 className="font-bold text-black text-2xl">Request Management</h3>
-            <p className="text-gray-700 mt-2 dark:text-4xl ">
+          <div className="w-full h-fit  p-5 rounded-md bg-[#161d2b]  text-white">
+            <h3 className="font-bold  text-2xl">Request Management</h3>
+            <p className=" mt-2 dark:text-4xl ">
               When you click show button, it is expensive operation, 3 requests are made for Georgian, English and
-              Russian languages.
+              Russian languages. But you can choose in which languages the request is sent.
             </p>
 
             <img src="/images/requestsManagement.jpeg" alt="" className="w-60 my-3" />
 
             <p>
-              Please manage your requests through the checkboxes. For instance, if you use only Georgian and English
-              languages, you should only select these languages. This way you will avoid sending unnecessary requests
-              and the performance will be better.
+              Please manage your requests through the <b> GREEN </b> checkboxes. For instance, if you use only Georgian
+              and English languages, you should only select these languages. This way you will avoid sending unnecessary
+              requests and the performance will be better.
             </p>
 
-            <img src="/images/showHide.jpeg" alt="" className="w-60 my-3" />
-
-            <p>These blue checkboxes are just for showing or hiding text in present view.</p>
+            <p className="mt-3">IMPORTANT!!</p>
+            <p>
+              And <b> BLUE </b> checkboxes are just for showing or hiding text in present view.
+            </p>
             <div className="flex items-end justify-end">
-              <button
-                variant="text"
-                color="red"
-                onClick={handleOpen}
-                className="mr-1 items-end  text-right text-black font-bold"
-              >
+              <button variant="text" color="red" onClick={handleOpen} className="mr-1 items-end  text-right font-bold">
                 Cancel
               </button>
             </div>

@@ -1,138 +1,77 @@
-import React from "react";
-import { Switch } from "@material-tailwind/react";
-import { FaFacebookMessenger, FaTelegram } from "react-icons/fa";
-import { useBibleSettingContext } from "../context/BibleSettingProvider";
+import React, { useState } from 'react';
+import { Radio, Switch } from '@material-tailwind/react';
+import { useBibleSettingContext } from '../context/BibleSettingProvider';
+import GeoDoc from '../components/doc/GeoDoc';
+import EngDoc from '../components/doc/EngDoc';
 
 const Documentation = () => {
   const { darkMode, setDarkMode } = useBibleSettingContext();
+  const [language, setLanguage] = useState('english');
 
   const changeDarkMode = () => {
     setDarkMode(!darkMode);
-    localStorage.setItem("darkmode", !darkMode);
+    localStorage.setItem('darkmode', !darkMode);
   };
 
   return (
-    <div className="w-full flex justify-center min-h-[100vh] dark:text-white  dark:bg-[#101828] ">
-      <div className="w-full max-w-[600px]  p-4 py-16 ">
-        <h1 className=" text-center text-2xl mb-4">დოკუმენტაცია</h1>
-        <p className="">
-          ეს აპლიკაცია გამოიყენება ეკლესიაში ბიბლიის მუხლების გასაშვებად
-          პროექტორზე. მისი გამოყენება ძალიან მარტივია.
-        </p>
-        <img
-          src="/images/filteres.jpeg"
-          alt="filteres"
-          className="object-contain w-full py-5"
-        />
-        <p className="">
-          1. პირველი ირჩევ ენას, რომელ ენაზეც გვინდა რომ დაინახო "preview".{" "}
-          <span className="text-red-400">
-            ეს არ ცვლის პროექტორზე გასულ ენას!{" "}
-          </span>
-          <br />
-          <br />
-          2. იმის მიხედვით თუ რომელი ენა ავირჩიეთ გამოჩნდება ვერსიები. აირჩევ
-          სასურველ ვერსიას.
-          <img
-            src="/images/versia.jpeg"
-            alt="filteres"
-            className="object-contain w-[250px] py-5"
-          />
-          <br />
-          3. შემდეგი ნაბიჯია წიგნის, თავის და მუხლის არჩევა. თუ რამოდენიმე
-          მუხლის ჩვენება გინდა ერთდროულად "მუხლი (მდე)"-ში ირჩევ თუ სადამდე
-          გინდა მუხლები აჩვენოს. შედეგი ავტომატურად გამოჩნდება.
-        </p>
-        <br />
-        <hr />
-        <br />
-        <h2 className="font-bold mb-1">როგორ ვაჩვენო პროექტორზე?</h2>
-        <p>
-          დაბლითა მარჯვენა კუთხეში დაინახავ ღილაკს "Open Present View" დააჭირე
-          და გადაგიყვანს ახალ ტაბზე. ეს გვერდი უნდა აჩვენო პროექტორზე. იმისათვის
-          რომ ბრაუზერის ზედა მხარე არ გამოჩნდეს თუ ვინდოუსზე ხარ დააჭირე F11-ს
-          ან დაბლითა მარჯვენა კუთხეში აქვს გადიდების იკონი.
-          <br />
-          <br />
-          იმისთვის რომ სასურველი ტექსტი სასურველ ენაზე გამოჩნეს დაბრუნდი ისევ
-          მთავარ გვერდზე, უნდა აირჩიო ენა და შესაბამისი ვერსიები და show ღილაკს
-          დააწექი. ასევე შეგიძლია აკონტროლო ფონტის ზომა.
-        </p>
-        <img
-          src="/images/lang.jpeg"
-          alt="filteres"
-          className="object-contain w-[400px] py-5"
-        />
-
-        <p>ამ განყოფილებაშ კი ირჩევთ სასურველ ბექგრაუნდს</p>
-        <img
-          src="/images/backg.jpeg"
-          alt="filteres"
-          className="object-contain w-[400px] py-5"
-        />
-        <div
-          className="p-4 mb-4  text-black  rounded-lg bg-green-50 dark:bg-gray-800 dark:text-white mt-3"
-          role="alert"
-        >
-          ყველა ცვლილება შენახული იქნება ბრაუზერის localStorage-ში. თუ რაიმემ
-          გაჭედა და არ მუშაობს ცადეთ შემდეგი მეთოდები:
-        </div>
-        <ul>
-          <li className="dark:text-white ">
-            1. გაასუფთავეთ localstorage. გაეცანით სტატიას{" "}
-            <a href="https://doc.arcgis.com/en/power-bi/get-started/clear-browser-storage.htm">
-              link
-            </a>
-          </li>
-          <li className="dark:text-white ">
-            2. დაარეფრეშეთ გვერდი სადაც უშვებთ მუხლებს
-          </li>
-          <li className="dark:text-white  ">
-            <p>
-              3. დამატებით შენიშვნებისთვის / იდეებისთვის მომწერეთ მესენჯერზე /
-              ტელეგრამზე{" "}
-            </p>{" "}
-            <div className="flex items-center pt-2">
-              <a
-                href="https://www.facebook.com/esaia.gafrindashvili/"
-                className="w-full flex items-center justify-center gap-2 mt-2 "
-                target="noreferrer"
-              >
-                <button>Messenger</button>
-                <FaFacebookMessenger />
-              </a>
-              <a
-                href="https://t.me/esoeso27"
-                className="w-full flex items-center justify-center gap-2 mt-2 "
-                target="noreferrer"
-              >
-                <button>Telegram</button>
-                <FaTelegram />
-              </a>
-            </div>
-          </li>
-        </ul>
+    <div className="w-full flex justify-center  min-h-[100vh] dark:text-white   dark:bg-[#101828] font-Roboto ">
+      <div className="w-full max-w-[800px] mx-3  px-3 rounded-lg md:px-7 py-10 my-6  bg-gray-100 dark:bg-[#161d2b] border border-gray-300 dark:border-gray-800 ">
+        {language === 'georgia' ? <GeoDoc /> : <EngDoc />}
       </div>
-      {/* Fixed */}
 
-      <div className=" p-3  right-0 bottom-0 text-white m-4 fixed  ">
-        <div className="flex">
+      {/* Fixed */}
+      <div className=" flex flex-col items-end p-3  right-0 bottom-0 text-white m-4 fixed border border-gray-400 bg-gray-200  dark:bg-[#15354f] md:bg-transparent md:dark:bg-transparent md:border-none rounded-sm  ">
+        <div className="mb-5">
+          <div className="flex items-center cursor-pointer">
+            <Radio
+              id={'english'}
+              value={'english'}
+              color="blue-gray"
+              onChange={e => setLanguage(e.target.value)}
+              checked={language === 'english'}
+            />
+
+            <label
+              htmlFor="english"
+              className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 cursor-pointer"
+            >
+              English
+            </label>
+          </div>
+          <div className="flex items-center  cursor-pointer">
+            <Radio
+              id={'georgia'}
+              value={'georgia'}
+              color="blue-gray"
+              onChange={e => setLanguage(e.target.value)}
+              checked={language === 'georgia'}
+            />
+
+            <label
+              htmlFor="georgia"
+              className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 cursor-pointer"
+            >
+              Georgia
+            </label>
+          </div>
+        </div>
+
+        <div className="[&__label]:dark:text-gray-400 [&__label]:text-gray-800 ">
           <Switch
             color="indigo"
-            label={darkMode ? "light" : "dark"}
+            label={darkMode ? 'light' : 'dark'}
             onChange={changeDarkMode}
             checked={darkMode}
             ripple={true}
           />
         </div>
       </div>
-
       {/* left */}
-      <div className=" p-3  left-0 bottom-0 text-white m-4 fixed  ">
+      <div className=" p-3  left-0 bottom-0 text-white m-4 fixed   ">
         <div className="flex">
           <a href="/">
-            <button className=" px-4 py-2 mx-5 dark:bg-[#374151] hover:shadow-lg dark:text-white bg-white text-black border-[#cccccc]  border-[1px]">
-              Edit
+            <button className=" px-4 py-2 mx-5 rounded-md dark:bg-[#374151] hover:shadow-lg dark:text-white bg-white text-black border-[#cccccc]  border-[1px]">
+              Back
             </button>
           </a>
         </div>

@@ -4,10 +4,11 @@ import Filteres from './pages/Filteres';
 import Show from './pages/Show';
 import { useBibleSettingContext } from './context/BibleSettingProvider';
 import useData from './hooks/useData';
+import Donate from './pages/Donate';
 
 function App() {
   const { darkMode } = useBibleSettingContext();
-  const { fontTitle, setFontTitle } = useData();
+  const { fontTitle } = useData();
 
   return (
     <div>
@@ -17,6 +18,7 @@ function App() {
             <Route path="/" element={<Filteres />} />
             <Route path="/show" element={<Show />} />
             <Route path="/doc" element={<Documentation />} />
+            <Route path="/donation" element={<Donate />} />
           </Routes>
         </div>
       </div>

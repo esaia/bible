@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { BibleContext } from "../context/InputValuesProvider";
+import { useContext } from 'react';
+import { BibleContext } from '../context/InputValuesProvider';
 
 const useBibleContext = () => {
   const {

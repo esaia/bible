@@ -11,7 +11,7 @@ const BibleSettingProvider = ({ children }) => {
   const { inputValues } = useBibleContext();
 
   const [darkMode, setDarkMode] = useState(localStorage.getItem('darkmode') === 'true');
-  const [fontTitle, setFontTitle] = useState(() => localStorage.getItem('font'));
+  const [fontTitle, setFontTitle] = useState(() => localStorage.getItem('font') || 'font-banner');
 
   const [versions, setVersions] = useState(
     JSON.parse(localStorage.getItem('versions')) || {

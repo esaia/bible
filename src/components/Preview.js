@@ -3,7 +3,7 @@ import useBibleContext from '../hooks/useBibleContext';
 import { FacebookShareButton } from 'react-share';
 import { TbBrandStackshare } from 'react-icons/tb';
 
-const Preview = () => {
+const Preview = ({ showWholeChapter }) => {
   const { filteredData, inputDispatch, inputValues } = useBibleContext();
 
   // Check if inputvalue.verse exists
@@ -13,7 +13,11 @@ const Preview = () => {
     if (inputValues.separate && !inputValues.verse) {
       renderedData = filteredData.bibleData.slice(0, 15);
     } else if (!inputValues.verse) {
-      renderedData = filteredData.bibleData.slice(0, 1);
+      if (showWholeChapter) {
+        renderedData = filteredData.bibleData;
+      } else {
+        renderedData = filteredData.bibleData.slice(0, 1);
+      }
     } else {
       renderedData = filteredData.bibleData.slice(inputValues.verse - 1, inputValues.versemde || inputValues.verse);
     }

@@ -52,7 +52,7 @@ const Header = () => {
               options={languages}
               isSearchable={true}
               onChange={(e, triggleAction) => changeInputValue(e, triggleAction)}
-              className="my-react-select-container  w-[100px]  flex-auto z-50"
+              className="my-react-select-container  w-[100px]  flex-auto z-[52]"
               classNamePrefix="my-react-select"
             />
 
@@ -72,7 +72,7 @@ const Header = () => {
               options={versions}
               isSearchable={true}
               onChange={(e, triggleAction) => changeInputValue(e, triggleAction)}
-              className="my-react-select-container w-[300px]  flex-auto  z-50"
+              className="my-react-select-container w-[300px]  flex-auto  z-[50]"
               classNamePrefix="my-react-select"
             />
             {/* )} */}

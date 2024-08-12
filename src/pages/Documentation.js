@@ -3,6 +3,7 @@ import { Radio, Switch } from '@material-tailwind/react';
 import { useBibleSettingContext } from '../context/BibleSettingProvider';
 import GeoDoc from '../components/doc/GeoDoc';
 import EngDoc from '../components/doc/EngDoc';
+import FixedButton from '../components/UiComponents/FixedButton';
 
 const Documentation = () => {
   const { darkMode, setDarkMode } = useBibleSettingContext();
@@ -69,11 +70,7 @@ const Documentation = () => {
       {/* left */}
       <div className=" p-3  left-0 bottom-0 text-white m-4 fixed   ">
         <div className="flex">
-          <a href="/">
-            <button className=" px-4 py-2 mx-5 rounded-md dark:bg-[#374151] hover:shadow-lg dark:text-white bg-white text-black border-[#cccccc]  border-[1px]">
-              Back
-            </button>
-          </a>
+          <FixedButton to="/" title="Back" />
         </div>
       </div>
     </div>

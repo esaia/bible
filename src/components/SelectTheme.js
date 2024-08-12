@@ -71,8 +71,8 @@ const SelectTheme = () => {
     localStorage.setItem('dynamicImage', newValue);
   };
   return (
-    <div>
-      <div className="grid grid-cols-3 grid-rows-2 gap-4 justify-center items-center md:grid-cols-4 xl:grid-cols-5">
+    <>
+      <div className="grid grid-cols-2 grid-rows-2 gap-4 justify-center items-center md:grid-cols-4 xl:grid-cols-5 ">
         {themeImages.map(theme => (
           <Theme
             key={theme.id}
@@ -122,7 +122,7 @@ const SelectTheme = () => {
           })}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -130,7 +130,7 @@ export default React.memo(SelectTheme);
 
 const Theme = ({ id, setThemeNumber, checked, src }) => {
   return (
-    <div className="flex flex-wrap cursor-pointer">
+    <div className="flex flex-wrap cursor-pointer justify-start">
       <Radio id={id} value={id} color="blue-gray" onChange={e => setThemeNumber(e.target?.value)} checked={checked} />
       <label htmlFor={id} className="cursor-pointer">
         <img src={src} alt="theme img" className="themeimg rounded-md" />

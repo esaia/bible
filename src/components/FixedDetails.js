@@ -19,7 +19,7 @@ const FixedDetails = () => {
         <div className=" p-3  right-0 bottom-0 text-white m-4 fixed   ">
           <div className="flex">
             <FixedButton to="/bible" title="📖" target={'_blank'} />
-            <FixedButton to="/donation" title="Open Present View" target={'_blank'} />
+            <FixedButton to="/show" title="Open Present View" target={'_blank'} />
 
             <DarkModeSwitcher />
           </div>
